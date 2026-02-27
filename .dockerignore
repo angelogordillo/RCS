@@ -1,0 +1,10 @@
+.git
+.gitignore
+frontend
+docs
+data
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.venv
