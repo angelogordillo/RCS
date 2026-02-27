@@ -1,7 +1,12 @@
+from pathlib import Path
+
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 app = FastAPI(title="RCS API", version="0.1.0")
+BASE_DIR = Path(__file__).resolve().parent.parent
+FRONTEND_INDEX = BASE_DIR / "frontend" / "index.html"
 
 
 class Node(BaseModel):
@@ -31,6 +36,18 @@ NODES = [
 
 
 @app.get("/")
+def home() -> FileResponse | dict:
+    if FRONTEND_INDEX.exists():
+        return FileResponse(FRONTEND_INDEX)
+
+    return {
+        "project": "Red de Cadena de Suministro México",
+        "status": "ok",
+        "version": "0.1.0",
+    }
+
+
+@app.get("/api")
 def root() -> dict:
     return {
         "project": "Red de Cadena de Suministro México",
@@ -40,11 +57,13 @@ def root() -> dict:
 
 
 @app.get("/nodes")
+@app.get("/api/nodes")
 def list_nodes() -> list[dict]:
     return NODES
 
 
 @app.post("/nodes")
+@app.post("/api/nodes")
 def create_node(node: Node) -> dict:
     NODES.append(node.model_dump())
     return {"message": "Nodo agregado", "node": node}

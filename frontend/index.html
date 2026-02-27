@@ -3,94 +3,352 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RCS México</title>
+  <title>RCS Mexico | Red de Cadena de Suministro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-1: #0f172a;
-      --bg-2: #1e293b;
-      --card: #ffffff;
-      --ink: #0f172a;
-      --muted: #64748b;
-      --accent: #0ea5e9;
+      --bg: #f5f8ef;
+      --surface: #fffef8;
+      --ink: #102a43;
+      --muted: #486581;
+      --line: #d9e2ec;
+      --brand: #0a9396;
+      --brand-2: #ee9b00;
+      --accent-soft: #e9f7f6;
+      --shadow: 0 12px 34px rgba(16, 42, 67, 0.12);
     }
-    * { box-sizing: border-box; }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: "Avenir Next", "Montserrat", sans-serif;
-      background: linear-gradient(120deg, var(--bg-1), var(--bg-2));
+      font-family: "IBM Plex Sans", sans-serif;
       color: var(--ink);
+      background:
+        radial-gradient(circle at 88% 9%, #ffd166 0%, rgba(255, 209, 102, 0) 32%),
+        radial-gradient(circle at 8% 92%, #94d2bd 0%, rgba(148, 210, 189, 0) 38%),
+        var(--bg);
       min-height: 100vh;
+    }
+
+    .wrap {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+      padding: 28px 0 72px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+
+    .logo {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.12rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(145deg, var(--brand), #005f73);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+    }
+
+    .nav-badge {
+      border: 1px solid #c7d2fe;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #1e3a8a;
+      background: #eef2ff;
+    }
+
+    .hero {
       display: grid;
-      place-items: center;
-      padding: 24px;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+      align-items: stretch;
+      margin-bottom: 20px;
     }
-    .panel {
-      width: min(980px, 100%);
-      background: var(--card);
-      border-radius: 18px;
-      padding: 32px;
-      box-shadow: 0 20px 60px rgba(2, 6, 23, 0.35);
+
+    .card {
+      background: var(--surface);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
     }
+
+    .hero-copy {
+      padding: 34px;
+      animation: rise 0.6s ease-out;
+    }
+
     h1 {
-      margin: 0 0 8px;
-      font-size: clamp(1.7rem, 4vw, 2.3rem);
+      font-family: "Space Grotesk", sans-serif;
+      margin: 0;
+      line-height: 1.05;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      max-width: 18ch;
     }
-    p { margin: 0; color: var(--muted); }
-    .grid {
-      margin-top: 22px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
+
+    .lead {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      max-width: 54ch;
     }
-    .kpi {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 14px;
+
+    .cta-row {
+      margin-top: 26px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
-    .kpi strong {
-      display: block;
-      font-size: 1.4rem;
+
+    .btn {
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-main {
+      background: linear-gradient(135deg, var(--brand), #007f8a);
+      color: #ffffff;
+    }
+
+    .btn-alt {
+      background: #ffffff;
       color: var(--ink);
+      border: 1px solid var(--line);
     }
-    .kpi span { color: var(--muted); }
-    .badge {
+
+    .hero-panel {
+      padding: 20px;
+      display: grid;
+      align-content: start;
+      gap: 10px;
+      animation: rise 0.8s ease-out;
+    }
+
+    .mini-title {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.83rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .risk {
+      background: var(--accent-soft);
+      border-radius: 14px;
+      padding: 14px;
+      border: 1px solid rgba(10, 147, 150, 0.2);
+    }
+
+    .risk strong {
+      display: block;
+      font-size: 1.5rem;
+      color: #005f73;
+    }
+
+    .metrics {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      padding: 14px;
+      animation: rise 0.7s ease-out;
+    }
+
+    .metric:nth-child(2) { animation-delay: 0.08s; }
+    .metric:nth-child(3) { animation-delay: 0.16s; }
+    .metric:nth-child(4) { animation-delay: 0.24s; }
+
+    .metric strong {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.7rem;
+      display: block;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .sections {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .section {
+      padding: 16px;
+      animation: rise 0.9s ease-out;
+    }
+
+    .section h2 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .section p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .status {
       margin-top: 18px;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      background: #e0f2fe;
-      color: #0369a1;
+      gap: 7px;
+      font-size: 0.83rem;
+      color: #065f46;
+      background: #dcfce7;
+      border: 1px solid #86efac;
       border-radius: 999px;
+      padding: 8px 12px;
       font-weight: 600;
     }
+
     .dot {
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: var(--accent);
+      background: #16a34a;
       animation: pulse 1.4s infinite;
     }
+
     @keyframes pulse {
       0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.3); opacity: .65; }
+      50% { transform: scale(1.25); opacity: 0.55; }
+    }
+
+    @keyframes rise {
+      from {
+        transform: translateY(10px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .sections {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .wrap {
+        width: min(1120px, 94%);
+      }
+
+      .hero-copy,
+      .hero-panel {
+        padding: 20px;
+      }
+
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="panel">
-    <h1>Red de Cadena de Suministro México</h1>
-    <p>MVP para monitoreo y orquestación de nodos logísticos.</p>
+  <div class="wrap">
+    <header class="nav">
+      <div class="logo"><span class="logo-mark"></span>RCS Mexico</div>
+      <span class="nav-badge">MVP operativo</span>
+    </header>
 
-    <section class="grid">
-      <article class="kpi"><strong>42</strong><span>Nodos activos</span></article>
-      <article class="kpi"><strong>128</strong><span>Rutas monitoreadas</span></article>
-      <article class="kpi"><strong>96.2%</strong><span>Nivel de servicio</span></article>
-      <article class="kpi"><strong>14</strong><span>Alertas de riesgo</span></article>
+    <section class="hero">
+      <article class="card hero-copy">
+        <h1>La red de cadena de suministro para Mexico.</h1>
+        <p class="lead">Monitorea nodos, rutas y eventos de riesgo en una sola vista para tomar decisiones de planeacion y respuesta en minutos.</p>
+        <div class="cta-row">
+          <a class="btn btn-main" href="/api/nodes">Ver nodos API</a>
+          <a class="btn btn-alt" href="/docs">Abrir Swagger</a>
+        </div>
+        <div class="status"><span class="dot"></span>Servicio y API en linea</div>
+      </article>
+
+      <aside class="card hero-panel">
+        <p class="mini-title">Corredor priorizado</p>
+        <div class="risk">
+          <strong>Centro-Noreste</strong>
+          <span>Indice de riesgo: Medio</span>
+        </div>
+        <p class="mini-title">Ventana sugerida</p>
+        <div class="risk">
+          <strong>06:00 - 11:00</strong>
+          <span>Menor congestion y menor variabilidad</span>
+        </div>
+      </aside>
     </section>
 
-    <div class="badge"><span class="dot"></span> Demo inicial operativa</div>
-  </main>
+    <section class="metrics">
+      <article class="card metric"><strong>42</strong><span>Nodos activos</span></article>
+      <article class="card metric"><strong>128</strong><span>Rutas monitoreadas</span></article>
+      <article class="card metric"><strong>96.2%</strong><span>Nivel de servicio</span></article>
+      <article class="card metric"><strong>14</strong><span>Alertas abiertas</span></article>
+    </section>
+
+    <section class="sections">
+      <article class="card section">
+        <h2>Planeacion</h2>
+        <p>Simula capacidad por nodo y prioriza inventario en zonas criticas antes de una disrupcion.</p>
+      </article>
+      <article class="card section">
+        <h2>Operacion</h2>
+        <p>Visualiza incidencias en tiempo real para rerutear embarques y sostener el nivel de servicio.</p>
+      </article>
+      <article class="card section">
+        <h2>Compras</h2>
+        <p>Detecta concentracion de riesgo en proveedores y define alternativas por region y categoria.</p>
+      </article>
+    </section>
+  </div>
 </body>
 </html>
