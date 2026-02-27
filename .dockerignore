@@ -1,6 +1,5 @@
 .git
 .gitignore
-frontend
 docs
 data
 __pycache__
