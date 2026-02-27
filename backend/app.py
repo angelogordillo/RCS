@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from fastapi import FastAPI
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
 
 app = FastAPI(title="RCS API", version="0.1.0")
@@ -35,16 +35,18 @@ NODES = [
 ]
 
 
-@app.get("/")
-def home() -> FileResponse | dict:
+@app.get("/", response_model=None)
+def home():
     if FRONTEND_INDEX.exists():
         return FileResponse(FRONTEND_INDEX)
 
-    return {
+    return JSONResponse(
+        {
         "project": "Red de Cadena de Suministro México",
         "status": "ok",
         "version": "0.1.0",
-    }
+        }
+    )
 
 
 @app.get("/api")
