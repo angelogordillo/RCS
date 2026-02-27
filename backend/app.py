@@ -2,11 +2,16 @@ from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 app = FastAPI(title="RCS API", version="0.1.0")
 BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_INDEX = BASE_DIR / "frontend" / "index.html"
+LOGOS_DIR = BASE_DIR / "logos"
+
+if LOGOS_DIR.exists():
+    app.mount("/logos", StaticFiles(directory=LOGOS_DIR), name="logos")
 
 
 class Node(BaseModel):
