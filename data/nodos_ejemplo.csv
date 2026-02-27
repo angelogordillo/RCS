@@ -1,0 +1,4 @@
+id,nombre,tipo,estado,capacidad
+mx-cdmx-cd-001,Centro de Distribución CDMX,centro_distribucion,CDMX,1500
+mx-nl-planta-001,Planta Monterrey,planta,Nuevo León,3200
+mx-jal-proveedor-001,Proveedor Guadalajara,proveedor,Jalisco,900

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RCS México</title>
+  <style>
+    :root {
+      --bg-1: #0f172a;
+      --bg-2: #1e293b;
+      --card: #ffffff;
+      --ink: #0f172a;
+      --muted: #64748b;
+      --accent: #0ea5e9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Montserrat", sans-serif;
+      background: linear-gradient(120deg, var(--bg-1), var(--bg-2));
+      color: var(--ink);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    .panel {
+      width: min(980px, 100%);
+      background: var(--card);
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(2, 6, 23, 0.35);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.7rem, 4vw, 2.3rem);
+    }
+    p { margin: 0; color: var(--muted); }
+    .grid {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .kpi {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .kpi strong {
+      display: block;
+      font-size: 1.4rem;
+      color: var(--ink);
+    }
+    .kpi span { color: var(--muted); }
+    .badge {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: #e0f2fe;
+      color: #0369a1;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1.4s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: .65; }
+    }
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <h1>Red de Cadena de Suministro México</h1>
+    <p>MVP para monitoreo y orquestación de nodos logísticos.</p>
+
+    <section class="grid">
+      <article class="kpi"><strong>42</strong><span>Nodos activos</span></article>
+      <article class="kpi"><strong>128</strong><span>Rutas monitoreadas</span></article>
+      <article class="kpi"><strong>96.2%</strong><span>Nivel de servicio</span></article>
+      <article class="kpi"><strong>14</strong><span>Alertas de riesgo</span></article>
+    </section>
+
+    <div class="badge"><span class="dot"></span> Demo inicial operativa</div>
+  </main>
+</body>
+</html>
