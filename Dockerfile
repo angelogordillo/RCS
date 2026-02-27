@@ -11,6 +11,7 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 
 COPY backend /app/backend
 COPY frontend /app/frontend
+COPY logos /app/logos
 
 WORKDIR /app/backend
 
