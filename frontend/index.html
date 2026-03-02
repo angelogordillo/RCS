@@ -49,6 +49,13 @@
       margin: 0 auto;
     }
 
+    .logos-partners {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      margin: 24px auto 0;
+    }
+
     .logo-item {
       display: flex;
       align-items: center;
@@ -78,6 +85,10 @@
 
       .logos-bottom {
         grid-template-columns: 1fr;
+      }
+
+      .logos-partners {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
   </style>
@@ -123,6 +134,21 @@
         <a href="https://camaramexicanachilena.com.mx/" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio de la Cámara Mexicano Chilena">
           <img src="/logos/logo-camara.jpg" alt="Cámara" />
         </a>
+      </div>
+    </section>
+
+    <section class="logos-partners" aria-label="Logos aliados adicionales">
+      <div class="logo-item">
+        <img src="/logos/hiway.jpeg" alt="Hiway" />
+      </div>
+      <div class="logo-item">
+        <img src="/logos/montt-casa-logo.jpeg" alt="Montt Casa" />
+      </div>
+      <div class="logo-item">
+        <img src="/logos/hooman-azul.jpg" alt="Hooman" />
+      </div>
+      <div class="logo-item">
+        <img src="/logos/integralegal.jpeg" alt="Integralegal" />
       </div>
     </section>
   </main>
