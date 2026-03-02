@@ -8,6 +8,7 @@ from pydantic import BaseModel
 app = FastAPI(title="RCS API", version="0.1.0")
 BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_INDEX = BASE_DIR / "frontend" / "index.html"
+FRONTEND_EVENTOS = BASE_DIR / "frontend" / "eventos.html"
 LOGOS_DIR = BASE_DIR / "logos"
 
 if LOGOS_DIR.exists():
@@ -51,6 +52,21 @@ def home():
         "status": "ok",
         "version": "0.1.0",
         }
+    )
+
+
+@app.get("/eventos", response_model=None)
+def eventos():
+    if FRONTEND_EVENTOS.exists():
+        return FileResponse(FRONTEND_EVENTOS)
+
+    return JSONResponse(
+        {
+            "project": "Red de Cadena de Suministro México",
+            "status": "error",
+            "message": "No se encontró frontend/eventos.html",
+        },
+        status_code=404,
     )
 
 

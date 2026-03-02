@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RCS | Eventos</title>
+  <meta name="description" content="Resumen de eventos de la Red de Cadena de Suministro México." />
+  <style>
+    :root {
+      --ink: #13233f;
+      --muted: #5b6780;
+      --line: #dfe5f0;
+      --surface: #f4f7fb;
+      --brand: #0f5bd8;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f8fbff 0%, #f1f5fb 100%);
+    }
+
+    main {
+      width: min(980px, 100%);
+      margin: 0 auto;
+      padding: 40px 16px 56px;
+    }
+
+    .header {
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      margin: 12px 0 0;
+      color: var(--muted);
+      max-width: 72ch;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 24px rgba(16, 36, 68, 0.06);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.15rem, 3vw, 1.5rem);
+      line-height: 1.25;
+    }
+
+    p {
+      margin: 0 0 12px;
+      line-height: 1.6;
+    }
+
+    ul {
+      margin: 0 0 16px;
+      padding-left: 18px;
+      line-height: 1.6;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #e7edf7;
+    }
+
+    .links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      border-radius: 10px;
+      border: 1px solid var(--brand);
+      color: var(--brand);
+      padding: 9px 12px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .btn.primary {
+      background: var(--brand);
+      color: var(--white);
+    }
+
+    @media (max-width: 800px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery img {
+        height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="header">
+      <span class="eyebrow">RCS Latam</span>
+      <h1>Eventos y Participación Institucional</h1>
+      <p class="subtitle">Resumen ejecutivo de actividades de networking y colaboración empresarial en cadena de suministro.</p>
+    </header>
+
+    <section class="card" aria-label="Resumen del evento de networking de supply chain">
+      <div class="meta">
+        <span class="tag">Networking Supply Chain</span>
+        <span class="tag">Fuente: Cámara Mexicano-Chilena</span>
+        <span class="tag">Publicado: 27 de febrero de 2026</span>
+      </div>
+
+      <h2>Participación institucional en evento de networking organizado por OWL LATAM</h2>
+      <p>
+        La Cámara Mexicana-Chilena de Comercio e Inversión participó como aliada institucional en un encuentro de networking de supply chain, con foco en conectar líderes de operaciones, abastecimiento y logística.
+      </p>
+      <p>
+        El contenido central del evento se orientó a compartir experiencias reales, buenas prácticas de eficiencia operativa y decisiones basadas en datos para fortalecer cadenas de suministro más resilientes y competitivas.
+      </p>
+
+      <ul>
+        <li><strong>Speaker:</strong> Lorenzo Gimeno, Gerente de Operaciones en Wild Foods México.</li>
+        <li><strong>Ejes tratados:</strong> optimización de procesos, aprendizaje operativo en consumo masivo y colaboración empresarial México-Chile.</li>
+        <li><strong>Resultado clave:</strong> impulso a la cooperación binacional para innovación y crecimiento sostenible del ecosistema logístico.</li>
+      </ul>
+
+      <div class="links">
+        <a class="btn primary" href="https://camaramexicanachilena.com.mx/participacion-institucional-en-evento-de-networking-supply-chain/" target="_blank" rel="noopener noreferrer">Ver nota oficial</a>
+        <a class="btn" href="https://www.theowlsolutions.lat" target="_blank" rel="noopener noreferrer">Más información OWL</a>
+      </div>
+
+      <div class="gallery" aria-label="Galería del evento">
+        <img src="https://camaramexicanachilena.com.mx/wp-content/uploads/2026/02/Owl-Networking_1.jpeg" alt="Participantes del evento de networking de supply chain" />
+        <img src="https://camaramexicanachilena.com.mx/wp-content/uploads/2026/02/Owl-Networking_2.jpeg" alt="Sesión del evento de networking con asistentes" />
+        <img src="https://camaramexicanachilena.com.mx/wp-content/uploads/2026/02/Owl-Networking_3.jpeg" alt="Intercambio profesional durante el evento" />
+      </div>
+    </section>
+  </main>
+</body>
+</html>
