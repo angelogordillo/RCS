@@ -1,4 +1,4 @@
-# Red de Cadena de Suministro México (RCS)
+# Red de Cadena de Suministro Chile - México (RCS)
 
 Proyecto inicial para visualizar, analizar y coordinar nodos logísticos en México (proveedores, plantas, centros de distribución, puertos, rutas y riesgo operativo).
 

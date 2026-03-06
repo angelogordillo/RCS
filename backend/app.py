@@ -50,7 +50,7 @@ def home():
 
     return JSONResponse(
         {
-        "project": "Red de Cadena de Suministro México",
+        "project": "Red de Cadena de Suministro Chile - México",
         "status": "ok",
         "version": "0.1.0",
         }
@@ -64,7 +64,7 @@ def eventos():
 
     return JSONResponse(
         {
-            "project": "Red de Cadena de Suministro México",
+            "project": "Red de Cadena de Suministro Chile - México",
             "status": "error",
             "message": "No se encontró frontend/eventos.html",
         },
@@ -79,7 +79,7 @@ def bolsa():
 
     return JSONResponse(
         {
-            "project": "Red de Cadena de Suministro México",
+            "project": "Red de Cadena de Suministro Chile - México",
             "status": "error",
             "message": "No se encontró frontend/bolsa.html",
         },
@@ -94,7 +94,7 @@ def publicaciones():
 
     return JSONResponse(
         {
-            "project": "Red de Cadena de Suministro México",
+            "project": "Red de Cadena de Suministro Chile - México",
             "status": "error",
             "message": "No se encontró frontend/publicaciones.html",
         },
@@ -105,7 +105,7 @@ def publicaciones():
 @app.get("/api")
 def root() -> dict:
     return {
-        "project": "Red de Cadena de Suministro México",
+        "project": "Red de Cadena de Suministro Chile - México",
         "status": "ok",
         "version": "0.1.0",
     }
