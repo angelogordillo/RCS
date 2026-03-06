@@ -9,6 +9,8 @@ app = FastAPI(title="RCS API", version="0.1.0")
 BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_INDEX = BASE_DIR / "frontend" / "index.html"
 FRONTEND_EVENTOS = BASE_DIR / "frontend" / "eventos.html"
+FRONTEND_BOLSA = BASE_DIR / "frontend" / "bolsa.html"
+FRONTEND_PUBLICACIONES = BASE_DIR / "frontend" / "publicaciones.html"
 LOGOS_DIR = BASE_DIR / "logos"
 
 if LOGOS_DIR.exists():
@@ -65,6 +67,36 @@ def eventos():
             "project": "Red de Cadena de Suministro México",
             "status": "error",
             "message": "No se encontró frontend/eventos.html",
+        },
+        status_code=404,
+    )
+
+
+@app.get("/bolsa", response_model=None)
+def bolsa():
+    if FRONTEND_BOLSA.exists():
+        return FileResponse(FRONTEND_BOLSA)
+
+    return JSONResponse(
+        {
+            "project": "Red de Cadena de Suministro México",
+            "status": "error",
+            "message": "No se encontró frontend/bolsa.html",
+        },
+        status_code=404,
+    )
+
+
+@app.get("/publicaciones", response_model=None)
+def publicaciones():
+    if FRONTEND_PUBLICACIONES.exists():
+        return FileResponse(FRONTEND_PUBLICACIONES)
+
+    return JSONResponse(
+        {
+            "project": "Red de Cadena de Suministro México",
+            "status": "error",
+            "message": "No se encontró frontend/publicaciones.html",
         },
         status_code=404,
     )

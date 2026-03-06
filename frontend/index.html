@@ -29,6 +29,30 @@
       text-align: center;
     }
 
+    .top-nav {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0 0 14px;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .top-nav a {
+      text-decoration: none;
+      font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #1e264b;
+    }
+
+    .top-nav .sep {
+      color: #6f7da6;
+      font-weight: 700;
+    }
+
     h1 {
       margin: 0 0 32px;
       font-size: clamp(2rem, 6vw, 3.2rem);
@@ -232,6 +256,10 @@
     }
 
     @media (max-width: 760px) {
+      .top-nav {
+        justify-content: center;
+      }
+
       .logos {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -249,6 +277,13 @@
 </head>
 <body>
   <main>
+    <nav class="top-nav" aria-label="Navegación principal del home">
+      <a href="/eventos">Eventos</a>
+      <span class="sep">/</span>
+      <a href="/bolsa">Bolsa de Trabajo</a>
+      <span class="sep">/</span>
+      <a href="/publicaciones">Publicaciones</a>
+    </nav>
     <h1>Red de Cadena de Suministro México</h1>
     <section class="logos" aria-label="Logos del proyecto">
       <div class="logo-item">
