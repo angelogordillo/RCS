@@ -3,23 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RCS Privado | Proyección de Demanda</title>
+  <title>RCS Privado | Forecasting KPIs</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Fraunces:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #eff4fb;
-      --surface: rgba(255, 255, 255, 0.92);
-      --surface-strong: #ffffff;
+      --bg: #edf2fb;
+      --surface: #ffffff;
+      --surface-2: #f6f8fc;
       --ink: #16233d;
-      --muted: #5d6984;
-      --line: rgba(26, 52, 99, 0.12);
-      --brand: #0f5bd8;
-      --brand-deep: #102a72;
-      --accent: #00a87e;
+      --muted: #66728c;
+      --line: rgba(22, 35, 61, 0.1);
+      --brand: #1e56b4;
+      --brand-soft: #b8d8fb;
+      --teal: #76ddd4;
+      --shadow: 0 18px 40px rgba(18, 35, 76, 0.12);
       --danger: #b42318;
-      --shadow: 0 22px 48px rgba(15, 45, 99, 0.12);
+      --dark: #04070e;
     }
 
     * { box-sizing: border-box; }
@@ -27,34 +28,31 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at top left, rgba(15, 91, 216, 0.16), transparent 28%),
-        radial-gradient(circle at top right, rgba(0, 168, 126, 0.12), transparent 24%),
-        linear-gradient(180deg, #f6f9ff 0%, var(--bg) 100%);
+      background: linear-gradient(180deg, #f6f8fe 0%, var(--bg) 100%);
       color: var(--ink);
       font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
     }
 
     .shell {
-      width: min(1220px, calc(100% - 32px));
+      width: min(1380px, calc(100% - 28px));
       margin: 0 auto;
-      padding: 28px 0 56px;
+      padding: 22px 0 40px;
     }
 
     .topbar {
       display: flex;
       justify-content: space-between;
-      gap: 16px;
       align-items: center;
-      margin-bottom: 24px;
+      gap: 16px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
     }
 
     .topbar a,
     .logout-button {
-      color: var(--brand-deep);
+      color: var(--ink);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -64,43 +62,37 @@
       border: 0;
       background: transparent;
       cursor: pointer;
-      padding: 0;
       display: none;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(15, 91, 216, 0.09);
-      color: var(--brand-deep);
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .hero,
-    .card,
-    .login-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
+      padding: 0;
     }
 
     .login-screen {
-      min-height: calc(100vh - 84px);
+      min-height: calc(100vh - 90px);
       display: grid;
       place-items: center;
+    }
+
+    .login-card,
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
     }
 
     .login-card {
       width: min(520px, 100%);
       padding: 28px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--brand);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .login-card h1 {
@@ -124,19 +116,17 @@
     .login-form label {
       display: grid;
       gap: 6px;
-      color: var(--muted);
       font-size: 0.9rem;
+      color: var(--muted);
       font-weight: 700;
     }
 
     .login-form input {
-      width: 100%;
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 13px 14px;
       font: inherit;
-      color: var(--ink);
-      background: var(--surface-strong);
+      background: var(--surface-2);
     }
 
     .login-form button {
@@ -145,17 +135,9 @@
       padding: 14px 16px;
       font: inherit;
       font-weight: 800;
-      letter-spacing: 0.04em;
       color: #ffffff;
-      background: linear-gradient(135deg, var(--brand-deep) 0%, var(--brand) 100%);
+      background: linear-gradient(135deg, #0e214f 0%, var(--brand) 100%);
       cursor: pointer;
-    }
-
-    .login-note,
-    .status {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.55;
     }
 
     .error {
@@ -169,289 +151,258 @@
     }
 
     .hero {
-      padding: 28px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
-      gap: 24px;
-      margin-bottom: 18px;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      margin-bottom: 14px;
-      color: var(--brand);
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    h2 {
-      margin: 0;
-      color: var(--ink);
-    }
-
-    .hero-title {
-      font-family: "Fraunces", Georgia, serif;
-      font-size: clamp(2rem, 5vw, 3.35rem);
-      line-height: 1.02;
-      max-width: 10ch;
-      margin: 0;
-    }
-
-    .hero p {
-      margin: 14px 0 0;
-      color: var(--muted);
-      line-height: 1.65;
-      max-width: 64ch;
-    }
-
-    .hero-panel {
-      background: linear-gradient(180deg, rgba(16, 42, 114, 0.98) 0%, rgba(15, 91, 216, 0.98) 100%);
+      background: var(--dark);
       color: #ffffff;
-      border-radius: 22px;
-      padding: 22px;
-      display: grid;
-      gap: 14px;
-      align-content: start;
-    }
-
-    .hero-panel small {
-      opacity: 0.75;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 700;
-    }
-
-    .hero-panel .big {
-      font-size: 2rem;
-      font-weight: 800;
-      line-height: 1;
-    }
-
-    .hero-panel ul {
-      margin: 0;
-      padding-left: 18px;
-      line-height: 1.55;
-      color: rgba(255, 255, 255, 0.86);
-    }
-
-    .summary-grid,
-    .body-grid {
-      display: grid;
-      gap: 18px;
-    }
-
-    .summary-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-radius: 26px;
+      padding: 22px 28px;
       margin-bottom: 18px;
     }
 
-    .body-grid {
-      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr repeat(6, minmax(0, 1fr));
+      gap: 22px;
       align-items: start;
     }
 
-    .card {
-      padding: 22px;
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
     }
 
-    .metric-label {
-      color: var(--muted);
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .metric-value {
-      margin-top: 12px;
-      font-size: clamp(1.7rem, 3vw, 2.4rem);
-      font-weight: 800;
-    }
-
-    .metric-note {
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 0.93rem;
-      line-height: 1.45;
-    }
-
-    .card-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: end;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-    }
-
-    .card-head p {
-      margin: 8px 0 0;
-      color: var(--muted);
+    .hero p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.78);
       line-height: 1.5;
     }
 
-    .bars {
+    .hero-metric .label {
+      color: rgba(255, 255, 255, 0.78);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .hero-metric .value {
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      font-weight: 800;
+      color: #8fc5ff;
+      line-height: 1;
+    }
+
+    .hero-metric .value.teal {
+      color: var(--teal);
+    }
+
+    .hero-metric .sub {
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .viewer-status {
+      margin-top: 12px;
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.68);
+    }
+
+    .grid {
       display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 18px 18px 20px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      background: var(--dark);
+      color: #ffffff;
+      margin: -18px -18px 18px;
+      padding: 14px 18px;
+      font-size: 1rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .card-subtitle {
+      margin: -6px 0 14px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .chart {
+      display: grid;
+      gap: 10px;
+    }
+
+    .chart-grid-12 {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 8px;
       align-items: end;
-      min-height: 260px;
+      min-height: 280px;
     }
 
     .bar-col {
       display: grid;
-      gap: 10px;
-      align-items: end;
-      justify-items: center;
-    }
-
-    .bar-stack {
-      width: 100%;
-      display: flex;
-      align-items: end;
-      justify-content: center;
       gap: 8px;
-      min-height: 220px;
-    }
-
-    .bar {
-      width: 28px;
-      border-radius: 14px 14px 6px 6px;
-      background: linear-gradient(180deg, var(--brand) 0%, var(--brand-deep) 100%);
-      box-shadow: inset 0 -10px 16px rgba(255, 255, 255, 0.12);
-    }
-
-    .bar.baseline {
-      background: rgba(15, 91, 216, 0.2);
-      box-shadow: none;
-    }
-
-    .bar.upside {
-      background: linear-gradient(180deg, #30c49a 0%, var(--accent) 100%);
+      justify-items: center;
+      align-items: end;
     }
 
     .bar-value {
       font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--muted);
+      color: var(--brand);
+      font-weight: 800;
     }
 
     .bar-label {
-      font-size: 0.88rem;
-      font-weight: 800;
-      color: var(--ink);
+      font-size: 0.8rem;
+      color: var(--muted);
+      transform: rotate(-28deg);
+      transform-origin: center top;
+      white-space: nowrap;
+      margin-top: 8px;
     }
 
-    .table-wrap {
-      overflow-x: auto;
+    .bias-stack {
+      width: 100%;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .zero-line {
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: rgba(22, 35, 61, 0.18);
+    }
+
+    .bias-bar {
+      width: 28px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #2d67c8 0%, #17479a 100%);
+      position: absolute;
+      bottom: 50%;
+    }
+
+    .bias-bar.negative {
+      top: 50%;
+      bottom: auto;
+    }
+
+    .line-chart {
+      position: relative;
+      height: 260px;
+      border-bottom: 1px solid rgba(22, 35, 61, 0.12);
+    }
+
+    .line-chart svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .line-labels {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 6px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    .grouped-bars {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 8px;
+      align-items: end;
+      min-height: 290px;
+    }
+
+    .grouped-bar-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: end;
+      gap: 6px;
+      height: 230px;
+    }
+
+    .grouped-bar {
+      width: 20px;
+      border-radius: 8px 8px 4px 4px;
+      background: var(--brand-soft);
+    }
+
+    .grouped-bar.order {
+      background: linear-gradient(180deg, #3492ef 0%, #2270c5 100%);
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.94rem;
+      font-size: 0.92rem;
     }
 
     th, td {
-      text-align: left;
-      padding: 12px 10px;
+      padding: 11px 10px;
       border-bottom: 1px solid var(--line);
+      text-align: left;
       vertical-align: top;
     }
 
     th {
       color: var(--muted);
-      font-size: 0.76rem;
-      letter-spacing: 0.08em;
       text-transform: uppercase;
+      font-size: 0.74rem;
+      letter-spacing: 0.06em;
     }
 
-    .chip {
+    tbody tr:last-child td {
+      font-weight: 800;
+      background: #f3f6fb;
+    }
+
+    .pill {
       display: inline-flex;
       align-items: center;
-      padding: 5px 10px;
+      gap: 8px;
       border-radius: 999px;
-      background: rgba(15, 91, 216, 0.08);
-      color: var(--brand-deep);
-      font-size: 0.76rem;
+      padding: 8px 12px;
+      background: #eef4ff;
+      color: var(--brand);
+      font-size: 0.82rem;
       font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .list {
-      display: grid;
-      gap: 12px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .list > * {
-      padding: 14px 16px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: var(--surface-strong);
-    }
-
-    .region-row,
-    .capacity-row {
-      display: grid;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .region-row {
-      grid-template-columns: 120px 1fr auto;
-    }
-
-    .capacity-row {
-      grid-template-columns: 82px 1fr auto;
-    }
-
-    .track {
-      width: 100%;
-      height: 12px;
-      border-radius: 999px;
-      background: rgba(16, 42, 114, 0.08);
-      overflow: hidden;
-    }
-
-    .fill {
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--brand), var(--accent));
     }
 
     .footnote {
-      margin-top: 18px;
+      margin-top: 16px;
       color: var(--muted);
       font-size: 0.86rem;
       line-height: 1.55;
     }
 
-    @media (max-width: 1040px) {
-      .summary-grid,
-      .body-grid,
-      .hero {
+    @media (max-width: 1180px) {
+      .hero-grid,
+      .grid {
         grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 720px) {
-      .shell {
-        width: min(100% - 20px, 1220px);
-      }
-
-      .bars {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .region-row,
-      .capacity-row {
-        grid-template-columns: 1fr;
+    @media (max-width: 820px) {
+      .chart-grid-12,
+      .grouped-bars,
+      .line-labels {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
       }
     }
   </style>
@@ -460,17 +411,14 @@
   <main class="shell">
     <div class="topbar">
       <a href="/">RCS Latam</a>
-      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-        <span class="badge">Acceso empresa</span>
-        <button class="logout-button" id="logoutButton" type="button">Cerrar sesión</button>
-      </div>
+      <button class="logout-button" id="logoutButton" type="button">Cerrar sesión</button>
     </div>
 
     <section class="login-screen" id="loginScreen">
       <article class="login-card">
         <span class="eyebrow">Módulo privado de demanda</span>
         <h1>Ingreso por empresa</h1>
-        <p>Acceso reservado a la demo de planeación comercial y supply chain para Wild Foods México.</p>
+        <p>Acceso reservado al benchmark 2025 de Forecasting KPIs incorporado al módulo privado de Wild Foods México.</p>
         <form class="login-form" id="loginForm">
           <label>
             Empresa
@@ -487,105 +435,105 @@
           <button type="submit">Entrar al módulo</button>
           <div class="error" id="loginError"></div>
         </form>
-        <p class="login-note">Si prefieres, estas credenciales se pueden mover a variables de entorno sin tocar el front.</p>
       </article>
     </section>
 
     <section class="dashboard" id="dashboard">
       <section class="hero">
-        <div>
-          <span class="eyebrow">Planeacion comercial y supply chain</span>
-          <h1 class="hero-title">Proyección de demanda para Wild Foods México</h1>
-          <p id="heroNote">Cargando datos simulados del horizonte de seis meses...</p>
-          <p class="status" id="viewerStatus"></p>
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow" style="color:#8fc5ff;">Forecasting KPIs</div>
+            <h1>Overview</h1>
+            <p id="heroNote">Cargando benchmark 2025...</p>
+            <div class="viewer-status" id="viewerStatus"></div>
+          </div>
+          <div class="hero-metric">
+            <div class="label">Total</div>
+            <div class="value" id="totalProducts">-</div>
+            <div class="sub"># Products.</div>
+          </div>
+          <div class="hero-metric">
+            <div class="label">Average</div>
+            <div class="value" id="avgBias">-</div>
+            <div class="sub">% Bias.</div>
+          </div>
+          <div class="hero-metric">
+            <div class="label">&nbsp;</div>
+            <div class="value" id="avgAccuracy">-</div>
+            <div class="sub">% Accuracy.</div>
+          </div>
+          <div class="hero-metric">
+            <div class="label">&nbsp;</div>
+            <div class="value teal" id="avgFva">-</div>
+            <div class="sub">% FVA.</div>
+          </div>
+          <div class="hero-metric">
+            <div class="label">MTD</div>
+            <div class="value" id="mtdBias">-</div>
+            <div class="sub">% Bias.</div>
+          </div>
+          <div class="hero-metric">
+            <div class="label">&nbsp;</div>
+            <div class="value" id="mtdAccuracy">-</div>
+            <div class="sub">% Accuracy.</div>
+          </div>
+          <div class="hero-metric">
+            <div class="label">&nbsp;</div>
+            <div class="value teal" id="mtdFva">-</div>
+            <div class="sub">% FVA.</div>
+          </div>
         </div>
-        <aside class="hero-panel">
-          <small>Pico de demanda esperado</small>
-          <div class="big" id="peakMonth">-</div>
-          <div id="peakUnits">-</div>
-          <ul id="alertsList"></ul>
-        </aside>
       </section>
 
-      <section class="summary-grid">
+      <div class="grid">
         <article class="card">
-          <div class="metric-label">Volumen 6M</div>
-          <div class="metric-value" id="units6m">-</div>
-          <div class="metric-note">Unidades estimadas para el portafolio priorizado.</div>
+          <div class="card-header">% Bias by Month</div>
+          <p class="card-subtitle">Sesgo mensual del forecast 2025 reconstruido desde el tablero real.</p>
+          <div class="chart-grid-12" id="biasChart"></div>
         </article>
-        <article class="card">
-          <div class="metric-label">Ingresos 6M</div>
-          <div class="metric-value" id="revenue6m">-</div>
-          <div class="metric-note">Valor bruto simulado para planeación comercial.</div>
-        </article>
-        <article class="card">
-          <div class="metric-label">Service Level</div>
-          <div class="metric-value" id="serviceLevel">-</div>
-          <div class="metric-note">Cobertura promedio esperada con plan actual.</div>
-        </article>
-        <article class="card">
-          <div class="metric-label">Utilización pico</div>
-          <div class="metric-value" id="capacityPeak">-</div>
-          <div class="metric-note">Uso máximo de capacidad mensual disponible.</div>
-        </article>
-      </section>
 
-      <section class="body-grid">
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <h2>Escenarios mensuales</h2>
-              <p>Comparativo entre baseline, forecast y upside para el siguiente semestre.</p>
-            </div>
-            <span class="chip">Simulado</span>
+        <article class="card">
+          <div class="card-header">% Accuracy by Month</div>
+          <p class="card-subtitle">Lectura de precisión mensual. Los valores de septiembre y noviembre fueron estimados visualmente desde la captura.</p>
+          <div class="line-chart">
+            <svg id="accuracyChart" viewBox="0 0 760 260" preserveAspectRatio="none"></svg>
           </div>
-          <div class="bars" id="forecastBars"></div>
-        </div>
+          <div class="line-labels" id="accuracyLabels"></div>
+        </article>
 
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <h2>Mix regional</h2>
-              <p>Distribución esperada por macrozona para priorizar inventario y despacho.</p>
-            </div>
-          </div>
-          <div class="list" id="regions"></div>
-        </div>
+        <article class="card">
+          <div class="card-header">Forecast vs Order by Month</div>
+          <p class="card-subtitle">Comparación entre Forecast Qty. y Order Qty. usando los volúmenes visibles del panel real.</p>
+          <div class="grouped-bars" id="volumeChart"></div>
+        </article>
 
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <h2>Demanda por SKU</h2>
-              <p>Portafolio de referencia para ventas, abastecimiento y S&amp;OP.</p>
-            </div>
+        <article class="card">
+          <div class="card-header">Forecast Information by Group</div>
+          <p class="card-subtitle">Segmentación por enfoque de forecasting con el resumen observado en el tablero fuente.</p>
+          <div style="margin-bottom:14px;">
+            <span class="pill" id="summaryPill">Cargando...</span>
           </div>
-          <div class="table-wrap">
+          <div style="overflow-x:auto;">
             <table>
               <thead>
                 <tr>
-                  <th>SKU</th>
-                  <th>Canal</th>
-                  <th>Promedio mensual</th>
-                  <th>Pico</th>
-                  <th>Ingreso 6M</th>
-                  <th>Margen</th>
+                  <th>Segmentation</th>
+                  <th># Products</th>
+                  <th>Avg Fcst Qty.</th>
+                  <th>Avg Order Qty.</th>
+                  <th>Avg Bias Qty.</th>
+                  <th>Avg Error Qty.</th>
+                  <th>% Bias</th>
+                  <th>% Accuracy</th>
+                  <th>% FVA</th>
+                  <th>Avg FVA Units</th>
                 </tr>
               </thead>
-              <tbody id="skuTable"></tbody>
+              <tbody id="groupTable"></tbody>
             </table>
           </div>
-        </div>
-
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <h2>Capacidad operativa</h2>
-              <p>Lectura rápida de saturación mensual para empaque y despacho.</p>
-            </div>
-          </div>
-          <div class="list" id="capacityList"></div>
-        </div>
-      </section>
+        </article>
+      </div>
 
       <p class="footnote" id="assumptions">Cargando supuestos...</p>
     </section>
@@ -605,11 +553,6 @@
     const passwordInput = document.getElementById("passwordInput");
 
     const formatNumber = (value) => new Intl.NumberFormat("es-MX").format(value);
-    const formatCurrency = (value) => new Intl.NumberFormat("es-MX", {
-      style: "currency",
-      currency: "MXN",
-      maximumFractionDigits: 0,
-    }).format(value);
 
     function setSession(token, company) {
       localStorage.setItem(STORAGE_KEY, token);
@@ -634,22 +577,21 @@
       loginError.textContent = message;
     }
 
-    function renderBars(monthly) {
-      const container = document.getElementById("forecastBars");
+    function renderBiasChart(months) {
+      const container = document.getElementById("biasChart");
       container.innerHTML = "";
-      const maxUnits = Math.max(...monthly.map((item) => item.upside_units));
-      monthly.forEach((item) => {
-        const baselineHeight = Math.max(24, Math.round((item.baseline_units / maxUnits) * 210));
-        const forecastHeight = Math.max(30, Math.round((item.units / maxUnits) * 210));
-        const upsideHeight = Math.max(36, Math.round((item.upside_units / maxUnits) * 210));
-        const col = document.createElement("article");
+      const maxAbs = Math.max(...months.map((item) => Math.abs(item.bias_pct)));
+
+      months.forEach((item) => {
+        const col = document.createElement("div");
         col.className = "bar-col";
+        const height = Math.max(10, Math.round((Math.abs(item.bias_pct) / maxAbs) * 92));
+        const barClass = item.bias_pct < 0 ? "bias-bar negative" : "bias-bar";
         col.innerHTML = `
-          <div class="bar-value">${formatNumber(item.units)}</div>
-          <div class="bar-stack">
-            <div class="bar baseline" style="height:${baselineHeight}px"></div>
-            <div class="bar" style="height:${forecastHeight}px"></div>
-            <div class="bar upside" style="height:${upsideHeight}px"></div>
+          <div class="bar-value">${item.bias_pct}%</div>
+          <div class="bias-stack">
+            <div class="zero-line"></div>
+            <div class="${barClass}" style="height:${height}px"></div>
           </div>
           <div class="bar-label">${item.month}</div>
         `;
@@ -657,50 +599,89 @@
       });
     }
 
-    function renderRegions(regions) {
-      const root = document.getElementById("regions");
-      root.innerHTML = "";
-      regions.forEach((item) => {
-        const row = document.createElement("div");
-        row.className = "region-row";
-        row.innerHTML = `
-          <strong>${item.region}</strong>
-          <div class="track"><div class="fill" style="width:${item.share_pct}%"></div></div>
-          <span>${item.share_pct}% · ${formatNumber(item.units_6m)} u</span>
+    function renderAccuracyChart(months) {
+      const svg = document.getElementById("accuracyChart");
+      const labels = document.getElementById("accuracyLabels");
+      labels.innerHTML = "";
+      const width = 760;
+      const height = 260;
+      const left = 30;
+      const right = 20;
+      const top = 20;
+      const bottom = 30;
+      const usableWidth = width - left - right;
+      const usableHeight = height - top - bottom;
+      const minValue = 50;
+      const maxValue = 90;
+
+      const points = months.map((item, index) => {
+        const x = left + (usableWidth / (months.length - 1)) * index;
+        const y = top + (maxValue - item.accuracy_pct) / (maxValue - minValue) * usableHeight;
+        return `${x},${y}`;
+      }).join(" ");
+
+      const dots = months.map((item, index) => {
+        const x = left + (usableWidth / (months.length - 1)) * index;
+        const y = top + (maxValue - item.accuracy_pct) / (maxValue - minValue) * usableHeight;
+        return `
+          <circle cx="${x}" cy="${y}" r="5.5" fill="#1e56b4"></circle>
+          <text x="${x}" y="${y - 12}" text-anchor="middle" fill="#1e56b4" font-size="14" font-weight="800">${item.accuracy_pct}%</text>
         `;
-        root.appendChild(row);
+      }).join("");
+
+      svg.innerHTML = `
+        <line x1="${left}" y1="${top + usableHeight}" x2="${width - right}" y2="${top + usableHeight}" stroke="rgba(22,35,61,0.12)" />
+        <polyline points="${points}" fill="none" stroke="#1e56b4" stroke-width="3"></polyline>
+        ${dots}
+      `;
+
+      months.forEach((item) => {
+        const label = document.createElement("div");
+        label.textContent = item.month;
+        labels.appendChild(label);
       });
     }
 
-    function renderSkuTable(rows) {
-      const tbody = document.getElementById("skuTable");
+    function renderVolumeChart(months) {
+      const container = document.getElementById("volumeChart");
+      container.innerHTML = "";
+      const maxQty = Math.max(...months.flatMap((item) => [item.forecast_qty, item.order_qty]));
+
+      months.forEach((item) => {
+        const fcstHeight = Math.max(18, Math.round((item.forecast_qty / maxQty) * 210));
+        const orderHeight = Math.max(18, Math.round((item.order_qty / maxQty) * 210));
+        const col = document.createElement("div");
+        col.className = "bar-col";
+        col.innerHTML = `
+          <div class="bar-value">${Math.round(item.order_qty / 1000)} mil</div>
+          <div class="grouped-bar-wrap">
+            <div class="grouped-bar" style="height:${fcstHeight}px"></div>
+            <div class="grouped-bar order" style="height:${orderHeight}px"></div>
+          </div>
+          <div class="bar-label">${item.month}</div>
+        `;
+        container.appendChild(col);
+      });
+    }
+
+    function renderGroupTable(rows) {
+      const tbody = document.getElementById("groupTable");
       tbody.innerHTML = "";
       rows.forEach((item) => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td><strong>${item.sku}</strong></td>
-          <td>${item.canal}</td>
-          <td>${formatNumber(item.avg_monthly_units)}</td>
-          <td>${item.peak_month}<br /><span style="color:#5d6984">${formatNumber(item.peak_units)} u</span></td>
-          <td>${formatCurrency(item.revenue_mxn)}</td>
-          <td>${item.margin_pct}%</td>
+          <td>${item.segment}</td>
+          <td>${formatNumber(item.products)}</td>
+          <td>${formatNumber(item.avg_fcst_qty)}</td>
+          <td>${formatNumber(item.avg_order_qty)}</td>
+          <td>${formatNumber(item.avg_bias_qty)}</td>
+          <td>${formatNumber(item.avg_error_qty)}</td>
+          <td>${item.bias_pct}%</td>
+          <td>${item.accuracy_pct}%</td>
+          <td>${item.fva_pct}%</td>
+          <td>${formatNumber(item.avg_fva_units)}</td>
         `;
         tbody.appendChild(tr);
-      });
-    }
-
-    function renderCapacity(rows) {
-      const root = document.getElementById("capacityList");
-      root.innerHTML = "";
-      rows.forEach((item) => {
-        const row = document.createElement("div");
-        row.className = "capacity-row";
-        row.innerHTML = `
-          <strong>${item.month}</strong>
-          <div class="track"><div class="fill" style="width:${Math.min(item.utilization_pct, 100)}%"></div></div>
-          <span>${item.utilization_pct}% · gap ${formatNumber(item.gap_units)} u</span>
-        `;
-        root.appendChild(row);
       });
     }
 
@@ -713,7 +694,7 @@
         throw new Error("La sesión expiró o las credenciales no son válidas.");
       }
       if (!response.ok) {
-        throw new Error("No se pudo cargar la proyección.");
+        throw new Error("No se pudo cargar el benchmark de forecasting.");
       }
       return response.json();
     }
@@ -723,28 +704,33 @@
       const summary = data.summary;
 
       showDashboard();
-      document.getElementById("heroNote").textContent = `${data.company.note} Categoria foco: ${data.company.category}. Generado: ${data.generated_at}.`;
+      document.getElementById("heroNote").textContent = `${data.company.note} Última actualización técnica: ${data.generated_at}.`;
       document.getElementById("viewerStatus").textContent = `Sesión activa para ${data.viewer.company} con usuario ${data.viewer.username}.`;
-      document.getElementById("peakMonth").textContent = summary.peak_month;
-      document.getElementById("peakUnits").textContent = `${formatNumber(summary.peak_units)} unidades proyectadas`;
-      document.getElementById("units6m").textContent = formatNumber(summary.units_6m);
-      document.getElementById("revenue6m").textContent = formatCurrency(summary.revenue_6m_mxn);
-      document.getElementById("serviceLevel").textContent = `${summary.avg_service_level_pct}%`;
-      document.getElementById("capacityPeak").textContent = `${summary.capacity_utilization_peak_pct}%`;
+      document.getElementById("totalProducts").textContent = formatNumber(summary.total_products);
+      document.getElementById("avgBias").textContent = `${summary.avg_bias_pct}%`;
+      document.getElementById("avgAccuracy").textContent = `${summary.avg_accuracy_pct}%`;
+      document.getElementById("avgFva").textContent = `${summary.avg_fva_pct}%`;
+      document.getElementById("mtdBias").textContent = `${summary.mtd_bias_pct}%`;
+      document.getElementById("mtdAccuracy").textContent = `${summary.mtd_accuracy_pct}%`;
+      document.getElementById("mtdFva").textContent = `${summary.mtd_fva_pct}%`;
+      document.getElementById("summaryPill").textContent = `Peor sesgo: ${summary.worst_bias_month} (${summary.worst_bias_pct}%) · Mejor accuracy: ${summary.best_accuracy_month} (${summary.best_accuracy_pct}%)`;
+      document.getElementById("assumptions").textContent = `Supuestos y trazabilidad: ${data.assumptions.join(" ")}`;
 
-      const alerts = document.getElementById("alertsList");
-      alerts.innerHTML = "";
-      data.alerts.forEach((message) => {
-        const li = document.createElement("li");
-        li.textContent = message;
-        alerts.appendChild(li);
-      });
-
-      document.getElementById("assumptions").textContent = `Supuestos base: ${data.assumptions.join(" ")}`;
-      renderBars(data.monthly_forecast);
-      renderRegions(data.regional_mix);
-      renderSkuTable(data.sku_rows);
-      renderCapacity(data.capacity_plan);
+      renderBiasChart(data.monthly_kpis);
+      renderAccuracyChart(data.monthly_kpis);
+      renderVolumeChart(data.monthly_kpis);
+      renderGroupTable([...data.group_rows, {
+        segment: "Total",
+        products: summary.total_products,
+        avg_fcst_qty: 537300,
+        avg_order_qty: 589247,
+        avg_bias_qty: -51947,
+        avg_error_qty: 148384,
+        bias_pct: summary.avg_bias_pct,
+        accuracy_pct: summary.avg_accuracy_pct,
+        fva_pct: summary.avg_fva_pct,
+        avg_fva_units: 215933,
+      }]);
     }
 
     loginForm.addEventListener("submit", async (event) => {
