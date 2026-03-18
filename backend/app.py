@@ -59,30 +59,33 @@ NODES = [
     },
 ]
 
-SIMULATED_WILD_FOODS_SKUS = [
-    {"sku": "Protein Bites Cacao 45g", "canal": "Autoservicio", "base": 18500, "precio": 28.5, "margen": 0.34},
-    {"sku": "Protein Bites Matcha 45g", "canal": "E-commerce", "base": 9200, "precio": 31.0, "margen": 0.39},
-    {"sku": "Granola Clean Label 300g", "canal": "Clubes de precio", "base": 14100, "precio": 74.0, "margen": 0.28},
-    {"sku": "Nut Butter Almond 250g", "canal": "Retail especializado", "base": 7600, "precio": 119.0, "margen": 0.32},
-    {"sku": "Nut Butter Peanut 400g", "canal": "Autoservicio", "base": 11100, "precio": 96.0, "margen": 0.31},
-    {"sku": "Keto Cookies Vanilla 120g", "canal": "E-commerce", "base": 6800, "precio": 65.0, "margen": 0.36},
+MONTHLY_FORECAST_DATA = [
+    {"month": "Mar 2026", "final_fcst": 644475, "ma_fcst": 574822, "sales_order": 0, "py": 627595, "sku_count": 178, "flag": "YTG"},
+    {"month": "Abr 2026", "final_fcst": 559987, "ma_fcst": 574822, "sales_order": 0, "py": 654728, "sku_count": 169, "flag": "YTG"},
+    {"month": "May 2026", "final_fcst": 584871, "ma_fcst": 574822, "sales_order": 0, "py": 587989, "sku_count": 170, "flag": "YTG"},
+    {"month": "Jun 2026", "final_fcst": 528423, "ma_fcst": 574822, "sales_order": 0, "py": 441467, "sku_count": 166, "flag": "YTG"},
+    {"month": "Jul 2026", "final_fcst": 580202, "ma_fcst": 574822, "sales_order": 0, "py": 538751, "sku_count": 166, "flag": "YTG"},
+    {"month": "Ago 2026", "final_fcst": 549080, "ma_fcst": 574822, "sales_order": 0, "py": 580783, "sku_count": 166, "flag": "YTG"},
+    {"month": "Sep 2026", "final_fcst": 552905, "ma_fcst": 574822, "sales_order": 0, "py": 654959, "sku_count": 166, "flag": "YTG"},
+    {"month": "Oct 2026", "final_fcst": 705588, "ma_fcst": 574822, "sales_order": 0, "py": 765746, "sku_count": 166, "flag": "YTG"},
+    {"month": "Nov 2026", "final_fcst": 615754, "ma_fcst": 574822, "sales_order": 0, "py": 578993, "sku_count": 168, "flag": "YTG"},
+    {"month": "Dic 2026", "final_fcst": 551898, "ma_fcst": 574822, "sales_order": 0, "py": 520727, "sku_count": 166, "flag": "YTG"},
 ]
 
-MONTH_LABELS = [
-    "Abr 2026",
-    "May 2026",
-    "Jun 2026",
-    "Jul 2026",
-    "Ago 2026",
-    "Sep 2026",
+SEGMENTATION_DATA = [
+    {"region": "Stat. Fcst", "share_pct": 81.0, "units_6m": 4731978},
+    {"region": "Pure Stat. Fcst", "share_pct": 13.0, "units_6m": 761799},
+    {"region": "Alternative Strategies", "share_pct": 5.4, "units_6m": 316198},
+    {"region": "Market Intelligence", "share_pct": 1.1, "units_6m": 63208},
 ]
 
-SEASONALITY = [1.0, 1.04, 1.08, 1.12, 1.09, 1.15]
-REGIONAL_SPLIT = [
-    {"region": "Centro", "share": 0.41},
-    {"region": "Norte", "share": 0.24},
-    {"region": "Occidente", "share": 0.21},
-    {"region": "Sureste", "share": 0.14},
+GROUP_FORECAST_DATA = [
+    {"sku": "WILD PROTEIN", "canal": "Main group", "avg_monthly_units": 76, "peak_month": "Forecast", "peak_units": 4257984, "revenue_mxn": 4298813, "margin_pct": 904392, "py_units": 4849413},
+    {"sku": "WILD SOUL", "canal": "Main group", "avg_monthly_units": 16, "peak_month": "Forecast", "peak_units": 854102, "revenue_mxn": 831650, "margin_pct": 191910, "py_units": 1246487},
+    {"sku": "WILD FIT", "canal": "Main group", "avg_monthly_units": 14, "peak_month": "Forecast", "peak_units": 574089, "revenue_mxn": 484250, "margin_pct": 84544, "py_units": 637868},
+    {"sku": "WILD PROTEIN PRO", "canal": "Main group", "avg_monthly_units": 28, "peak_month": "Forecast", "peak_units": 144200, "revenue_mxn": 116127, "margin_pct": 26605, "py_units": 232992},
+    {"sku": "WILD FOODS", "canal": "Main group", "avg_monthly_units": 8, "peak_month": "Forecast", "peak_units": 38486, "revenue_mxn": 14287, "margin_pct": 3736, "py_units": 16966},
+    {"sku": "COMPLEMENTO VENTA", "canal": "Main group", "avg_monthly_units": 41, "peak_month": "Forecast", "peak_units": 4322, "revenue_mxn": 3045, "margin_pct": 691, "py_units": 5042},
 ]
 
 
@@ -121,104 +124,80 @@ def require_company_auth(request: Request) -> dict:
     return verify_token(auth_header.split(" ", 1)[1].strip())
 
 
-def month_total(index: int) -> int:
-    base_total = sum(item["base"] for item in SIMULATED_WILD_FOODS_SKUS)
-    return round(base_total * SEASONALITY[index])
-
-
 def build_demand_forecast():
-    monthly_units = [month_total(index) for index in range(len(MONTH_LABELS))]
-    monthly_revenue = []
-    sku_rows = []
-    sku_chart = []
-    capacity_limit = 76000
-
-    for item in SIMULATED_WILD_FOODS_SKUS:
-        sku_monthly = [round(item["base"] * factor) for factor in SEASONALITY]
-        monthly_revenue.append(sum(units * item["precio"] for units in sku_monthly))
-        sku_rows.append(
-            {
-                "sku": item["sku"],
-                "canal": item["canal"],
-                "avg_monthly_units": round(sum(sku_monthly) / len(sku_monthly)),
-                "peak_month": MONTH_LABELS[sku_monthly.index(max(sku_monthly))],
-                "peak_units": max(sku_monthly),
-                "revenue_mxn": round(sum(units * item["precio"] for units in sku_monthly)),
-                "margin_pct": round(item["margen"] * 100, 1),
-            }
-        )
-        sku_chart.append(
-            {
-                "sku": item["sku"],
-                "values": sku_monthly,
-            }
-        )
-
-    regional_mix = []
-    for region in REGIONAL_SPLIT:
-        demand = round(sum(monthly_units) * region["share"])
-        regional_mix.append(
-            {
-                "region": region["region"],
-                "units_6m": demand,
-                "share_pct": round(region["share"] * 100, 1),
-            }
-        )
-
-    month_capacity = []
-    for label, units in zip(MONTH_LABELS, monthly_units):
-        utilization = round((units / capacity_limit) * 100, 1)
-        month_capacity.append(
-            {
-                "month": label,
-                "forecast_units": units,
-                "capacity_limit": capacity_limit,
-                "utilization_pct": utilization,
-                "gap_units": capacity_limit - units,
-            }
-        )
-
-    total_units = sum(monthly_units)
+    total_forecast = sum(item["final_fcst"] for item in MONTHLY_FORECAST_DATA)
+    total_ma = sum(item["ma_fcst"] for item in MONTHLY_FORECAST_DATA)
+    total_py = sum(item["py"] for item in MONTHLY_FORECAST_DATA)
+    peak_month = max(MONTHLY_FORECAST_DATA, key=lambda item: item["final_fcst"])
+    month_capacity = [
+        {
+            "month": "Ene 2026",
+            "flag": "YTD",
+            "forecast_units": 0,
+            "baseline_units": 0,
+            "actual_units": 476926,
+            "reference_units": 416796,
+        },
+        {
+            "month": "Feb 2026",
+            "flag": "YTD",
+            "forecast_units": 0,
+            "baseline_units": 0,
+            "actual_units": 734962,
+            "reference_units": 702429,
+        },
+    ]
+    month_capacity.extend(
+        {
+            "month": item["month"],
+            "flag": item["flag"],
+            "forecast_units": item["final_fcst"],
+            "baseline_units": item["ma_fcst"],
+            "actual_units": item["sales_order"],
+            "reference_units": item["py"],
+        }
+        for item in MONTHLY_FORECAST_DATA
+    )
     return {
         "company": {
             "name": COMPANY_NAME,
             "country": "Mexico",
             "category": "Healthy snacks & functional foods",
-            "note": "Datos simulados para demo privada de planeacion de demanda en RCS.",
+            "note": "Datos agregados desde Forecast Data.xlsx (Export 2026, YTD/YTG, ProductType PTE).",
         },
         "generated_at": date.today().isoformat(),
         "summary": {
-            "units_6m": total_units,
-            "revenue_6m_mxn": round(sum(monthly_revenue)),
-            "avg_service_level_pct": 96.2,
-            "forecast_accuracy_pct": 91.4,
-            "peak_month": MONTH_LABELS[monthly_units.index(max(monthly_units))],
-            "peak_units": max(monthly_units),
-            "capacity_utilization_peak_pct": max(item["utilization_pct"] for item in month_capacity),
+            "units_6m": total_forecast,
+            "revenue_6m_mxn": total_py,
+            "avg_service_level_pct": 1211888,
+            "active_skus": 185,
+            "peak_month": peak_month["month"],
+            "peak_units": peak_month["final_fcst"],
+            "capacity_utilization_peak_pct": total_ma,
         },
         "monthly_forecast": [
             {
-                "month": label,
-                "units": units,
-                "revenue_mxn": round(units * 58.4),
-                "baseline_units": round(units * 0.93),
-                "upside_units": round(units * 1.12),
+                "month": item["month"],
+                "units": item["final_fcst"],
+                "revenue_mxn": item["py"],
+                "baseline_units": item["ma_fcst"],
+                "upside_units": item["py"],
             }
-            for label, units in zip(MONTH_LABELS, monthly_units)
+            for item in MONTHLY_FORECAST_DATA
         ],
-        "sku_rows": sku_rows,
-        "sku_chart": sku_chart,
-        "regional_mix": regional_mix,
+        "sku_rows": GROUP_FORECAST_DATA,
+        "sku_chart": [],
+        "regional_mix": SEGMENTATION_DATA,
         "capacity_plan": month_capacity,
         "alerts": [
-            "Agosto y septiembre concentran la mayor presion sobre capacidad por promociones de regreso a rutina.",
-            "E-commerce aporta el margen mas alto; conviene proteger inventario de Protein Bites Matcha y Keto Cookies.",
-            "Centro y Norte explican 65% de la demanda proyectada, por lo que el stock de seguridad deberia priorizar CDMX y Monterrey.",
+            "El forecast agregado 2026 suma 5.87 millones de unidades contra 7.07 millones del PY visible en el export.",
+            "Octubre es el mayor mes de forecast con 705.588 unidades, mientras enero y febrero ya muestran ventas YTD reales.",
+            "La mayor parte del volumen proyectado cae en Stat. Fcst con 81% del forecast, seguido por Pure Stat. Fcst con 13%.",
         ],
         "assumptions": [
-            "Sell-out historico simulado de 6 SKUs con crecimiento estacional moderado.",
-            "No se incorporan quiebres de proveedor, FX ni cambios regulatorios.",
-            "Capacidad mensual fija para empaque y despacho equivalente a 76 mil unidades.",
+            "Se usó la hoja Export del archivo Forecast Data.xlsx compartido por el usuario.",
+            "Los totales se consolidaron fuera del archivo y se dejaron embebidos en el backend para no depender de la ruta Downloads.",
+            "YTD aporta Sales Order en enero-febrero; YTG aporta Final Forecast, MA Forecast y referencia PY de marzo a diciembre.",
         ],
     }
 

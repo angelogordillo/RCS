@@ -470,7 +470,7 @@
       <article class="login-card">
         <span class="eyebrow">Módulo privado de demanda</span>
         <h1>Ingreso por empresa</h1>
-        <p>Acceso reservado a la demo de planeación comercial y supply chain para Wild Foods México.</p>
+        <p>Acceso reservado al forecast consolidado 2026 de Wild Foods México, cargado desde el export real compartido.</p>
         <form class="login-form" id="loginForm">
           <label>
             Empresa
@@ -495,12 +495,12 @@
       <section class="hero">
         <div>
           <span class="eyebrow">Planeacion comercial y supply chain</span>
-          <h1 class="hero-title">Proyección de demanda para Wild Foods México</h1>
-          <p id="heroNote">Cargando datos simulados del horizonte de seis meses...</p>
+          <h1 class="hero-title">Forecast 2026 para Wild Foods México</h1>
+          <p id="heroNote">Cargando datos agregados desde Forecast Data.xlsx...</p>
           <p class="status" id="viewerStatus"></p>
         </div>
         <aside class="hero-panel">
-          <small>Pico de demanda esperado</small>
+          <small>Pico de forecast 2026</small>
           <div class="big" id="peakMonth">-</div>
           <div id="peakUnits">-</div>
           <ul id="alertsList"></ul>
@@ -509,24 +509,24 @@
 
       <section class="summary-grid">
         <article class="card">
-          <div class="metric-label">Volumen 6M</div>
+          <div class="metric-label">Final Forecast 2026</div>
           <div class="metric-value" id="units6m">-</div>
-          <div class="metric-note">Unidades estimadas para el portafolio priorizado.</div>
+          <div class="metric-note">Suma agregada de marzo a diciembre en el export 2026.</div>
         </article>
         <article class="card">
-          <div class="metric-label">Ingresos 6M</div>
+          <div class="metric-label">PY Referencia</div>
           <div class="metric-value" id="revenue6m">-</div>
-          <div class="metric-note">Valor bruto simulado para planeación comercial.</div>
+          <div class="metric-note">Referencia 2025 visible en el mismo export.</div>
         </article>
         <article class="card">
-          <div class="metric-label">Service Level</div>
+          <div class="metric-label">Sales YTD Jan-Feb</div>
           <div class="metric-value" id="serviceLevel">-</div>
-          <div class="metric-note">Cobertura promedio esperada con plan actual.</div>
+          <div class="metric-note">Ventas reales observadas en el tramo YTD del archivo.</div>
         </article>
         <article class="card">
-          <div class="metric-label">Utilización pico</div>
+          <div class="metric-label">SKU Activas</div>
           <div class="metric-value" id="capacityPeak">-</div>
-          <div class="metric-note">Uso máximo de capacidad mensual disponible.</div>
+          <div class="metric-note">Part numbers únicos considerados en la consolidación.</div>
         </article>
       </section>
 
@@ -534,10 +534,10 @@
         <div class="card">
           <div class="card-head">
             <div>
-              <h2>Escenarios mensuales</h2>
-              <p>Comparativo entre baseline, forecast y upside para el siguiente semestre.</p>
+              <h2>Final Forecast vs MA vs PY</h2>
+              <p>Comparativo mensual del export real: Final Forecast, Moving Average y referencia PY.</p>
             </div>
-            <span class="chip">Simulado</span>
+            <span class="chip">Real export</span>
           </div>
           <div class="bars" id="forecastBars"></div>
         </div>
@@ -545,8 +545,8 @@
         <div class="card">
           <div class="card-head">
             <div>
-              <h2>Mix regional</h2>
-              <p>Distribución esperada por macrozona para priorizar inventario y despacho.</p>
+              <h2>Mix por segmentación</h2>
+              <p>Peso del forecast total por tipo de motor de forecast en el archivo real.</p>
             </div>
           </div>
           <div class="list" id="regions"></div>
@@ -555,20 +555,20 @@
         <div class="card">
           <div class="card-head">
             <div>
-              <h2>Demanda por SKU</h2>
-              <p>Portafolio de referencia para ventas, abastecimiento y S&amp;OP.</p>
+              <h2>Forecast por grupo</h2>
+              <p>Consolidado por grupo comercial con Final Forecast, MA, Sales YTD y PY.</p>
             </div>
           </div>
           <div class="table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>SKU</th>
-                  <th>Canal</th>
-                  <th>Promedio mensual</th>
-                  <th>Pico</th>
-                  <th>Ingreso 6M</th>
-                  <th>Margen</th>
+                  <th>Grupo</th>
+                  <th>SKU activas</th>
+                  <th>Final Forecast</th>
+                  <th>MA Forecast</th>
+                  <th>Sales YTD</th>
+                  <th>PY</th>
                 </tr>
               </thead>
               <tbody id="skuTable"></tbody>
@@ -579,8 +579,8 @@
         <div class="card">
           <div class="card-head">
             <div>
-              <h2>Capacidad operativa</h2>
-              <p>Lectura rápida de saturación mensual para empaque y despacho.</p>
+              <h2>Corte YTD/YTG por mes</h2>
+              <p>Lectura mensual del export distinguiendo ventas YTD y forecast YTG.</p>
             </div>
           </div>
           <div class="list" id="capacityList"></div>
@@ -637,7 +637,7 @@
     function renderBars(monthly) {
       const container = document.getElementById("forecastBars");
       container.innerHTML = "";
-      const maxUnits = Math.max(...monthly.map((item) => item.upside_units));
+      const maxUnits = Math.max(...monthly.map((item) => Math.max(item.units, item.baseline_units, item.upside_units)));
       monthly.forEach((item) => {
         const baselineHeight = Math.max(24, Math.round((item.baseline_units / maxUnits) * 210));
         const forecastHeight = Math.max(30, Math.round((item.units / maxUnits) * 210));
@@ -679,11 +679,11 @@
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td><strong>${item.sku}</strong></td>
-          <td>${item.canal}</td>
           <td>${formatNumber(item.avg_monthly_units)}</td>
-          <td>${item.peak_month}<br /><span style="color:#5d6984">${formatNumber(item.peak_units)} u</span></td>
-          <td>${formatCurrency(item.revenue_mxn)}</td>
-          <td>${item.margin_pct}%</td>
+          <td>${formatNumber(item.peak_units)}</td>
+          <td>${formatNumber(item.revenue_mxn)}</td>
+          <td>${formatNumber(item.margin_pct)}</td>
+          <td>${formatNumber(item.py_units)}</td>
         `;
         tbody.appendChild(tr);
       });
@@ -696,9 +696,9 @@
         const row = document.createElement("div");
         row.className = "capacity-row";
         row.innerHTML = `
-          <strong>${item.month}</strong>
-          <div class="track"><div class="fill" style="width:${Math.min(item.utilization_pct, 100)}%"></div></div>
-          <span>${item.utilization_pct}% · gap ${formatNumber(item.gap_units)} u</span>
+          <strong>${item.month} · ${item.flag}</strong>
+          <div class="track"><div class="fill" style="width:${Math.min(item.reference_units ? (item.forecast_units || item.actual_units) / item.reference_units * 100 : 0, 100)}%"></div></div>
+          <span>Final ${formatNumber(item.forecast_units)} · Actual ${formatNumber(item.actual_units)} · PY ${formatNumber(item.reference_units)}</span>
         `;
         root.appendChild(row);
       });
@@ -726,11 +726,11 @@
       document.getElementById("heroNote").textContent = `${data.company.note} Categoria foco: ${data.company.category}. Generado: ${data.generated_at}.`;
       document.getElementById("viewerStatus").textContent = `Sesión activa para ${data.viewer.company} con usuario ${data.viewer.username}.`;
       document.getElementById("peakMonth").textContent = summary.peak_month;
-      document.getElementById("peakUnits").textContent = `${formatNumber(summary.peak_units)} unidades proyectadas`;
+      document.getElementById("peakUnits").textContent = `${formatNumber(summary.peak_units)} unidades de Final Forecast`;
       document.getElementById("units6m").textContent = formatNumber(summary.units_6m);
-      document.getElementById("revenue6m").textContent = formatCurrency(summary.revenue_6m_mxn);
-      document.getElementById("serviceLevel").textContent = `${summary.avg_service_level_pct}%`;
-      document.getElementById("capacityPeak").textContent = `${summary.capacity_utilization_peak_pct}%`;
+      document.getElementById("revenue6m").textContent = formatNumber(summary.revenue_6m_mxn);
+      document.getElementById("serviceLevel").textContent = formatNumber(summary.avg_service_level_pct);
+      document.getElementById("capacityPeak").textContent = formatNumber(summary.active_skus);
 
       const alerts = document.getElementById("alertsList");
       alerts.innerHTML = "";
