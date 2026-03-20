@@ -60,32 +60,26 @@ NODES = [
 ]
 
 MONTHLY_FORECAST_DATA = [
-    {"month": "Mar 2026", "final_fcst": 644475, "ma_fcst": 574822, "sales_order": 0, "py": 627595, "sku_count": 178, "flag": "YTG"},
-    {"month": "Abr 2026", "final_fcst": 559987, "ma_fcst": 574822, "sales_order": 0, "py": 654728, "sku_count": 169, "flag": "YTG"},
-    {"month": "May 2026", "final_fcst": 584871, "ma_fcst": 574822, "sales_order": 0, "py": 587989, "sku_count": 170, "flag": "YTG"},
-    {"month": "Jun 2026", "final_fcst": 528423, "ma_fcst": 574822, "sales_order": 0, "py": 441467, "sku_count": 166, "flag": "YTG"},
-    {"month": "Jul 2026", "final_fcst": 580202, "ma_fcst": 574822, "sales_order": 0, "py": 538751, "sku_count": 166, "flag": "YTG"},
-    {"month": "Ago 2026", "final_fcst": 549080, "ma_fcst": 574822, "sales_order": 0, "py": 580783, "sku_count": 166, "flag": "YTG"},
-    {"month": "Sep 2026", "final_fcst": 552905, "ma_fcst": 574822, "sales_order": 0, "py": 654959, "sku_count": 166, "flag": "YTG"},
-    {"month": "Oct 2026", "final_fcst": 705588, "ma_fcst": 574822, "sales_order": 0, "py": 765746, "sku_count": 166, "flag": "YTG"},
-    {"month": "Nov 2026", "final_fcst": 615754, "ma_fcst": 574822, "sales_order": 0, "py": 578993, "sku_count": 168, "flag": "YTG"},
-    {"month": "Dic 2026", "final_fcst": 551898, "ma_fcst": 574822, "sales_order": 0, "py": 520727, "sku_count": 166, "flag": "YTG"},
+    {"month": "Mar 2026", "final_fcst": 136772, "ma_fcst": 129374, "sales_order": 0, "py": 61365, "sku_count": 58, "flag": "YTG"},
+    {"month": "Abr 2026", "final_fcst": 154481, "ma_fcst": 129374, "sales_order": 0, "py": 58565, "sku_count": 58, "flag": "YTG"},
+    {"month": "May 2026", "final_fcst": 197476, "ma_fcst": 129374, "sales_order": 0, "py": 106858, "sku_count": 58, "flag": "YTG"},
+    {"month": "Jun 2026", "final_fcst": 168873, "ma_fcst": 129374, "sales_order": 0, "py": 78543, "sku_count": 58, "flag": "YTG"},
 ]
 
 SEGMENTATION_DATA = [
-    {"region": "Stat. Fcst", "share_pct": 81.0, "units_6m": 4731978},
-    {"region": "Pure Stat. Fcst", "share_pct": 13.0, "units_6m": 761799},
-    {"region": "Alternative Strategies", "share_pct": 5.4, "units_6m": 316198},
-    {"region": "Market Intelligence", "share_pct": 1.1, "units_6m": 63208},
+    {"region": "Market Intelligence", "share_pct": 42.3, "units_6m": 277985},
+    {"region": "Pure Stat. Fcst", "share_pct": 28.4, "units_6m": 186960},
+    {"region": "Alternative Strategies", "share_pct": 17.0, "units_6m": 111662},
+    {"region": "Stat. Fcst", "share_pct": 12.3, "units_6m": 80995},
 ]
 
 GROUP_FORECAST_DATA = [
-    {"sku": "WILD PROTEIN", "canal": "Main group", "avg_monthly_units": 76, "peak_month": "Forecast", "peak_units": 4257984, "revenue_mxn": 4298813, "margin_pct": 904392, "py_units": 4849413},
-    {"sku": "WILD SOUL", "canal": "Main group", "avg_monthly_units": 16, "peak_month": "Forecast", "peak_units": 854102, "revenue_mxn": 831650, "margin_pct": 191910, "py_units": 1246487},
-    {"sku": "WILD FIT", "canal": "Main group", "avg_monthly_units": 14, "peak_month": "Forecast", "peak_units": 574089, "revenue_mxn": 484250, "margin_pct": 84544, "py_units": 637868},
-    {"sku": "WILD PROTEIN PRO", "canal": "Main group", "avg_monthly_units": 28, "peak_month": "Forecast", "peak_units": 144200, "revenue_mxn": 116127, "margin_pct": 26605, "py_units": 232992},
-    {"sku": "WILD FOODS", "canal": "Main group", "avg_monthly_units": 8, "peak_month": "Forecast", "peak_units": 38486, "revenue_mxn": 14287, "margin_pct": 3736, "py_units": 16966},
-    {"sku": "COMPLEMENTO VENTA", "canal": "Main group", "avg_monthly_units": 41, "peak_month": "Forecast", "peak_units": 4322, "revenue_mxn": 3045, "margin_pct": 691, "py_units": 5042},
+    {"sku": "Barras", "canal": "LineName", "avg_monthly_units": 18, "peak_month": "Forecast", "peak_units": 466759, "revenue_mxn": 445648, "margin_pct": 203790, "py_units": 370295},
+    {"sku": "Granola", "canal": "LineName", "avg_monthly_units": 2, "peak_month": "Forecast", "peak_units": 49492, "revenue_mxn": 37411, "margin_pct": 20418, "py_units": 33659},
+    {"sku": "DUO", "canal": "LineName", "avg_monthly_units": 1, "peak_month": "Forecast", "peak_units": 43200, "revenue_mxn": 0, "margin_pct": 9600, "py_units": 0},
+    {"sku": "Soul", "canal": "LineName", "avg_monthly_units": 6, "peak_month": "Forecast", "peak_units": 42290, "revenue_mxn": 0, "margin_pct": 420, "py_units": 0},
+    {"sku": "Pro", "canal": "LineName", "avg_monthly_units": 4, "peak_month": "Forecast", "peak_units": 25549, "revenue_mxn": 23376, "margin_pct": 14536, "py_units": 15348},
+    {"sku": "Mini", "canal": "LineName", "avg_monthly_units": 4, "peak_month": "Forecast", "peak_units": 20106, "revenue_mxn": 6032, "margin_pct": 4313, "py_units": 2532},
 ]
 
 
@@ -127,7 +121,7 @@ def require_company_auth(request: Request) -> dict:
 def build_demand_forecast():
     total_forecast = sum(item["final_fcst"] for item in MONTHLY_FORECAST_DATA)
     total_ma = sum(item["ma_fcst"] for item in MONTHLY_FORECAST_DATA)
-    total_py = sum(item["py"] for item in MONTHLY_FORECAST_DATA)
+    total_py = 433503
     peak_month = max(MONTHLY_FORECAST_DATA, key=lambda item: item["final_fcst"])
     month_capacity = [
         {
@@ -163,14 +157,14 @@ def build_demand_forecast():
             "name": COMPANY_NAME,
             "country": "Mexico",
             "category": "Healthy snacks & functional foods",
-            "note": "Datos agregados desde Forecast Data.xlsx (Export 2026, YTD/YTG, ProductType PTE).",
+            "note": "Datos agregados desde Forecast Data (1).xlsx con nuevo modelo basado en PartNo, LineName y FlavorVal.",
         },
         "generated_at": date.today().isoformat(),
         "summary": {
             "units_6m": total_forecast,
             "revenue_6m_mxn": total_py,
-            "avg_service_level_pct": 1211888,
-            "active_skus": 185,
+            "avg_service_level_pct": 256264,
+            "active_skus": 58,
             "peak_month": peak_month["month"],
             "peak_units": peak_month["final_fcst"],
             "capacity_utilization_peak_pct": total_ma,
@@ -190,14 +184,14 @@ def build_demand_forecast():
         "regional_mix": SEGMENTATION_DATA,
         "capacity_plan": month_capacity,
         "alerts": [
-            "El forecast agregado 2026 suma 5.87 millones de unidades contra 7.07 millones del PY visible en el export.",
-            "Octubre es el mayor mes de forecast con 705.588 unidades, mientras enero y febrero ya muestran ventas YTD reales.",
-            "La mayor parte del volumen proyectado cae en Stat. Fcst con 81% del forecast, seguido por Pure Stat. Fcst con 13%.",
+            "El nuevo corte 2026 es mucho más acotado: YTD enero-febrero y YTG marzo-junio, con 58 SKU activas.",
+            "Mayo es el mayor mes de forecast con 197.476 unidades y supera con holgura al promedio móvil cargado.",
+            "El modelo ahora se explica mejor por Market Intelligence y Pure Stat. Fcst, mientras LineName reemplaza al antiguo GroupName.",
         ],
         "assumptions": [
-            "Se usó la hoja Export del archivo Forecast Data.xlsx compartido por el usuario.",
-            "Los totales se consolidaron fuera del archivo y se dejaron embebidos en el backend para no depender de la ruta Downloads.",
-            "YTD aporta Sales Order en enero-febrero; YTG aporta Final Forecast, MA Forecast y referencia PY de marzo a diciembre.",
+            "Se usó la hoja Export del archivo Forecast Data (1).xlsx compartido por el usuario.",
+            "El dataset ahora incluye años 2025 y 2026, pero el módulo se reajustó para mostrar el corte operativo 2026.",
+            "Como GroupName ya no viene en el export, el agregado principal se rehizo con LineName y la jerarquía de segmentación del archivo.",
         ],
     }
 
