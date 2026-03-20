@@ -496,8 +496,7 @@
         <div>
           <span class="eyebrow">Planeacion comercial y supply chain</span>
           <h1 class="hero-title">Forecast 2026 para Wild Foods México</h1>
-          <p id="heroNote">Cargando datos agregados desde Forecast Data (1).xlsx...</p>
-          <p class="status" id="viewerStatus"></p>
+          <p id="heroNote"></p>
         </div>
         <aside class="hero-panel">
           <small>Pico de forecast 2026</small>
@@ -587,7 +586,7 @@
         </div>
       </section>
 
-      <p class="footnote" id="assumptions">Cargando supuestos...</p>
+      <p class="footnote" id="assumptions"></p>
     </section>
   </main>
 
@@ -723,8 +722,7 @@
       const summary = data.summary;
 
       showDashboard();
-      document.getElementById("heroNote").textContent = `${data.company.note} Categoria foco: ${data.company.category}. Generado: ${data.generated_at}.`;
-      document.getElementById("viewerStatus").textContent = `Sesión activa para ${data.viewer.company} con usuario ${data.viewer.username}.`;
+      document.getElementById("heroNote").textContent = "";
       document.getElementById("peakMonth").textContent = summary.peak_month;
       document.getElementById("peakUnits").textContent = `${formatNumber(summary.peak_units)} unidades de Final Forecast`;
       document.getElementById("units6m").textContent = formatNumber(summary.units_6m);
@@ -740,7 +738,7 @@
         alerts.appendChild(li);
       });
 
-      document.getElementById("assumptions").textContent = `Supuestos base: ${data.assumptions.join(" ")}`;
+      document.getElementById("assumptions").textContent = "";
       renderBars(data.monthly_forecast);
       renderRegions(data.regional_mix);
       renderSkuTable(data.sku_rows);
