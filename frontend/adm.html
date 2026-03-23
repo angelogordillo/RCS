@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RCS | Admin</title>
+  <meta name="description" content="Acceso administrativo a interesados del waiting list del seminario." />
+  <style>
+    :root {
+      --ink: #10213d;
+      --muted: #60708b;
+      --line: #d9e2ee;
+      --surface: #f2f6fb;
+      --brand: #0f5bd8;
+      --brand-deep: #0b2e68;
+      --white: #ffffff;
+      --danger: #c83f4a;
+      --shadow: 0 18px 48px rgba(16, 33, 61, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(15, 91, 216, 0.14), transparent 25%),
+        linear-gradient(180deg, #f8fbff 0%, #edf2f8 100%);
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 91, 216, 0.08);
+      color: var(--brand);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1, h2 { margin: 0; }
+
+    .button,
+    button {
+      border: 0;
+      border-radius: 12px;
+      min-height: 44px;
+      padding: 0 16px;
+      font: inherit;
+      font-weight: 700;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--brand), #2f7dff);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .ghost {
+      background: rgba(15, 91, 216, 0.08);
+      color: var(--brand);
+    }
+
+    .login-screen {
+      display: none;
+      min-height: calc(100vh - 120px);
+      place-items: center;
+    }
+
+    .login-card,
+    .panel,
+    .empty-state {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .login-card {
+      width: min(460px, 100%);
+      padding: 28px;
+    }
+
+    .login-card p,
+    .kpi-copy,
+    .error,
+    .muted,
+    td {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .login-form {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .login-form label {
+      display: grid;
+      gap: 6px;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .login-form input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 13px 14px;
+      font: inherit;
+    }
+
+    .error {
+      min-height: 24px;
+      color: var(--danger);
+      font-size: 0.92rem;
+    }
+
+    .dashboard {
+      display: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.7fr);
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-top: 10px;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .kpi-value {
+      margin-top: 8px;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 800;
+    }
+
+    .table-panel {
+      overflow: hidden;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      margin-top: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+    }
+
+    th, td {
+      padding: 14px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      font-size: 0.94rem;
+    }
+
+    th {
+      color: var(--ink);
+      background: var(--surface);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .empty-state {
+      display: none;
+      padding: 28px;
+      text-align: center;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(15, 91, 216, 0.08);
+      color: var(--brand);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="topbar">
+      <div>
+        <span class="eyebrow">RCS Admin</span>
+      </div>
+      <button class="ghost" id="logoutButton" type="button" style="display:none;">Cerrar sesión</button>
+    </div>
+
+    <section class="login-screen" id="loginScreen">
+      <article class="login-card">
+        <span class="eyebrow">Acceso protegido</span>
+        <h1 style="margin-top: 12px;">Panel de interesados</h1>
+        <p style="margin-top: 12px;">Ingresa con tu usuario y password para ver los registros del waiting list del seminario.</p>
+        <form class="login-form" id="loginForm">
+          <label>
+            Usuario
+            <input id="usernameInput" name="username" type="text" autocomplete="username" required />
+          </label>
+          <label>
+            Password
+            <input id="passwordInput" name="password" type="password" autocomplete="current-password" required />
+          </label>
+          <button type="submit">Entrar a /adm</button>
+          <div class="error" id="loginError"></div>
+        </form>
+      </article>
+    </section>
+
+    <section class="dashboard" id="dashboard">
+      <section class="hero">
+        <article class="panel">
+          <span class="eyebrow">Waiting list</span>
+          <h1>Interesados del seminario</h1>
+          <p class="muted" style="margin-top: 12px;">Vista privada de los registros capturados desde <strong>/eventos/seminario</strong>.</p>
+        </article>
+        <article class="panel">
+          <span class="eyebrow">Sesión</span>
+          <h2 style="margin-top: 12px;" id="viewerName">Administrador</h2>
+          <p class="muted" id="latestDate" style="margin-top: 12px;">Sin actividad reciente.</p>
+        </article>
+      </section>
+
+      <section class="kpi-grid">
+        <article class="panel">
+          <div class="eyebrow">Total registros</div>
+          <div class="kpi-value" id="totalEntries">0</div>
+          <div class="kpi-copy">Cantidad de interesados guardados en la lista de espera.</div>
+        </article>
+        <article class="panel">
+          <div class="eyebrow">Último registro</div>
+          <div class="kpi-value" id="lastEntryDay">-</div>
+          <div class="kpi-copy">Fecha del registro más reciente recibido.</div>
+        </article>
+        <article class="panel">
+          <div class="eyebrow">Origen</div>
+          <div class="kpi-value">/eventos/seminario</div>
+          <div class="kpi-copy">Captura conectada al formulario público del waiting list.</div>
+        </article>
+      </section>
+
+      <section class="panel table-panel">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:16px;">
+          <div>
+            <span class="eyebrow">Registros</span>
+            <h2 style="margin-top: 10px;">Base de interesados</h2>
+          </div>
+          <span class="tag" id="recordTag">0 filas</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Empresa</th>
+                <th>Cargo</th>
+                <th>País</th>
+                <th>Interés</th>
+              </tr>
+            </thead>
+            <tbody id="waitlistBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="empty-state" id="emptyState">
+        <h2>Aún no hay interesados registrados</h2>
+        <p class="muted" style="margin-top: 10px;">En cuanto alguien complete el formulario del waiting list, aparecerá aquí.</p>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "rcs_admin_token";
+    const loginScreen = document.getElementById("loginScreen");
+    const dashboard = document.getElementById("dashboard");
+    const logoutButton = document.getElementById("logoutButton");
+    const loginForm = document.getElementById("loginForm");
+    const loginError = document.getElementById("loginError");
+    const usernameInput = document.getElementById("usernameInput");
+    const passwordInput = document.getElementById("passwordInput");
+
+    function showLogin(message = "") {
+      loginScreen.style.display = "grid";
+      dashboard.style.display = "none";
+      logoutButton.style.display = "none";
+      loginError.textContent = message;
+    }
+
+    function showDashboard() {
+      loginScreen.style.display = "none";
+      dashboard.style.display = "block";
+      logoutButton.style.display = "inline-flex";
+    }
+
+    function clearSession() {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+
+    function setSession(token) {
+      localStorage.setItem(STORAGE_KEY, token);
+    }
+
+    function formatDate(isoDate) {
+      if (!isoDate) return "-";
+      const date = new Date(isoDate);
+      return new Intl.DateTimeFormat("es-MX", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(date);
+    }
+
+    function renderRows(entries) {
+      const tbody = document.getElementById("waitlistBody");
+      const emptyState = document.getElementById("emptyState");
+      const tablePanel = document.querySelector(".table-panel");
+      tbody.innerHTML = "";
+
+      if (!entries.length) {
+        tablePanel.style.display = "none";
+        emptyState.style.display = "block";
+        return;
+      }
+
+      tablePanel.style.display = "block";
+      emptyState.style.display = "none";
+
+      entries.forEach((entry) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${formatDate(entry.submitted_at)}</td>
+          <td>${entry.nombre || "-"}</td>
+          <td><a href="mailto:${entry.email}">${entry.email || "-"}</a></td>
+          <td>${entry.empresa || "-"}</td>
+          <td>${entry.cargo || "-"}</td>
+          <td>${entry.pais || "-"}</td>
+          <td>${entry.interes || "-"}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    async function loadWaitlist(token) {
+      const response = await fetch("/api/private/seminario-waitlist", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (response.status === 401) {
+        clearSession();
+        throw new Error("La sesión expiró o las credenciales no son válidas.");
+      }
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(payload.detail || "No fue posible cargar los interesados.");
+      }
+
+      showDashboard();
+      document.getElementById("viewerName").textContent = payload.viewer.display_name || payload.viewer.username || "Administrador";
+      document.getElementById("latestDate").textContent = payload.summary.latest_at ? `Último ingreso recibido: ${formatDate(payload.summary.latest_at)}` : "Sin actividad reciente.";
+      document.getElementById("totalEntries").textContent = payload.summary.total || 0;
+      document.getElementById("lastEntryDay").textContent = payload.summary.latest_at ? formatDate(payload.summary.latest_at).split(",")[0] : "-";
+      document.getElementById("recordTag").textContent = `${payload.summary.total || 0} filas`;
+      renderRows(payload.entries || []);
+    }
+
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      loginError.textContent = "";
+
+      try {
+        const response = await fetch("/api/admin-login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: usernameInput.value.trim(),
+            password: passwordInput.value,
+          }),
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(payload.detail || "No fue posible iniciar sesión.");
+        }
+
+        setSession(payload.token);
+        passwordInput.value = "";
+        await loadWaitlist(payload.token);
+      } catch (error) {
+        showLogin(error.message);
+      }
+    });
+
+    logoutButton.addEventListener("click", () => {
+      clearSession();
+      showLogin("Sesión cerrada.");
+    });
+
+    const token = localStorage.getItem(STORAGE_KEY);
+    if (token) {
+      loadWaitlist(token).catch((error) => showLogin(error.message));
+    } else {
+      showLogin("");
+    }
+  </script>
+</body>
+</html>

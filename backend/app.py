@@ -16,6 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_INDEX = BASE_DIR / "frontend" / "index.html"
 FRONTEND_EVENTOS = BASE_DIR / "frontend" / "eventos.html"
 FRONTEND_SEMINARIO = BASE_DIR / "frontend" / "seminario.html"
+FRONTEND_ADMIN = BASE_DIR / "frontend" / "adm.html"
 FRONTEND_BOLSA = BASE_DIR / "frontend" / "bolsa.html"
 FRONTEND_PUBLICACIONES = BASE_DIR / "frontend" / "publicaciones.html"
 FRONTEND_PROYECCION = BASE_DIR / "frontend" / "proyeccion.html"
@@ -25,6 +26,9 @@ SEMINARIO_WAITLIST_FILE = DATA_DIR / "seminario_waitlist.ndjson"
 COMPANY_USER = os.getenv("RCS_COMPANY_USER", "wildfoods")
 COMPANY_PASSWORD = os.getenv("RCS_COMPANY_PASSWORD", "wildfoods2026")
 COMPANY_NAME = os.getenv("RCS_COMPANY_NAME", "Wild Foods Mexico")
+ADMIN_USER = os.getenv("RCS_ADMIN_USER", "admin")
+ADMIN_PASSWORD = os.getenv("RCS_ADMIN_PASSWORD", "rcs2026")
+ADMIN_NAME = os.getenv("RCS_ADMIN_NAME", "Administrador RCS")
 APP_SECRET = os.getenv("RCS_APP_SECRET", "rcs-company-secret")
 
 if LOGOS_DIR.exists():
@@ -41,6 +45,11 @@ class Node(BaseModel):
 
 class CompanyLogin(BaseModel):
     company: str
+    username: str
+    password: str
+
+
+class AdminLogin(BaseModel):
     username: str
     password: str
 
@@ -115,14 +124,14 @@ def auth_error(detail: str = "Unauthorized") -> HTTPException:
     return HTTPException(status_code=401, detail=detail)
 
 
-def create_token(company: str, username: str) -> str:
-    payload = {"company": company, "username": username}
+def create_token(username: str, role: str, company: str = "") -> str:
+    payload = {"company": company, "username": username, "role": role}
     encoded_payload = base64.urlsafe_b64encode(json.dumps(payload).encode("utf-8")).decode("utf-8")
     signature = hmac.new(APP_SECRET.encode("utf-8"), encoded_payload.encode("utf-8"), "sha256").hexdigest()
     return f"{encoded_payload}.{signature}"
 
 
-def verify_token(token: str) -> dict:
+def verify_token(token: str, expected_role: str | None = None, expected_username: str | None = None) -> dict:
     try:
         encoded_payload, signature = token.split(".", 1)
     except ValueError as exc:
@@ -134,7 +143,9 @@ def verify_token(token: str) -> dict:
         payload = json.loads(base64.urlsafe_b64decode(encoded_payload.encode("utf-8")).decode("utf-8"))
     except Exception as exc:  # pragma: no cover - defensive decoding
         raise auth_error() from exc
-    if payload.get("username") != COMPANY_USER:
+    if expected_role and payload.get("role") != expected_role:
+        raise auth_error()
+    if expected_username and payload.get("username") != expected_username:
         raise auth_error()
     return payload
 
@@ -143,7 +154,14 @@ def require_company_auth(request: Request) -> dict:
     auth_header = request.headers.get("Authorization", "")
     if not auth_header.startswith("Bearer "):
         raise auth_error()
-    return verify_token(auth_header.split(" ", 1)[1].strip())
+    return verify_token(auth_header.split(" ", 1)[1].strip(), expected_role="company", expected_username=COMPANY_USER)
+
+
+def require_admin_auth(request: Request) -> dict:
+    auth_header = request.headers.get("Authorization", "")
+    if not auth_header.startswith("Bearer "):
+        raise auth_error()
+    return verify_token(auth_header.split(" ", 1)[1].strip(), expected_role="admin", expected_username=ADMIN_USER)
 
 
 def build_demand_forecast():
@@ -256,6 +274,24 @@ def save_seminario_waitlist(entry: SeminarioWaitlistEntry) -> None:
         handle.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
+def load_seminario_waitlist() -> list[dict]:
+    if not SEMINARIO_WAITLIST_FILE.exists():
+        return []
+
+    entries: list[dict] = []
+    with SEMINARIO_WAITLIST_FILE.open("r", encoding="utf-8") as handle:
+        for line in handle:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                entries.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+    entries.sort(key=lambda item: item.get("submitted_at", ""), reverse=True)
+    return entries
+
+
 @app.get("/", response_model=None)
 def home():
     if FRONTEND_INDEX.exists():
@@ -295,6 +331,21 @@ def eventos_seminario():
             "project": "Red de Cadena de Suministro Chile - México",
             "status": "error",
             "message": "No se encontró frontend/seminario.html",
+        },
+        status_code=404,
+    )
+
+
+@app.get("/adm", response_model=None)
+def admin():
+    if FRONTEND_ADMIN.exists():
+        return FileResponse(FRONTEND_ADMIN)
+
+    return JSONResponse(
+        {
+            "project": "Red de Cadena de Suministro Chile - México",
+            "status": "error",
+            "message": "No se encontró frontend/adm.html",
         },
         status_code=404,
     )
@@ -375,6 +426,22 @@ def seminario_waiting_list(payload: SeminarioWaitlistEntry) -> dict:
     }
 
 
+@app.post("/api/admin-login")
+def admin_login(payload: AdminLogin) -> dict:
+    username = payload.username.strip()
+    if not hmac.compare_digest(username, ADMIN_USER):
+        raise auth_error("Credenciales invalidas")
+    if not hmac.compare_digest(payload.password, ADMIN_PASSWORD):
+        raise auth_error("Credenciales invalidas")
+    token = create_token(username=username, role="admin")
+    return {
+        "token": token,
+        "username": username,
+        "display_name": ADMIN_NAME,
+        "session_id": secrets.token_hex(8),
+    }
+
+
 @app.post("/api/company-login")
 def company_login(payload: CompanyLogin) -> dict:
     company = payload.company.strip() or COMPANY_NAME
@@ -382,12 +449,37 @@ def company_login(payload: CompanyLogin) -> dict:
         raise auth_error("Credenciales invalidas")
     if not hmac.compare_digest(payload.password, COMPANY_PASSWORD):
         raise auth_error("Credenciales invalidas")
-    token = create_token(company, payload.username.strip())
+    token = create_token(username=payload.username.strip(), role="company", company=company)
     return {
         "token": token,
         "company": company,
         "display_name": COMPANY_NAME,
         "session_id": secrets.token_hex(8),
+    }
+
+
+@app.get("/api/admin-me")
+def admin_me(auth: dict = Depends(require_admin_auth)) -> dict:
+    return {
+        "username": auth.get("username", ADMIN_USER),
+        "display_name": ADMIN_NAME,
+        "role": auth.get("role", "admin"),
+    }
+
+
+@app.get("/api/private/seminario-waitlist")
+def admin_waitlist(auth: dict = Depends(require_admin_auth)) -> dict:
+    entries = load_seminario_waitlist()
+    return {
+        "viewer": {
+            "username": auth.get("username", ADMIN_USER),
+            "display_name": ADMIN_NAME,
+        },
+        "summary": {
+            "total": len(entries),
+            "latest_at": entries[0].get("submitted_at") if entries else None,
+        },
+        "entries": entries,
     }
 
 
