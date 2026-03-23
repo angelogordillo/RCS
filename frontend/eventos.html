@@ -4,15 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RCS | Eventos</title>
-  <meta name="description" content="Resumen de eventos de la Red de Cadena de Suministro Chile - México." />
+  <meta name="description" content="Agenda de eventos de la Red de Cadena de Suministro Chile - México, con acceso al seminario Arquitectos de la Mentalidad 2026 y archivo reciente." />
   <style>
     :root {
-      --ink: #13233f;
-      --muted: #5b6780;
-      --line: #dfe5f0;
+      --ink: #10213d;
+      --muted: #5a6680;
+      --line: #dbe3ef;
       --surface: #f4f7fb;
       --brand: #0f5bd8;
+      --brand-deep: #092f6b;
+      --gold: #d3b56b;
       --white: #ffffff;
+      --shadow: 0 18px 50px rgba(15, 42, 89, 0.12);
     }
 
     * { box-sizing: border-box; }
@@ -21,138 +24,300 @@
       margin: 0;
       font-family: "Helvetica Neue", Arial, sans-serif;
       color: var(--ink);
-      background: linear-gradient(180deg, #f8fbff 0%, #f1f5fb 100%);
+      background:
+        radial-gradient(circle at top right, rgba(211, 181, 107, 0.22), transparent 25%),
+        linear-gradient(180deg, #f9fbff 0%, #eef3fa 100%);
     }
 
     main {
-      width: min(980px, 100%);
+      width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 40px 16px 56px;
+      padding: 42px 0 56px;
     }
 
-    .header {
-      margin-bottom: 24px;
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.9fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 26px;
+    }
+
+    .hero-panel,
+    .highlight-card,
+    .event-card,
+    .contact-footer {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(219, 227, 239, 0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-panel {
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(9, 47, 107, 0.96), rgba(16, 33, 61, 0.98)),
+        #10213d;
+      color: var(--white);
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -80px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(211, 181, 107, 0.34), rgba(211, 181, 107, 0));
     }
 
     .eyebrow {
       display: inline-block;
+      margin-bottom: 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       font-size: 0.78rem;
+      font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--brand);
-      font-weight: 700;
-      margin-bottom: 10px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.1;
     }
 
     h1 {
-      margin: 0;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      line-height: 1.15;
+      font-size: clamp(2.1rem, 5vw, 3.6rem);
+      max-width: 12ch;
     }
 
     .subtitle {
-      margin: 12px 0 0;
-      color: var(--muted);
-      max-width: 72ch;
+      margin: 16px 0 0;
+      max-width: 60ch;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.84);
     }
 
-    .card {
-      background: var(--white);
-      border: 1px solid var(--line);
+    .hero-actions,
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-actions {
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn.primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--brand), #2d7cff);
+      box-shadow: 0 12px 24px rgba(15, 91, 216, 0.28);
+    }
+
+    .btn.secondary {
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.24);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn.light {
+      color: var(--brand);
+      border-color: rgba(15, 91, 216, 0.22);
+      background: rgba(15, 91, 216, 0.06);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.12rem;
+    }
+
+    .stat span {
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .highlight-card {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 91, 216, 0.08);
+      color: var(--brand);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .highlight-card p,
+    .event-card p,
+    .event-card li,
+    .contact-footer p {
+      margin: 0;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .pillar {
+      padding: 12px;
       border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 10px 24px rgba(16, 36, 68, 0.06);
+      background: linear-gradient(135deg, rgba(15, 91, 216, 0.08), rgba(211, 181, 107, 0.08));
+      border: 1px solid rgba(15, 91, 216, 0.1);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .event-card {
+      padding: 24px;
     }
 
     .meta {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 14px;
+      margin: 14px 0 18px;
     }
 
     .tag {
-      border: 1px solid var(--line);
-      background: var(--surface);
+      padding: 7px 11px;
       border-radius: 999px;
-      padding: 6px 10px;
+      background: var(--surface);
+      border: 1px solid var(--line);
       font-size: 0.82rem;
       color: var(--muted);
     }
 
-    h2 {
-      margin: 0 0 12px;
-      font-size: clamp(1.15rem, 3vw, 1.5rem);
-      line-height: 1.25;
-    }
-
-    p {
-      margin: 0 0 12px;
-      line-height: 1.6;
+    .card-title {
+      margin-top: 14px;
+      font-size: clamp(1.25rem, 3vw, 1.6rem);
     }
 
     ul {
-      margin: 0 0 16px;
+      margin: 18px 0;
       padding-left: 18px;
-      line-height: 1.6;
     }
 
     .gallery {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
-      margin-top: 16px;
+      margin-top: 18px;
     }
 
     .gallery img {
       width: 100%;
-      height: 170px;
+      height: 180px;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 14px;
       border: 1px solid var(--line);
       background: #e7edf7;
     }
 
-    .links {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .btn {
-      display: inline-block;
-      border-radius: 10px;
-      border: 1px solid var(--brand);
-      color: var(--brand);
-      padding: 9px 12px;
-      font-size: 0.92rem;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .btn.primary {
-      background: var(--brand);
-      color: var(--white);
-    }
-
     .contact-footer {
-      margin: 20px 0 0;
-      padding: 12px 14px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      color: var(--muted);
-      background: var(--white);
+      padding: 18px 22px;
       text-align: center;
     }
 
     .contact-footer a {
-      color: var(--ink);
-      text-decoration: none;
+      color: var(--brand-deep);
       font-weight: 700;
+      text-decoration: none;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 920px) {
+      .hero,
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel,
+      .highlight-card,
+      .event-card,
+      .contact-footer {
+        border-radius: 20px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      main {
+        width: min(100% - 24px, 1120px);
+        padding-top: 24px;
+      }
+
+      .hero-panel,
+      .highlight-card,
+      .event-card {
+        padding: 22px;
+      }
+
+      .hero-stats,
+      .pillars,
       .gallery {
         grid-template-columns: 1fr;
       }
@@ -165,46 +330,102 @@
 </head>
 <body>
   <main>
-    <header class="header">
-      <span class="eyebrow">RCS Latam</span>
-      <h1>Eventos y Participación Institucional</h1>
-      <p class="subtitle">Resumen ejecutivo de actividades de networking y colaboración empresarial en cadena de suministro.</p>
-    </header>
+    <section class="hero" aria-label="Resumen de agenda de eventos">
+      <article class="hero-panel">
+        <span class="eyebrow">RCS Latam | Agenda 2026</span>
+        <h1>Eventos para conectar estrategia, liderazgo e inteligencia aplicada</h1>
+        <p class="subtitle">
+          Reorganizamos esta sección para distinguir entre experiencias en agenda y participación institucional reciente. El acceso principal ahora destaca el seminario <strong>Arquitectos de la Mentalidad 2026</strong> con waiting list abierto.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="/eventos/seminario">Ver seminario</a>
+          <a class="btn secondary" href="mailto:angelo@theowl.solutions?subject=Eventos%20RCS%20Latam">Solicitar información</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>Programa ejecutivo 2026</strong>
+            <span>Enfoque en mentalidad, inteligencia artificial, integración y liderazgo.</span>
+          </div>
+          <div class="stat">
+            <strong>Waiting list activo</strong>
+            <span>Registro disponible para recibir prioridad cuando se confirme la siguiente edición.</span>
+          </div>
+        </div>
+      </article>
 
-    <section class="card" aria-label="Resumen del evento de networking de supply chain">
-      <div class="meta">
-        <span class="tag">Networking Supply Chain</span>
-        <span class="tag">Fuente: Cámara Mexicano-Chilena</span>
-        <span class="tag">Publicado: 27 de febrero de 2026</span>
-      </div>
-
-      <h2>Participación institucional en evento de networking organizado por OWL LATAM</h2>
-      <p>
-        La Cámara Mexicana-Chilena de Comercio e Inversión participó como aliada institucional en un encuentro de networking de supply chain, con foco en conectar líderes de operaciones, abastecimiento y logística.
-      </p>
-      <p>
-        El contenido central del evento se orientó a compartir experiencias reales, buenas prácticas de eficiencia operativa y decisiones basadas en datos para fortalecer cadenas de suministro más resilientes y competitivas.
-      </p>
-
-      <ul>
-        <li><strong>Speaker:</strong> Lorenzo Gimeno, Gerente de Operaciones en Wild Foods México.</li>
-        <li><strong>Ejes tratados:</strong> optimización de procesos, aprendizaje operativo en consumo masivo y colaboración empresarial México-Chile.</li>
-        <li><strong>Resultado clave:</strong> impulso a la cooperación binacional para innovación y crecimiento sostenible del ecosistema logístico.</li>
-      </ul>
-
-      <div class="links">
-        <a class="btn primary" href="https://camaramexicanachilena.com.mx/participacion-institucional-en-evento-de-networking-supply-chain/" target="_blank" rel="noopener noreferrer">Ver nota oficial</a>
-        <a class="btn" href="https://www.theowlsolutions.lat" target="_blank" rel="noopener noreferrer">Más información OWL</a>
-      </div>
-
-      <div class="gallery" aria-label="Galería del evento">
-        <img src="https://camaramexicanachilena.com.mx/wp-content/uploads/2026/02/Owl-Networking_1.jpeg" alt="Participantes del evento de networking de supply chain" />
-        <img src="https://camaramexicanachilena.com.mx/wp-content/uploads/2026/02/Owl-Networking_2.jpeg" alt="Sesión del evento de networking con asistentes" />
-        <img src="https://camaramexicanachilena.com.mx/wp-content/uploads/2026/02/Owl-Networking_3.jpeg" alt="Intercambio profesional durante el evento" />
-      </div>
+      <aside class="highlight-card" aria-label="Evento destacado">
+        <div>
+          <span class="section-kicker">Evento destacado</span>
+          <h2 style="margin-top: 14px;">Arquitectos de la Mentalidad 2026</h2>
+          <p style="margin-top: 12px;">
+            Seminario ejecutivo inspirado en el brochure adjunto: una experiencia para líderes que necesitan dirigir la transformación en la era de la inteligencia artificial.
+          </p>
+        </div>
+        <div class="pillars" aria-label="Pilares del programa">
+          <div class="pillar">M | Mindset</div>
+          <div class="pillar">A | Artificial Intelligence</div>
+          <div class="pillar">I | Integration</div>
+          <div class="pillar">L | Leadership</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn primary" href="/eventos/seminario">Entrar al detalle</a>
+        </div>
+      </aside>
     </section>
 
-    <p class="contact-footer">Contáctanos: <a href="mailto:angelo@theowl.solutions">angelo@theowl.solutions</a></p>
+    <section class="events-grid" aria-label="Listado de eventos">
+      <article class="event-card">
+        <span class="section-kicker">Próximamente</span>
+        <h2 class="card-title">Seminario con acceso dedicado y waiting list</h2>
+        <div class="meta">
+          <span class="tag">Arquitectos de la Mentalidad</span>
+          <span class="tag">Programa ejecutivo</span>
+          <span class="tag">Edición 2026</span>
+        </div>
+        <p>
+          Este nuevo acceso concentra la propuesta del seminario, sus pilares temáticos y un formulario de preregistro para personas y empresas interesadas en participar en la siguiente convocatoria.
+        </p>
+        <ul>
+          <li><strong>Orientación:</strong> líderes, directivos y perfiles de transformación.</li>
+          <li><strong>Valor:</strong> claridad estratégica para adoptar IA con criterio de negocio y liderazgo.</li>
+          <li><strong>Acción:</strong> inscripción al waiting list en una página dedicada.</li>
+        </ul>
+        <div class="card-actions">
+          <a class="btn primary" href="/eventos/seminario">Abrir página del seminario</a>
+        </div>
+      </article>
+
+      <article class="event-card">
+        <span class="section-kicker">Archivo reciente</span>
+        <h2 class="card-title">Participación institucional en networking de supply chain</h2>
+        <div class="meta">
+          <span class="tag">Networking Supply Chain</span>
+          <span class="tag">Fuente: Cámara Mexicano-Chilena</span>
+          <span class="tag">27 de febrero de 2026</span>
+        </div>
+        <p>
+          La Cámara Mexicana-Chilena de Comercio e Inversión participó como aliada institucional en un encuentro para conectar líderes de operaciones, abastecimiento y logística en torno a buenas prácticas y colaboración binacional.
+        </p>
+        <ul>
+          <li><strong>Speaker:</strong> Lorenzo Gimeno, Gerente de Operaciones en Wild Foods México.</li>
+          <li><strong>Ejes:</strong> optimización de procesos, decisiones con datos y aprendizaje operativo.</li>
+          <li><strong>Impacto:</strong> fortalecimiento del ecosistema México-Chile en supply chain.</li>
+        </ul>
+        <div class="card-actions">
+          <a class="btn primary" href="https://camaramexicanachilena.com.mx/participacion-institucional-en-evento-de-networking-supply-chain/" target="_blank" rel="noopener noreferrer">Ver nota oficial</a>
+          <a class="btn light" href="https://www.theowlsolutions.lat" target="_blank" rel="noopener noreferrer">Más información OWL</a>
+        </div>
+        <div class="gallery" aria-label="Galería del evento">
+          <img src="https://camaramexicanachilena.com.mx/wp-content/uploads/2026/02/Owl-Networking_1.jpeg" alt="Participantes del evento de networking de supply chain" />
+          <img src="https://camaramexicanachilena.com.mx/wp-content/uploads/2026/02/Owl-Networking_2.jpeg" alt="Sesión del evento de networking con asistentes" />
+          <img src="https://camaramexicanachilena.com.mx/wp-content/uploads/2026/02/Owl-Networking_3.jpeg" alt="Intercambio profesional durante el evento" />
+        </div>
+      </article>
+    </section>
+
+    <section class="contact-footer">
+      <p>Contacto para alianzas, patrocinios o información del programa: <a href="mailto:angelo@theowl.solutions">angelo@theowl.solutions</a></p>
+    </section>
   </main>
 </body>
 </html>

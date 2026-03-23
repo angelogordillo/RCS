@@ -1,5 +1,5 @@
 from pathlib import Path
-from datetime import date
+from datetime import date, datetime
 import base64
 import hmac
 import json
@@ -15,10 +15,13 @@ app = FastAPI(title="RCS API", version="0.1.0")
 BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_INDEX = BASE_DIR / "frontend" / "index.html"
 FRONTEND_EVENTOS = BASE_DIR / "frontend" / "eventos.html"
+FRONTEND_SEMINARIO = BASE_DIR / "frontend" / "seminario.html"
 FRONTEND_BOLSA = BASE_DIR / "frontend" / "bolsa.html"
 FRONTEND_PUBLICACIONES = BASE_DIR / "frontend" / "publicaciones.html"
 FRONTEND_PROYECCION = BASE_DIR / "frontend" / "proyeccion.html"
 LOGOS_DIR = BASE_DIR / "logos"
+DATA_DIR = BASE_DIR / "data"
+SEMINARIO_WAITLIST_FILE = DATA_DIR / "seminario_waitlist.ndjson"
 COMPANY_USER = os.getenv("RCS_COMPANY_USER", "wildfoods")
 COMPANY_PASSWORD = os.getenv("RCS_COMPANY_PASSWORD", "wildfoods2026")
 COMPANY_NAME = os.getenv("RCS_COMPANY_NAME", "Wild Foods Mexico")
@@ -40,6 +43,15 @@ class CompanyLogin(BaseModel):
     company: str
     username: str
     password: str
+
+
+class SeminarioWaitlistEntry(BaseModel):
+    nombre: str
+    email: str
+    empresa: str
+    cargo: str
+    pais: str
+    interes: str | None = ""
 
 
 NODES = [
@@ -236,6 +248,14 @@ def build_demand_forecast():
     }
 
 
+def save_seminario_waitlist(entry: SeminarioWaitlistEntry) -> None:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    record = entry.model_dump()
+    record["submitted_at"] = datetime.utcnow().isoformat(timespec="seconds") + "Z"
+    with SEMINARIO_WAITLIST_FILE.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+
 @app.get("/", response_model=None)
 def home():
     if FRONTEND_INDEX.exists():
@@ -260,6 +280,21 @@ def eventos():
             "project": "Red de Cadena de Suministro Chile - México",
             "status": "error",
             "message": "No se encontró frontend/eventos.html",
+        },
+        status_code=404,
+    )
+
+
+@app.get("/eventos/seminario", response_model=None)
+def eventos_seminario():
+    if FRONTEND_SEMINARIO.exists():
+        return FileResponse(FRONTEND_SEMINARIO)
+
+    return JSONResponse(
+        {
+            "project": "Red de Cadena de Suministro Chile - México",
+            "status": "error",
+            "message": "No se encontró frontend/seminario.html",
         },
         status_code=404,
     )
@@ -316,6 +351,27 @@ def root() -> dict:
         "project": "Red de Cadena de Suministro Chile - México",
         "status": "ok",
         "version": "0.1.0",
+    }
+
+
+@app.post("/api/eventos/seminario/waiting-list")
+def seminario_waiting_list(payload: SeminarioWaitlistEntry) -> dict:
+    payload.email = payload.email.strip()
+    if "@" not in payload.email or "." not in payload.email.split("@")[-1]:
+        raise HTTPException(status_code=422, detail="Correo electrónico inválido")
+
+    payload.nombre = payload.nombre.strip()
+    payload.empresa = payload.empresa.strip()
+    payload.cargo = payload.cargo.strip()
+    payload.pais = payload.pais.strip()
+    payload.interes = (payload.interes or "").strip()
+    if not all([payload.nombre, payload.empresa, payload.cargo, payload.pais]):
+        raise HTTPException(status_code=422, detail="Completa todos los campos obligatorios")
+
+    save_seminario_waitlist(payload)
+    return {
+        "status": "ok",
+        "message": "Tu registro fue agregado al waiting list del seminario.",
     }
 
 

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RCS | Seminario Arquitectos de la Mentalidad 2026</title>
+  <meta name="description" content="Seminario Arquitectos de la Mentalidad 2026: programa ejecutivo para liderar en la era de la inteligencia artificial. Inscripción al waiting list." />
+  <style>
+    :root {
+      --ink: #10213d;
+      --muted: #61708b;
+      --line: #d9e2ee;
+      --surface: #f3f6fb;
+      --brand: #0f5bd8;
+      --brand-deep: #0b2e68;
+      --gold: #d3b56b;
+      --white: #ffffff;
+      --success: #178a58;
+      --danger: #c43f3f;
+      --shadow: 0 20px 48px rgba(12, 30, 63, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(15, 91, 216, 0.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(211, 181, 107, 0.24), transparent 24%),
+        linear-gradient(180deg, #081122 0%, #10213d 26%, #eef3fa 26%, #edf2f8 100%);
+    }
+
+    main {
+      width: min(1140px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 60px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      color: rgba(255, 255, 255, 0.82);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.85fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 22px;
+    }
+
+    .hero-copy,
+    .hero-side,
+    .detail-card,
+    .form-card,
+    .contact-footer {
+      border-radius: 28px;
+      border: 1px solid rgba(217, 226, 238, 0.92);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      position: relative;
+      padding: 34px;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background:
+        linear-gradient(180deg, rgba(7, 18, 38, 0.18), rgba(7, 18, 38, 0.86)),
+        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80") center/cover;
+      color: var(--white);
+    }
+
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(15, 91, 216, 0.18), transparent 45%),
+        radial-gradient(circle at top right, rgba(211, 181, 107, 0.32), transparent 28%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      position: relative;
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 18px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.08;
+    }
+
+    h1 {
+      position: relative;
+      font-size: clamp(2.3rem, 5vw, 4.4rem);
+      max-width: 10ch;
+    }
+
+    .hero-copy p {
+      position: relative;
+      margin: 16px 0 0;
+      max-width: 58ch;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .quote {
+      position: relative;
+      margin-top: 22px;
+      padding-left: 16px;
+      border-left: 3px solid rgba(211, 181, 107, 0.9);
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .hero-side {
+      padding: 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 247, 251, 0.96));
+    }
+
+    .section-kicker {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 91, 216, 0.08);
+      color: var(--brand);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-side p,
+    .detail-card p,
+    .detail-card li,
+    .field label,
+    .helper,
+    .contact-footer p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 24px;
+    }
+
+    .pillar {
+      padding: 14px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(15, 91, 216, 0.08), rgba(211, 181, 107, 0.08));
+      border: 1px solid rgba(15, 91, 216, 0.1);
+    }
+
+    .pillar strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--brand-deep);
+      font-size: 1rem;
+    }
+
+    .pillar span {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .meta-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .meta-list li {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--white);
+      border: 1px solid var(--line);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .detail-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .detail-card,
+    .form-card,
+    .contact-footer {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .detail-card {
+      padding: 26px;
+    }
+
+    .detail-card h2 {
+      font-size: clamp(1.35rem, 3vw, 1.8rem);
+      margin-top: 14px;
+    }
+
+    .detail-card ul {
+      margin: 16px 0 0;
+      padding-left: 18px;
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .audience-item {
+      padding: 15px;
+      border-radius: 18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+
+    .form-card {
+      position: sticky;
+      top: 18px;
+      padding: 26px;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--white);
+      padding: 13px 14px;
+      font: inherit;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: rgba(15, 91, 216, 0.6);
+      box-shadow: 0 0 0 4px rgba(15, 91, 216, 0.12);
+    }
+
+    .field textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    button {
+      border: 0;
+      border-radius: 14px;
+      min-height: 48px;
+      padding: 0 18px;
+      font: inherit;
+      font-weight: 700;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--brand), #2f7dff);
+      cursor: pointer;
+      box-shadow: 0 14px 24px rgba(15, 91, 216, 0.24);
+    }
+
+    button[disabled] {
+      opacity: 0.7;
+      cursor: wait;
+    }
+
+    .status {
+      display: none;
+      margin-top: 14px;
+      padding: 13px 14px;
+      border-radius: 14px;
+      font-size: 0.94rem;
+      line-height: 1.5;
+    }
+
+    .status.visible {
+      display: block;
+    }
+
+    .status.success {
+      background: rgba(23, 138, 88, 0.12);
+      border: 1px solid rgba(23, 138, 88, 0.18);
+      color: var(--success);
+    }
+
+    .status.error {
+      background: rgba(196, 63, 63, 0.1);
+      border: 1px solid rgba(196, 63, 63, 0.18);
+      color: var(--danger);
+    }
+
+    .contact-footer {
+      margin-top: 22px;
+      padding: 18px 22px;
+      text-align: center;
+    }
+
+    .contact-footer a {
+      color: var(--brand-deep);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-card {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      main {
+        width: min(100% - 24px, 1140px);
+        padding-top: 18px;
+      }
+
+      .hero-copy,
+      .hero-side,
+      .detail-card,
+      .form-card {
+        padding: 22px;
+        border-radius: 22px;
+      }
+
+      .hero-copy {
+        min-height: 420px;
+      }
+
+      .pillars,
+      .audience-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back-link" href="/eventos">← Volver a eventos</a>
+
+    <section class="hero" aria-label="Presentación del seminario">
+      <article class="hero-copy">
+        <span class="hero-badge">Programa ejecutivo 2026</span>
+        <h1>Arquitectos de la Mentalidad</h1>
+        <p>
+          Liderando en la era de la inteligencia artificial. Esta página retoma la línea conceptual del brochure compartido para presentar el seminario como una experiencia dirigida a quienes necesitan conducir transformación, no solo adoptarla.
+        </p>
+        <p class="quote">"La Inteligencia Artificial acelera, la Mentalidad dirige"</p>
+      </article>
+
+      <aside class="hero-side" aria-label="Resumen del programa">
+        <span class="section-kicker">Framework del seminario</span>
+        <h2 style="margin-top: 14px;">Un recorrido ejecutivo para convertir IA en liderazgo aplicable</h2>
+        <p style="margin-top: 12px;">
+          A partir del material adjunto, estructuramos el acceso en torno a cuatro pilares que resumen el enfoque del programa y sirven como base para abrir el waiting list del evento.
+        </p>
+        <div class="pillars">
+          <div class="pillar">
+            <strong>M</strong>
+            <span>Mindset</span>
+          </div>
+          <div class="pillar">
+            <strong>A</strong>
+            <span>Artificial Intelligence</span>
+          </div>
+          <div class="pillar">
+            <strong>I</strong>
+            <span>Integration</span>
+          </div>
+          <div class="pillar">
+            <strong>L</strong>
+            <span>Leadership</span>
+          </div>
+        </div>
+        <ul class="meta-list">
+          <li><strong>Formato:</strong> seminario / programa ejecutivo.</li>
+          <li><strong>Edición:</strong> 2026.</li>
+          <li><strong>Estado:</strong> lista de espera abierta para la próxima convocatoria.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="content-grid">
+      <div class="detail-stack">
+        <article class="detail-card">
+          <span class="section-kicker">Propósito</span>
+          <h2>Diseñado para líderes que necesitan criterio, velocidad e integración</h2>
+          <p style="margin-top: 12px;">
+            El seminario se presenta como una plataforma de actualización ejecutiva para navegar con claridad la relación entre mentalidad, adopción tecnológica y liderazgo. Más que una introducción técnica, el énfasis está en dirigir mejor en escenarios de cambio acelerado.
+          </p>
+          <ul>
+            <li>Conectar visión estratégica con aplicaciones reales de inteligencia artificial.</li>
+            <li>Traducir tecnología en decisiones integradas de negocio, equipos y cultura.</li>
+            <li>Fortalecer una mentalidad de liderazgo preparada para entornos complejos.</li>
+          </ul>
+        </article>
+
+        <article class="detail-card">
+          <span class="section-kicker">Perfil sugerido</span>
+          <h2>Quiénes deberían estar en esta experiencia</h2>
+          <div class="audience-grid">
+            <div class="audience-item">
+              <strong>Dirección general</strong>
+              <p>Para quienes están definiendo rumbo y prioridades de transformación.</p>
+            </div>
+            <div class="audience-item">
+              <strong>Liderazgo funcional</strong>
+              <p>Operaciones, supply chain, comercial, talento o innovación con agenda de cambio.</p>
+            </div>
+            <div class="audience-item">
+              <strong>Equipos de transformación</strong>
+              <p>Responsables de integrar nuevas capacidades sin perder foco de negocio.</p>
+            </div>
+            <div class="audience-item">
+              <strong>Aliados institucionales</strong>
+              <p>Cámaras, comunidades o partners que buscan activar conversaciones de alto nivel.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="detail-card">
+          <span class="section-kicker">Qué recibirán</span>
+          <h2>Acceso prioritario cuando se anuncie la siguiente edición</h2>
+          <p style="margin-top: 12px;">
+            Al registrarte en el waiting list quedas en la base prioritaria para recibir confirmación de fechas, formato, disponibilidad y comunicación de apertura antes de la difusión general.
+          </p>
+          <ul>
+            <li>Notificación anticipada del lanzamiento del evento.</li>
+            <li>Contacto comercial para opciones individuales o corporativas.</li>
+            <li>Seguimiento directo por parte del equipo de RCS / OWL.</li>
+          </ul>
+        </article>
+      </div>
+
+      <aside class="form-card" aria-label="Formulario de waiting list">
+        <span class="section-kicker">Waiting list</span>
+        <h2 style="margin-top: 14px;">Inscríbete a la lista de espera</h2>
+        <p style="margin-top: 12px;">
+          Déjanos tus datos y te contactaremos en cuanto se confirme la próxima edición del seminario.
+        </p>
+        <form id="waitingListForm">
+          <div class="field">
+            <label for="nombre">Nombre completo</label>
+            <input id="nombre" name="nombre" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="email">Correo electrónico</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="empresa">Empresa</label>
+            <input id="empresa" name="empresa" type="text" autocomplete="organization" required />
+          </div>
+          <div class="field">
+            <label for="cargo">Cargo</label>
+            <input id="cargo" name="cargo" type="text" autocomplete="organization-title" required />
+          </div>
+          <div class="field">
+            <label for="pais">País</label>
+            <input id="pais" name="pais" type="text" autocomplete="country-name" required />
+          </div>
+          <div class="field">
+            <label for="interes">Interés o contexto</label>
+            <textarea id="interes" name="interes" placeholder="Cuéntanos si buscas cupos individuales, corporativos o información adicional."></textarea>
+          </div>
+          <button id="submitButton" type="submit">Quiero estar en el waiting list</button>
+        </form>
+        <p class="helper" style="margin-top: 12px;">Tus datos se usan únicamente para contactarte sobre este evento.</p>
+        <div class="status" id="formStatus" role="status" aria-live="polite"></div>
+      </aside>
+    </section>
+
+    <section class="contact-footer">
+      <p>Contacto directo: <a href="mailto:angelo@theowl.solutions">angelo@theowl.solutions</a></p>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("waitingListForm");
+    const statusBox = document.getElementById("formStatus");
+    const submitButton = document.getElementById("submitButton");
+
+    const setStatus = (type, message) => {
+      statusBox.className = `status visible ${type}`;
+      statusBox.textContent = message;
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      submitButton.disabled = true;
+      setStatus("success", "Enviando tu registro...");
+
+      const payload = {
+        nombre: form.nombre.value.trim(),
+        email: form.email.value.trim(),
+        empresa: form.empresa.value.trim(),
+        cargo: form.cargo.value.trim(),
+        pais: form.pais.value.trim(),
+        interes: form.interes.value.trim(),
+      };
+
+      try {
+        const response = await fetch("/api/eventos/seminario/waiting-list", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          throw new Error(result.message || result.detail || "No fue posible registrar tus datos.");
+        }
+
+        form.reset();
+        setStatus("success", result.message || "Tu registro fue agregado correctamente al waiting list.");
+      } catch (error) {
+        setStatus("error", error.message || "Ocurrió un error al enviar el formulario.");
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
