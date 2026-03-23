@@ -215,6 +215,13 @@ def build_demand_forecast():
             f"El mejor ajuste del modelo se observo en {best_month['month']} con accuracy de {best_month['accuracy_pct']}%, mientras que {worst_month['month']} fue el punto mas debil con {worst_month['accuracy_pct']}%.".replace(",", "."),
             f"Para el ultimo corte ({latest['month']}), el forecast quedo {closing_gap_units:,} unidades por encima de la venta real; la proyeccion a 12 meses queda en {projection_total:,} unidades.".replace(",", "."),
         ],
+        "product_insights": [
+            "La propuesta de valor del SKU esta centrada en 15 g de proteina por barra, lo que lo posiciona mas cerca de consumo funcional que de indulgencia pura.",
+            "El claim de sin azucar anadida y la comunicacion de bajo sodio y colesterol sugieren que la recompra puede depender de confianza nutricional y no solo de precio o sabor.",
+            "El formato de 5 unidades ayuda a explicar una demanda potencialmente mas concentrada en reposiciones por caja o multipack, con picos mas marcados que un SKU de compra unitaria.",
+            "La presencia de soya, leche y cacahuate como componentes relevantes sugiere sensibilidad a restricciones por alergenos, por lo que parte de la variabilidad comercial puede venir del universo acotado de consumidores.",
+            "Inferencia: al estar presentado como snack con proteina para mantenerte en movimiento, la demanda probablemente responde mejor a activaciones en bienestar, deporte y conveniencia que a una comunicacion genérica de snack.",
+        ],
         "alerts": [
             "El SKU mantiene una volatilidad alta y comportamiento erratico, con dispersion relevante entre forecast y venta real.",
             "La precision historica se deteriora de forma visible en el cierre mas reciente, especialmente en enero y febrero de 2026.",
@@ -224,6 +231,7 @@ def build_demand_forecast():
             "Se usó Detail.xlsx compartido por el usuario; el archivo contiene una serie histórica mensual para el SKU MX0200046031040.",
             "La proyeccion a 12 meses usa una base mixta entre venta real reciente y forecast reciente, con una curva simple de estacionalidad.",
             "El objetivo del modulo es mostrar lectura ejecutiva y no simulacion editable de supuestos.",
+            "Los insights complementarios del producto se apoyan en la ficha oficial publicada por Wild Foods Mexico para Wild Protein Chocolate 5 unidades.",
         ],
     }
 

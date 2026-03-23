@@ -544,6 +544,17 @@
         </article>
       </section>
 
+      <section class="panel" style="margin-bottom: 18px;">
+        <div class="section-head">
+          <div>
+            <h2>Insights complementarios del producto</h2>
+            <p class="section-copy">Señales cualitativas derivadas de la ficha oficial del SKU para enriquecer la lectura comercial.</p>
+          </div>
+          <span class="chip">Producto</span>
+        </div>
+        <ul class="analysis-list" id="productInsightsList"></ul>
+      </section>
+
       <section class="signal-grid">
         <article class="signal-card">
           <span class="panel-label">Accuracy promedio</span>
@@ -656,6 +667,16 @@
       });
     }
 
+    function renderProductInsights(messages) {
+      const root = document.getElementById("productInsightsList");
+      root.innerHTML = "";
+      messages.forEach((message) => {
+        const li = document.createElement("li");
+        li.textContent = message;
+        root.appendChild(li);
+      });
+    }
+
     function renderProjection(rows) {
       const tbody = document.getElementById("projectionTable");
       tbody.innerHTML = "";
@@ -725,6 +746,7 @@
 
       renderHistory(data.monthly_forecast);
       renderAnalysis(data.executive_analysis);
+      renderProductInsights(data.product_insights || []);
       renderProjection(data.projection_12m);
     }
 
