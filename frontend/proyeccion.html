@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RCS Privado | Proyección de Demanda</title>
+  <title>RCS Privado | Proyección SKU</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Fraunces:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #eff4fb;
-      --surface: rgba(255, 255, 255, 0.92);
-      --surface-strong: #ffffff;
-      --ink: #16233d;
-      --muted: #5d6984;
-      --line: rgba(26, 52, 99, 0.12);
-      --brand: #0f5bd8;
+      --bg: #eef3fb;
+      --surface: #ffffff;
+      --surface-2: #f6f8fc;
+      --ink: #18243f;
+      --muted: #64708a;
+      --line: rgba(24, 36, 63, 0.1);
+      --brand: #1f5ebf;
       --brand-deep: #102a72;
       --accent: #00a87e;
       --danger: #b42318;
-      --shadow: 0 22px 48px rgba(15, 45, 99, 0.12);
+      --shadow: 0 18px 38px rgba(18, 42, 96, 0.12);
     }
 
     * { box-sizing: border-box; }
@@ -27,18 +27,15 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at top left, rgba(15, 91, 216, 0.16), transparent 28%),
-        radial-gradient(circle at top right, rgba(0, 168, 126, 0.12), transparent 24%),
-        linear-gradient(180deg, #f6f9ff 0%, var(--bg) 100%);
+      background: linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
       color: var(--ink);
       font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
     }
 
     .shell {
-      width: min(1220px, calc(100% - 32px));
+      width: min(1360px, calc(100% - 28px));
       margin: 0 auto;
-      padding: 28px 0 56px;
+      padding: 22px 0 42px;
     }
 
     .topbar {
@@ -46,7 +43,7 @@
       justify-content: space-between;
       gap: 16px;
       align-items: center;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
     }
 
@@ -54,7 +51,7 @@
     .logout-button {
       color: var(--brand-deep);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -64,43 +61,39 @@
       border: 0;
       background: transparent;
       cursor: pointer;
-      padding: 0;
       display: none;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(15, 91, 216, 0.09);
-      color: var(--brand-deep);
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .hero,
-    .card,
-    .login-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
+      padding: 0;
     }
 
     .login-screen {
-      min-height: calc(100vh - 84px);
+      min-height: calc(100vh - 90px);
       display: grid;
       place-items: center;
+    }
+
+    .login-card,
+    .card,
+    .hero,
+    .scenario-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
     }
 
     .login-card {
       width: min(520px, 100%);
       padding: 28px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--brand);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .login-card h1 {
@@ -121,7 +114,8 @@
       gap: 14px;
     }
 
-    .login-form label {
+    .login-form label,
+    .scenario-grid label {
       display: grid;
       gap: 6px;
       color: var(--muted);
@@ -129,14 +123,14 @@
       font-weight: 700;
     }
 
-    .login-form input {
-      width: 100%;
+    .login-form input,
+    .scenario-grid input {
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 13px 14px;
       font: inherit;
       color: var(--ink);
-      background: var(--surface-strong);
+      background: var(--surface-2);
     }
 
     .login-form button {
@@ -145,17 +139,9 @@
       padding: 14px 16px;
       font: inherit;
       font-weight: 800;
-      letter-spacing: 0.04em;
       color: #ffffff;
       background: linear-gradient(135deg, var(--brand-deep) 0%, var(--brand) 100%);
       cursor: pointer;
-    }
-
-    .login-note,
-    .status {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.55;
     }
 
     .error {
@@ -169,62 +155,67 @@
     }
 
     .hero {
-      padding: 28px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
-      gap: 24px;
+      padding: 24px 26px;
       margin-bottom: 18px;
     }
 
-    .eyebrow {
-      display: inline-block;
-      margin-bottom: 14px;
-      color: var(--brand);
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 20px;
+      align-items: start;
     }
 
-    h2 {
-      margin: 0;
-      color: var(--ink);
-    }
-
-    .hero-title {
+    .hero h1 {
+      margin: 0 0 10px;
       font-family: "Fraunces", Georgia, serif;
-      font-size: clamp(2rem, 5vw, 3.35rem);
+      font-size: clamp(2rem, 5vw, 3.1rem);
       line-height: 1.02;
-      max-width: 10ch;
-      margin: 0;
     }
 
     .hero p {
-      margin: 14px 0 0;
+      margin: 0;
       color: var(--muted);
-      line-height: 1.65;
+      line-height: 1.6;
       max-width: 64ch;
     }
 
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #eef4ff;
+      color: var(--brand-deep);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
     .hero-panel {
-      background: linear-gradient(180deg, rgba(16, 42, 114, 0.98) 0%, rgba(15, 91, 216, 0.98) 100%);
-      color: #ffffff;
-      border-radius: 22px;
-      padding: 22px;
       display: grid;
-      gap: 14px;
-      align-content: start;
+      gap: 12px;
+      background: linear-gradient(180deg, rgba(16, 42, 114, 0.98) 0%, rgba(31, 94, 191, 0.98) 100%);
+      color: #ffffff;
+      border-radius: 20px;
+      padding: 20px;
     }
 
     .hero-panel small {
-      opacity: 0.75;
+      opacity: 0.78;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       font-weight: 700;
     }
 
     .hero-panel .big {
-      font-size: 2rem;
+      font-size: 2.1rem;
       font-weight: 800;
       line-height: 1;
     }
@@ -233,11 +224,11 @@
       margin: 0;
       padding-left: 18px;
       line-height: 1.55;
-      color: rgba(255, 255, 255, 0.86);
+      color: rgba(255, 255, 255, 0.88);
     }
 
     .summary-grid,
-    .body-grid {
+    .main-grid {
       display: grid;
       gap: 18px;
     }
@@ -247,13 +238,14 @@
       margin-bottom: 18px;
     }
 
-    .body-grid {
-      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+    .main-grid {
+      grid-template-columns: 360px minmax(0, 1fr);
       align-items: start;
     }
 
-    .card {
-      padding: 22px;
+    .card,
+    .scenario-card {
+      padding: 20px;
     }
 
     .metric-label {
@@ -266,7 +258,7 @@
 
     .metric-value {
       margin-top: 12px;
-      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
       font-weight: 800;
     }
 
@@ -282,7 +274,7 @@
       justify-content: space-between;
       gap: 12px;
       align-items: end;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
     }
 
@@ -292,166 +284,139 @@
       line-height: 1.5;
     }
 
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(31, 94, 191, 0.08);
+      color: var(--brand-deep);
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .scenario-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .scenario-kpis {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .scenario-kpis > div {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      background: var(--surface-2);
+    }
+
+    .scenario-kpis strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-top: 6px;
+    }
+
     .bars {
       display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(14, minmax(0, 1fr));
+      gap: 8px;
       align-items: end;
-      min-height: 260px;
+      min-height: 290px;
     }
 
     .bar-col {
       display: grid;
-      gap: 10px;
-      align-items: end;
+      gap: 8px;
       justify-items: center;
+      align-items: end;
     }
 
     .bar-stack {
       width: 100%;
+      min-height: 230px;
       display: flex;
+      gap: 5px;
       align-items: end;
       justify-content: center;
-      gap: 8px;
-      min-height: 220px;
     }
 
     .bar {
-      width: 28px;
-      border-radius: 14px 14px 6px 6px;
-      background: linear-gradient(180deg, var(--brand) 0%, var(--brand-deep) 100%);
-      box-shadow: inset 0 -10px 16px rgba(255, 255, 255, 0.12);
+      width: 16px;
+      border-radius: 8px 8px 3px 3px;
+      background: rgba(31, 94, 191, 0.2);
     }
 
-    .bar.baseline {
-      background: rgba(15, 91, 216, 0.2);
-      box-shadow: none;
+    .bar.forecast {
+      background: linear-gradient(180deg, #7bbcff 0%, #1f5ebf 100%);
     }
 
-    .bar.upside {
-      background: linear-gradient(180deg, #30c49a 0%, var(--accent) 100%);
+    .bar.orders {
+      background: linear-gradient(180deg, #00c18d 0%, #009a70 100%);
     }
 
     .bar-value {
-      font-size: 0.82rem;
-      font-weight: 700;
+      font-size: 0.76rem;
       color: var(--muted);
+      font-weight: 700;
+      text-align: center;
     }
 
     .bar-label {
-      font-size: 0.88rem;
-      font-weight: 800;
-      color: var(--ink);
-    }
-
-    .table-wrap {
-      overflow-x: auto;
+      font-size: 0.76rem;
+      color: var(--muted);
+      transform: rotate(-28deg);
+      transform-origin: center top;
+      white-space: nowrap;
+      margin-top: 8px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.94rem;
+      font-size: 0.92rem;
     }
 
     th, td {
       text-align: left;
-      padding: 12px 10px;
+      padding: 11px 10px;
       border-bottom: 1px solid var(--line);
       vertical-align: top;
     }
 
     th {
       color: var(--muted);
-      font-size: 0.76rem;
+      font-size: 0.74rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: rgba(15, 91, 216, 0.08);
-      color: var(--brand-deep);
-      font-size: 0.76rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .list {
-      display: grid;
-      gap: 12px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .list > * {
-      padding: 14px 16px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: var(--surface-strong);
-    }
-
-    .region-row,
-    .capacity-row {
-      display: grid;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .region-row {
-      grid-template-columns: 120px 1fr auto;
-    }
-
-    .capacity-row {
-      grid-template-columns: 82px 1fr auto;
-    }
-
-    .track {
-      width: 100%;
-      height: 12px;
-      border-radius: 999px;
-      background: rgba(16, 42, 114, 0.08);
-      overflow: hidden;
-    }
-
-    .fill {
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--brand), var(--accent));
+    .scenario-table-wrap,
+    .history-wrap {
+      overflow-x: auto;
     }
 
     .footnote {
-      margin-top: 18px;
+      margin-top: 16px;
       color: var(--muted);
       font-size: 0.86rem;
       line-height: 1.55;
     }
 
-    @media (max-width: 1040px) {
+    @media (max-width: 1120px) {
+      .hero-grid,
       .summary-grid,
-      .body-grid,
-      .hero {
+      .main-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 720px) {
-      .shell {
-        width: min(100% - 20px, 1220px);
-      }
-
+    @media (max-width: 780px) {
       .bars {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .region-row,
-      .capacity-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
       }
     }
   </style>
@@ -460,17 +425,14 @@
   <main class="shell">
     <div class="topbar">
       <a href="/">RCS Latam</a>
-      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-        <span class="badge">Acceso empresa</span>
-        <button class="logout-button" id="logoutButton" type="button">Cerrar sesión</button>
-      </div>
+      <button class="logout-button" id="logoutButton" type="button">Cerrar sesión</button>
     </div>
 
     <section class="login-screen" id="loginScreen">
       <article class="login-card">
         <span class="eyebrow">Módulo privado de demanda</span>
         <h1>Ingreso por empresa</h1>
-        <p>Acceso reservado al forecast consolidado 2026 de Wild Foods México, cargado desde el export actualizado compartido.</p>
+        <p>Acceso reservado al tablero de proyección individual por SKU para Wild Foods México.</p>
         <form class="login-form" id="loginForm">
           <label>
             Empresa
@@ -484,109 +446,161 @@
             Password
             <input id="passwordInput" name="password" type="password" placeholder="Password" autocomplete="current-password" />
           </label>
-          <button type="submit">Entrar al módulo</button>
+          <button type="submit">Entrar al tablero</button>
           <div class="error" id="loginError"></div>
         </form>
-        <p class="login-note">Si prefieres, estas credenciales se pueden mover a variables de entorno sin tocar el front.</p>
       </article>
     </section>
 
     <section class="dashboard" id="dashboard">
       <section class="hero">
-        <div>
-          <span class="eyebrow">Planeacion comercial y supply chain</span>
-          <h1 class="hero-title">Forecast 2026 para Wild Foods México</h1>
-          <p id="heroNote"></p>
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Proyección por SKU</span>
+            <h1 id="heroTitle">SKU individual</h1>
+            <p id="heroNote"></p>
+            <div class="pills">
+              <span class="pill" id="segmentationPill"></span>
+              <span class="pill" id="patternPill"></span>
+              <span class="pill" id="lifeCyclePill"></span>
+            </div>
+          </div>
+          <aside class="hero-panel">
+            <small>Lectura rápida</small>
+            <div class="big" id="heroBig">-</div>
+            <div id="heroSub"></div>
+            <ul id="alertsList"></ul>
+          </aside>
         </div>
-        <aside class="hero-panel">
-          <small>Pico de forecast 2026</small>
-          <div class="big" id="peakMonth">-</div>
-          <div id="peakUnits">-</div>
-          <ul id="alertsList"></ul>
-        </aside>
       </section>
 
       <section class="summary-grid">
         <article class="card">
-          <div class="metric-label">Final Forecast 2026</div>
-          <div class="metric-value" id="units6m">-</div>
-          <div class="metric-note">Suma agregada de marzo a diciembre en el export 2026.</div>
+          <div class="metric-label">Forecast histórico</div>
+          <div class="metric-value" id="histForecast">-</div>
+          <div class="metric-note">Suma de forecast observada en el detalle mensual del SKU.</div>
         </article>
         <article class="card">
-          <div class="metric-label">PY Referencia</div>
-          <div class="metric-value" id="revenue6m">-</div>
-          <div class="metric-note">Referencia 2025 visible en el mismo export.</div>
+          <div class="metric-label">Order histórico</div>
+          <div class="metric-value" id="histOrders">-</div>
+          <div class="metric-note">Ventas/órdenes históricas usadas como base de contraste.</div>
         </article>
         <article class="card">
-          <div class="metric-label">Sales YTD Jan-Feb</div>
-          <div class="metric-value" id="serviceLevel">-</div>
-          <div class="metric-note">Ventas reales observadas en el tramo YTD del archivo.</div>
+          <div class="metric-label">Accuracy promedio</div>
+          <div class="metric-value" id="histAccuracy">-</div>
+          <div class="metric-note">Accuracy agregado de la serie histórica del SKU.</div>
         </article>
         <article class="card">
-          <div class="metric-label">SKU Activas</div>
-          <div class="metric-value" id="capacityPeak">-</div>
-          <div class="metric-note">Part numbers únicos considerados en la consolidación.</div>
+          <div class="metric-label">Escenario 6M</div>
+          <div class="metric-value" id="scenarioTotal">-</div>
+          <div class="metric-note">Proyección resultante luego de aplicar los inputs macro.</div>
         </article>
       </section>
 
-      <section class="body-grid">
-        <div class="card">
+      <section class="main-grid">
+        <aside class="scenario-card">
           <div class="card-head">
             <div>
-              <h2>Final Forecast vs MA vs PY</h2>
-              <p>Comparativo mensual del nuevo export: Final Forecast, Moving Average y referencia PY.</p>
+              <h2>Inputs de escenario</h2>
+              <p>Ajusta el modelo con variables macro para recalcular el forecast del SKU.</p>
             </div>
-            <span class="chip">Real export</span>
+            <span class="chip">Editable</span>
           </div>
-          <div class="bars" id="forecastBars"></div>
-        </div>
+          <div class="scenario-grid">
+            <label>
+              Tipo de cambio base
+              <input id="baseFxInput" type="number" step="0.1" />
+            </label>
+            <label>
+              Tipo de cambio promedio esperado
+              <input id="expectedFxInput" type="number" step="0.1" />
+            </label>
+            <label>
+              Crecimiento del PIB (%)
+              <input id="gdpInput" type="number" step="0.1" />
+            </label>
+            <label>
+              Inflación esperada (%)
+              <input id="inflationInput" type="number" step="0.1" />
+            </label>
+          </div>
+          <div class="scenario-kpis">
+            <div>
+              Sensibilidad FX
+              <strong id="fxSensitivity">-</strong>
+            </div>
+            <div>
+              Sensibilidad PIB
+              <strong id="gdpSensitivity">-</strong>
+            </div>
+            <div>
+              Multiplicador de escenario
+              <strong id="scenarioMultiplier">-</strong>
+            </div>
+          </div>
+        </aside>
 
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <h2>Mix por segmentación</h2>
-              <p>Peso del forecast total por tipo de motor de forecast en el archivo actualizado.</p>
+        <div style="display:grid; gap:18px;">
+          <article class="card">
+            <div class="card-head">
+              <div>
+                <h2>Histórico mensual del SKU</h2>
+                <p>Comparativo entre forecast y order qty. para el detalle histórico del producto.</p>
+              </div>
+              <span class="chip">Detalle</span>
             </div>
-          </div>
-          <div class="list" id="regions"></div>
-        </div>
+            <div class="bars" id="historyBars"></div>
+          </article>
 
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <h2>Forecast por grupo</h2>
-              <p>Consolidado principal por LineName con Final Forecast, MA, Sales YTD y PY.</p>
+          <article class="card">
+            <div class="card-head">
+              <div>
+                <h2>Proyección a 6 meses</h2>
+                <p>Baseline de los últimos 3 meses ajustado por tipo de cambio, PIB e inflación.</p>
+              </div>
             </div>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Grupo</th>
-                  <th>SKU activas</th>
-                  <th>Final Forecast</th>
-                  <th>MA Forecast</th>
-                  <th>Sales YTD</th>
-                  <th>PY</th>
-                </tr>
-              </thead>
-              <tbody id="skuTable"></tbody>
-            </table>
-          </div>
-        </div>
+            <div class="scenario-table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Mes</th>
+                    <th>Baseline</th>
+                    <th>Escenario</th>
+                    <th>Delta</th>
+                  </tr>
+                </thead>
+                <tbody id="scenarioTable"></tbody>
+              </table>
+            </div>
+          </article>
 
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <h2>Corte YTD/YTG por mes</h2>
-              <p>Lectura mensual del corte nuevo distinguiendo ventas YTD y forecast YTG.</p>
+          <article class="card">
+            <div class="card-head">
+              <div>
+                <h2>Ficha del SKU</h2>
+                <p>Resumen operativo del producto y KPIs agregados usados por el modelo.</p>
+              </div>
             </div>
-          </div>
-          <div class="list" id="capacityList"></div>
+            <div class="history-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>PartNo</th>
+                    <th>SKU</th>
+                    <th>Línea</th>
+                    <th>Sabor</th>
+                    <th>Formato</th>
+                    <th>Bias</th>
+                    <th>Accuracy</th>
+                    <th>FVA Units</th>
+                  </tr>
+                </thead>
+                <tbody id="skuTable"></tbody>
+              </table>
+            </div>
+          </article>
         </div>
       </section>
-
-      <p class="footnote" id="assumptions"></p>
     </section>
   </main>
 
@@ -602,13 +616,14 @@
     const companyInput = document.getElementById("companyInput");
     const usernameInput = document.getElementById("usernameInput");
     const passwordInput = document.getElementById("passwordInput");
+    const baseFxInput = document.getElementById("baseFxInput");
+    const expectedFxInput = document.getElementById("expectedFxInput");
+    const gdpInput = document.getElementById("gdpInput");
+    const inflationInput = document.getElementById("inflationInput");
 
-    const formatNumber = (value) => new Intl.NumberFormat("es-MX").format(value);
-    const formatCurrency = (value) => new Intl.NumberFormat("es-MX", {
-      style: "currency",
-      currency: "MXN",
-      maximumFractionDigits: 0,
-    }).format(value);
+    let currentData = null;
+
+    const formatNumber = (value) => new Intl.NumberFormat("es-MX", { maximumFractionDigits: 0 }).format(value);
 
     function setSession(token, company) {
       localStorage.setItem(STORAGE_KEY, token);
@@ -633,74 +648,82 @@
       loginError.textContent = message;
     }
 
-    function renderBars(monthly) {
-      const container = document.getElementById("forecastBars");
-      container.innerHTML = "";
-      const maxUnits = Math.max(...monthly.map((item) => Math.max(item.units, item.baseline_units, item.upside_units)));
-      monthly.forEach((item) => {
-        const baselineHeight = Math.max(24, Math.round((item.baseline_units / maxUnits) * 210));
-        const forecastHeight = Math.max(30, Math.round((item.units / maxUnits) * 210));
-        const upsideHeight = Math.max(36, Math.round((item.upside_units / maxUnits) * 210));
+    function renderHistory(history) {
+      const root = document.getElementById("historyBars");
+      root.innerHTML = "";
+      const maxUnits = Math.max(...history.flatMap((item) => [item.units, item.revenue_mxn]));
+
+      history.forEach((item) => {
+        const fcstHeight = Math.max(18, Math.round((item.units / maxUnits) * 210));
+        const orderHeight = Math.max(18, Math.round((item.revenue_mxn / maxUnits) * 210));
         const col = document.createElement("article");
         col.className = "bar-col";
         col.innerHTML = `
-          <div class="bar-value">${formatNumber(item.units)}</div>
+          <div class="bar-value">${formatNumber(item.revenue_mxn)}</div>
           <div class="bar-stack">
-            <div class="bar baseline" style="height:${baselineHeight}px"></div>
-            <div class="bar" style="height:${forecastHeight}px"></div>
-            <div class="bar upside" style="height:${upsideHeight}px"></div>
+            <div class="bar forecast" style="height:${fcstHeight}px"></div>
+            <div class="bar orders" style="height:${orderHeight}px"></div>
           </div>
           <div class="bar-label">${item.month}</div>
         `;
-        container.appendChild(col);
+        root.appendChild(col);
       });
     }
 
-    function renderRegions(regions) {
-      const root = document.getElementById("regions");
-      root.innerHTML = "";
-      regions.forEach((item) => {
-        const row = document.createElement("div");
-        row.className = "region-row";
-        row.innerHTML = `
-          <strong>${item.region}</strong>
-          <div class="track"><div class="fill" style="width:${item.share_pct}%"></div></div>
-          <span>${item.share_pct}% · ${formatNumber(item.units_6m)} u</span>
-        `;
-        root.appendChild(row);
-      });
-    }
-
-    function renderSkuTable(rows) {
+    function renderSkuTable(row) {
       const tbody = document.getElementById("skuTable");
+      tbody.innerHTML = `
+        <tr>
+          <td>${row.part_no}</td>
+          <td><strong>${row.sku}</strong></td>
+          <td>${row.line_name}</td>
+          <td>${row.flavor}</td>
+          <td>${row.format}</td>
+          <td>${row.bias_pct}%</td>
+          <td>${row.accuracy_pct}%</td>
+          <td>${formatNumber(row.fva_units)}</td>
+        </tr>
+      `;
+    }
+
+    function scenarioMultiplier(row, defaults) {
+      const baseFx = Number(baseFxInput.value || defaults.base_fx);
+      const expectedFx = Number(expectedFxInput.value || defaults.expected_fx);
+      const gdpGrowth = Number(gdpInput.value || defaults.gdp_growth_pct);
+      const inflation = Number(inflationInput.value || defaults.inflation_pct);
+
+      const fxImpact = -((expectedFx - baseFx) / baseFx) * row.fx_sensitivity;
+      const gdpImpact = (gdpGrowth / 100) * row.gdp_sensitivity;
+      const inflationImpact = -(inflation / 100) * 0.15;
+      return Math.max(0.7, 1 + fxImpact + gdpImpact + inflationImpact);
+    }
+
+    function renderScenario(data) {
+      const row = data.sku_rows[0];
+      const defaults = data.scenario_defaults;
+      const multiplier = scenarioMultiplier(row, defaults);
+      const tbody = document.getElementById("scenarioTable");
       tbody.innerHTML = "";
-      rows.forEach((item) => {
+      let total = 0;
+
+      data.scenario_projection.forEach((item) => {
+        const scenarioQty = Math.round(item.baseline_qty * multiplier);
+        total += scenarioQty;
+        const delta = scenarioQty - item.baseline_qty;
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td><strong>${item.sku}</strong></td>
-          <td>${formatNumber(item.avg_monthly_units)}</td>
-          <td>${formatNumber(item.peak_units)}</td>
-          <td>${formatNumber(item.revenue_mxn)}</td>
-          <td>${formatNumber(item.margin_pct)}</td>
-          <td>${formatNumber(item.py_units)}</td>
+          <td>${item.month}</td>
+          <td>${formatNumber(item.baseline_qty)}</td>
+          <td>${formatNumber(scenarioQty)}</td>
+          <td>${delta >= 0 ? "+" : ""}${formatNumber(delta)}</td>
         `;
         tbody.appendChild(tr);
       });
-    }
 
-    function renderCapacity(rows) {
-      const root = document.getElementById("capacityList");
-      root.innerHTML = "";
-      rows.forEach((item) => {
-        const row = document.createElement("div");
-        row.className = "capacity-row";
-        row.innerHTML = `
-          <strong>${item.month} · ${item.flag}</strong>
-          <div class="track"><div class="fill" style="width:${Math.min(item.reference_units ? (item.forecast_units || item.actual_units) / item.reference_units * 100 : 0, 100)}%"></div></div>
-          <span>Final ${formatNumber(item.forecast_units)} · Actual ${formatNumber(item.actual_units)} · PY ${formatNumber(item.reference_units)}</span>
-        `;
-        root.appendChild(row);
-      });
+      document.getElementById("scenarioTotal").textContent = formatNumber(total);
+      document.getElementById("scenarioMultiplier").textContent = `${multiplier.toFixed(2)}x`;
+      document.getElementById("fxSensitivity").textContent = row.fx_sensitivity.toFixed(2);
+      document.getElementById("gdpSensitivity").textContent = row.gdp_sensitivity.toFixed(2);
     }
 
     async function fetchForecast(token) {
@@ -719,16 +742,28 @@
 
     async function loadForecast(token) {
       const data = await fetchForecast(token);
+      currentData = data;
       const summary = data.summary;
+      const row = data.sku_rows[0];
+      const profile = data.sku_profile;
+      const defaults = data.scenario_defaults;
 
       showDashboard();
-      document.getElementById("heroNote").textContent = "";
-      document.getElementById("peakMonth").textContent = summary.peak_month;
-      document.getElementById("peakUnits").textContent = `${formatNumber(summary.peak_units)} unidades de Final Forecast`;
-      document.getElementById("units6m").textContent = formatNumber(summary.units_6m);
-      document.getElementById("revenue6m").textContent = formatNumber(summary.revenue_6m_mxn);
-      document.getElementById("serviceLevel").textContent = formatNumber(summary.avg_service_level_pct);
-      document.getElementById("capacityPeak").textContent = formatNumber(summary.active_skus);
+      document.getElementById("heroTitle").textContent = profile.part_name;
+      document.getElementById("heroNote").textContent = `${profile.part_no_name} | ${profile.line_name} | ${profile.flavor} | formato ${profile.format}.`;
+      document.getElementById("segmentationPill").textContent = profile.segmentation;
+      document.getElementById("patternPill").textContent = profile.demand_pattern;
+      document.getElementById("lifeCyclePill").textContent = profile.life_cycle;
+      document.getElementById("heroBig").textContent = `${summary.avg_service_level_pct}%`;
+      document.getElementById("heroSub").textContent = `Accuracy histórica agregada | Bias ${summary.capacity_utilization_peak_pct}%`;
+      document.getElementById("histForecast").textContent = formatNumber(summary.units_6m);
+      document.getElementById("histOrders").textContent = formatNumber(summary.revenue_6m_mxn);
+      document.getElementById("histAccuracy").textContent = `${summary.avg_service_level_pct}%`;
+
+      baseFxInput.value = defaults.base_fx;
+      expectedFxInput.value = defaults.expected_fx;
+      gdpInput.value = defaults.gdp_growth_pct;
+      inflationInput.value = defaults.inflation_pct;
 
       const alerts = document.getElementById("alertsList");
       alerts.innerHTML = "";
@@ -738,12 +773,27 @@
         alerts.appendChild(li);
       });
 
-      document.getElementById("assumptions").textContent = "";
-      renderBars(data.monthly_forecast);
-      renderRegions(data.regional_mix);
-      renderSkuTable(data.sku_rows);
-      renderCapacity(data.capacity_plan);
+      renderHistory(data.monthly_forecast);
+      renderSkuTable({
+        part_no: row.part_no,
+        sku: row.sku,
+        line_name: row.line_name,
+        flavor: row.flavor,
+        format: row.format,
+        bias_pct: row.bias_pct,
+        accuracy_pct: row.accuracy_pct,
+        fva_units: row.fva_units,
+      });
+      renderScenario(data);
     }
+
+    [baseFxInput, expectedFxInput, gdpInput, inflationInput].forEach((input) => {
+      input.addEventListener("input", () => {
+        if (currentData) {
+          renderScenario(currentData);
+        }
+      });
+    });
 
     loginForm.addEventListener("submit", async (event) => {
       event.preventDefault();

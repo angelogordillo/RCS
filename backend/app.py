@@ -59,28 +59,46 @@ NODES = [
     },
 ]
 
-MONTHLY_FORECAST_DATA = [
-    {"month": "Mar 2026", "final_fcst": 136772, "ma_fcst": 129374, "sales_order": 0, "py": 61365, "sku_count": 58, "flag": "YTG"},
-    {"month": "Abr 2026", "final_fcst": 154481, "ma_fcst": 129374, "sales_order": 0, "py": 58565, "sku_count": 58, "flag": "YTG"},
-    {"month": "May 2026", "final_fcst": 197476, "ma_fcst": 129374, "sales_order": 0, "py": 106858, "sku_count": 58, "flag": "YTG"},
-    {"month": "Jun 2026", "final_fcst": 168873, "ma_fcst": 129374, "sales_order": 0, "py": 78543, "sku_count": 58, "flag": "YTG"},
+SKU_HISTORY = [
+    {"month": "2025-01", "fcst_qty": 10185, "order_qty": 16151, "bias_qty": -5966, "error_qty": 5966, "bias_pct": -36.9, "accuracy_pct": 63.1, "fva_pct": 63.1, "fva_units": 10185},
+    {"month": "2025-02", "fcst_qty": 7473, "order_qty": 9674, "bias_qty": -2201, "error_qty": 2201, "bias_pct": -22.7, "accuracy_pct": 77.2, "fva_pct": 77.2, "fva_units": 7473},
+    {"month": "2025-03", "fcst_qty": 6237, "order_qty": 9472, "bias_qty": -3235, "error_qty": 3235, "bias_pct": -34.2, "accuracy_pct": 65.8, "fva_pct": 65.8, "fva_units": 6237},
+    {"month": "2025-04", "fcst_qty": 9786, "order_qty": 9229, "bias_qty": 557, "error_qty": 557, "bias_pct": 6.0, "accuracy_pct": 94.0, "fva_pct": 44.4, "fva_units": 4096},
+    {"month": "2025-05", "fcst_qty": 10060, "order_qty": 16008, "bias_qty": -5948, "error_qty": 5948, "bias_pct": -37.2, "accuracy_pct": 62.8, "fva_pct": 5.9, "fva_units": 939},
+    {"month": "2025-06", "fcst_qty": 9514, "order_qty": 9221, "bias_qty": 293, "error_qty": 293, "bias_pct": 3.2, "accuracy_pct": 96.8, "fva_pct": 8.6, "fva_units": 794},
+    {"month": "2025-07", "fcst_qty": 15580, "order_qty": 14637, "bias_qty": 943, "error_qty": 943, "bias_pct": 6.4, "accuracy_pct": 93.6, "fva_pct": -5.0, "fva_units": -731},
+    {"month": "2025-08", "fcst_qty": 11865, "order_qty": 11931, "bias_qty": -66, "error_qty": 66, "bias_pct": -0.6, "accuracy_pct": 99.4, "fva_pct": 15.4, "fva_units": 1833},
+    {"month": "2025-09", "fcst_qty": 15094, "order_qty": 15757, "bias_qty": -663, "error_qty": 663, "bias_pct": -4.2, "accuracy_pct": 95.8, "fva_pct": 17.7, "fva_units": 2794},
+    {"month": "2025-10", "fcst_qty": 10823, "order_qty": 15173, "bias_qty": -4350, "error_qty": 4350, "bias_pct": -28.7, "accuracy_pct": 71.3, "fva_pct": -12.2, "fva_units": -1847},
+    {"month": "2025-11", "fcst_qty": 19732, "order_qty": 15690, "bias_qty": 4042, "error_qty": 4042, "bias_pct": 25.8, "accuracy_pct": 74.2, "fva_pct": -23.1, "fva_units": -3623},
+    {"month": "2025-12", "fcst_qty": 23542, "order_qty": 17417, "bias_qty": 6125, "error_qty": 6125, "bias_pct": 35.2, "accuracy_pct": 64.8, "fva_pct": -25.7, "fva_units": -4469},
+    {"month": "2026-01", "fcst_qty": 17886, "order_qty": 13935, "bias_qty": 3951, "error_qty": 3951, "bias_pct": 28.4, "accuracy_pct": 71.6, "fva_pct": -19.9, "fva_units": -2768},
+    {"month": "2026-02", "fcst_qty": 21149, "order_qty": 13840, "bias_qty": 7309, "error_qty": 7309, "bias_pct": 52.8, "accuracy_pct": 47.2, "fva_pct": -24.5, "fva_units": -3387},
 ]
 
-SEGMENTATION_DATA = [
-    {"region": "Market Intelligence", "share_pct": 42.3, "units_6m": 277985},
-    {"region": "Pure Stat. Fcst", "share_pct": 28.4, "units_6m": 186960},
-    {"region": "Alternative Strategies", "share_pct": 17.0, "units_6m": 111662},
-    {"region": "Stat. Fcst", "share_pct": 12.3, "units_6m": 80995},
-]
+SKU_PROFILE = {
+    "part_no": "MX0200046031040",
+    "part_name": "WP CHOCOLATE 5U",
+    "part_no_name": "MX0200046031040 - WP CHOCOLATE 5U",
+    "segmentation": "1 - Market Intelligence",
+    "demand_pattern": "Erratic",
+    "category": "Barras",
+    "line_name": "Barras",
+    "flavor": "Chocolate",
+    "format": "5U",
+    "life_cycle": "Active",
+    "adj_cv": 0.715,
+    "base_fx_sensitivity": 0.45,
+    "base_gdp_sensitivity": 0.9,
+}
 
-GROUP_FORECAST_DATA = [
-    {"sku": "Barras", "canal": "LineName", "avg_monthly_units": 18, "peak_month": "Forecast", "peak_units": 466759, "revenue_mxn": 445648, "margin_pct": 203790, "py_units": 370295},
-    {"sku": "Granola", "canal": "LineName", "avg_monthly_units": 2, "peak_month": "Forecast", "peak_units": 49492, "revenue_mxn": 37411, "margin_pct": 20418, "py_units": 33659},
-    {"sku": "DUO", "canal": "LineName", "avg_monthly_units": 1, "peak_month": "Forecast", "peak_units": 43200, "revenue_mxn": 0, "margin_pct": 9600, "py_units": 0},
-    {"sku": "Soul", "canal": "LineName", "avg_monthly_units": 6, "peak_month": "Forecast", "peak_units": 42290, "revenue_mxn": 0, "margin_pct": 420, "py_units": 0},
-    {"sku": "Pro", "canal": "LineName", "avg_monthly_units": 4, "peak_month": "Forecast", "peak_units": 25549, "revenue_mxn": 23376, "margin_pct": 14536, "py_units": 15348},
-    {"sku": "Mini", "canal": "LineName", "avg_monthly_units": 4, "peak_month": "Forecast", "peak_units": 20106, "revenue_mxn": 6032, "margin_pct": 4313, "py_units": 2532},
-]
+SCENARIO_DEFAULTS = {
+    "base_fx": 18.8,
+    "expected_fx": 20.2,
+    "gdp_growth_pct": 1.8,
+    "inflation_pct": 4.2,
+    "horizon_months": 6,
+}
 
 
 def auth_error(detail: str = "Unauthorized") -> HTTPException:
@@ -119,79 +137,93 @@ def require_company_auth(request: Request) -> dict:
 
 
 def build_demand_forecast():
-    total_forecast = sum(item["final_fcst"] for item in MONTHLY_FORECAST_DATA)
-    total_ma = sum(item["ma_fcst"] for item in MONTHLY_FORECAST_DATA)
-    total_py = 433503
-    peak_month = max(MONTHLY_FORECAST_DATA, key=lambda item: item["final_fcst"])
-    month_capacity = [
-        {
-            "month": "Ene 2026",
-            "flag": "YTD",
-            "forecast_units": 0,
-            "baseline_units": 0,
-            "actual_units": 476926,
-            "reference_units": 416796,
-        },
-        {
-            "month": "Feb 2026",
-            "flag": "YTD",
-            "forecast_units": 0,
-            "baseline_units": 0,
-            "actual_units": 734962,
-            "reference_units": 702429,
-        },
-    ]
-    month_capacity.extend(
-        {
-            "month": item["month"],
-            "flag": item["flag"],
-            "forecast_units": item["final_fcst"],
-            "baseline_units": item["ma_fcst"],
-            "actual_units": item["sales_order"],
-            "reference_units": item["py"],
-        }
-        for item in MONTHLY_FORECAST_DATA
-    )
+    total_fcst = sum(item["fcst_qty"] for item in SKU_HISTORY)
+    total_orders = sum(item["order_qty"] for item in SKU_HISTORY)
+    total_error = sum(item["error_qty"] for item in SKU_HISTORY)
+    avg_accuracy = round(max(0, (1 - (total_error / total_orders))) * 100, 1) if total_orders else 0.0
+    avg_bias = round(((total_fcst - total_orders) / total_orders) * 100, 1) if total_orders else 0.0
+    avg_fva = round(sum(item["fva_pct"] for item in SKU_HISTORY) / len(SKU_HISTORY), 1)
+    latest = SKU_HISTORY[-1]
+    recent_fcst = SKU_HISTORY[-3:]
+    base_next_month = round(sum(item["fcst_qty"] for item in recent_fcst) / len(recent_fcst))
+
+    scenario_projection = []
+    projected_base = base_next_month
+    month_labels = ["2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08"]
+    for idx, month in enumerate(month_labels[: SCENARIO_DEFAULTS["horizon_months"]]):
+        seasonality = [1.0, 1.04, 1.09, 1.02, 1.01, 0.98][idx]
+        scenario_projection.append(
+            {
+                "month": month,
+                "baseline_qty": round(projected_base * seasonality),
+            }
+        )
     return {
         "company": {
             "name": COMPANY_NAME,
             "country": "Mexico",
             "category": "Healthy snacks & functional foods",
-            "note": "Datos agregados desde Forecast Data (1).xlsx con nuevo modelo basado en PartNo, LineName y FlavorVal.",
+            "note": "Detail SKU dataset aplicado sobre un tablero de escenarios macro para Wild Foods Mexico.",
         },
         "generated_at": date.today().isoformat(),
         "summary": {
-            "units_6m": total_forecast,
-            "revenue_6m_mxn": total_py,
-            "avg_service_level_pct": 256264,
-            "active_skus": 58,
-            "peak_month": peak_month["month"],
-            "peak_units": peak_month["final_fcst"],
-            "capacity_utilization_peak_pct": total_ma,
+            "units_6m": total_fcst,
+            "revenue_6m_mxn": total_orders,
+            "avg_service_level_pct": avg_accuracy,
+            "active_skus": 1,
+            "peak_month": latest["month"],
+            "peak_units": latest["fcst_qty"],
+            "capacity_utilization_peak_pct": avg_bias,
         },
         "monthly_forecast": [
             {
                 "month": item["month"],
-                "units": item["final_fcst"],
-                "revenue_mxn": item["py"],
-                "baseline_units": item["ma_fcst"],
-                "upside_units": item["py"],
+                "units": item["fcst_qty"],
+                "revenue_mxn": item["order_qty"],
+                "baseline_units": item["order_qty"],
+                "upside_units": max(item["fcst_qty"], item["order_qty"]),
             }
-            for item in MONTHLY_FORECAST_DATA
+            for item in SKU_HISTORY
         ],
-        "sku_rows": GROUP_FORECAST_DATA,
-        "sku_chart": [],
-        "regional_mix": SEGMENTATION_DATA,
-        "capacity_plan": month_capacity,
+        "sku_rows": [
+            {
+                "sku": SKU_PROFILE["part_name"],
+                "part_no": SKU_PROFILE["part_no"],
+                "segmentation": SKU_PROFILE["segmentation"],
+                "pattern": SKU_PROFILE["demand_pattern"],
+                "category": SKU_PROFILE["category"],
+                "line_name": SKU_PROFILE["line_name"],
+                "flavor": SKU_PROFILE["flavor"],
+                "format": SKU_PROFILE["format"],
+                "life_cycle": SKU_PROFILE["life_cycle"],
+                "adj_cv": SKU_PROFILE["adj_cv"],
+                "months": len(SKU_HISTORY),
+                "base_fcst": total_fcst,
+                "base_orders": total_orders,
+                "bias_qty": total_fcst - total_orders,
+                "error_qty": total_error,
+                "bias_pct": avg_bias,
+                "accuracy_pct": avg_accuracy,
+                "fva_units": round(sum(item["fva_units"] for item in SKU_HISTORY)),
+                "fx_sensitivity": SKU_PROFILE["base_fx_sensitivity"],
+                "gdp_sensitivity": SKU_PROFILE["base_gdp_sensitivity"],
+            }
+        ],
+        "sku_chart": SKU_HISTORY,
+        "regional_mix": [],
+        "capacity_plan": [],
+        "scenario_defaults": SCENARIO_DEFAULTS,
+        "scenario_projection": scenario_projection,
+        "sku_profile": SKU_PROFILE,
         "alerts": [
-            "El nuevo corte 2026 es mucho más acotado: YTD enero-febrero y YTG marzo-junio, con 58 SKU activas.",
-            "Mayo es el mayor mes de forecast con 197.476 unidades y supera con holgura al promedio móvil cargado.",
-            "El modelo ahora se explica mejor por Market Intelligence y Pure Stat. Fcst, mientras LineName reemplaza al antiguo GroupName.",
+            "El SKU muestra alta volatilidad: el Adj CV es 0.715 y el patrón de demanda está marcado como Erratic.",
+            "El último corte disponible, febrero 2026, cerró con accuracy de 47.2% y sesgo positivo de 52.8%.",
+            "El modelo de escenario usa sensibilidad de tipo de cambio y PIB para proyectar los siguientes 6 meses del SKU.",
         ],
         "assumptions": [
-            "Se usó la hoja Export del archivo Forecast Data (1).xlsx compartido por el usuario.",
-            "El dataset ahora incluye años 2025 y 2026, pero el módulo se reajustó para mostrar el corte operativo 2026.",
-            "Como GroupName ya no viene en el export, el agregado principal se rehizo con LineName y la jerarquía de segmentación del archivo.",
+            "Se usó Detail.xlsx compartido por el usuario; el archivo contiene una serie histórica mensual para el SKU MX0200046031040.",
+            "La proyección base futura parte del promedio de los últimos 3 meses de forecast observados.",
+            "Los drivers macro afectan la proyección con elasticidades simples: FX 0.45 y PIB 0.9 sobre la base del SKU.",
         ],
     }
 
