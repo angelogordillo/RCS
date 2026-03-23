@@ -232,14 +232,14 @@
 
     .profile-card {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(180px, 0.8fr);
-      gap: 18px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(190px, 0.65fr);
+      gap: 16px;
       align-items: start;
     }
 
     .profile-card .profile-badge {
-      padding: 18px;
-      border-radius: 20px;
+      padding: 16px;
+      border-radius: 18px;
       background: linear-gradient(135deg, rgba(15, 91, 216, 0.08), rgba(211, 181, 107, 0.12));
       border: 1px solid rgba(15, 91, 216, 0.12);
     }
@@ -254,8 +254,8 @@
     .profile-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
+      gap: 10px;
+      margin-top: 16px;
     }
 
     .profile-link {
@@ -270,6 +270,12 @@
       border: 1px solid rgba(15, 91, 216, 0.2);
       color: var(--brand);
       background: rgba(15, 91, 216, 0.06);
+    }
+
+    .profile-copy {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
     .detail-card ul {
@@ -529,8 +535,8 @@
           <h2>Reseña ejecutiva</h2>
           <div class="profile-card" style="margin-top: 16px;">
             <div>
-              <p><strong>Francisco Gutiérrez Alcayaga "Guty"</strong> combina estrategia, negocio, inteligencia artificial y desarrollo humano en una trayectoria orientada a la transformación. Es <strong>Master en Inteligencia Artificial</strong>, <strong>MBA</strong>, consultor, emprendedor, autor y speaker.</p>
-              <p style="margin-top: 12px;">
+              <p class="profile-copy"><strong>Francisco Gutiérrez Alcayaga "Guty"</strong> combina estrategia, negocio, inteligencia artificial y desarrollo humano en una trayectoria orientada a la transformación. Es <strong>Master en Inteligencia Artificial</strong>, <strong>MBA</strong>, consultor, emprendedor, autor y speaker.</p>
+              <p class="profile-copy" style="margin-top: 10px;">
                 Desde esa mirada integral, entiende la adopción de IA no como un desafío meramente tecnológico, sino como una palanca de transformación centrada en ejecución, liderazgo y resultados.
               </p>
               <div class="profile-actions">
