@@ -92,12 +92,10 @@ SKU_PROFILE = {
     "base_gdp_sensitivity": 0.9,
 }
 
-SCENARIO_DEFAULTS = {
-    "base_fx": 18.8,
-    "expected_fx": 20.2,
-    "gdp_growth_pct": 1.8,
-    "inflation_pct": 4.2,
-    "horizon_months": 6,
+PROJECTION_DEFAULTS = {
+    "horizon_months": 12,
+    "blend_actual_weight": 0.65,
+    "blend_forecast_weight": 0.35,
 }
 
 
@@ -144,86 +142,88 @@ def build_demand_forecast():
     avg_bias = round(((total_fcst - total_orders) / total_orders) * 100, 1) if total_orders else 0.0
     avg_fva = round(sum(item["fva_pct"] for item in SKU_HISTORY) / len(SKU_HISTORY), 1)
     latest = SKU_HISTORY[-1]
-    recent_fcst = SKU_HISTORY[-3:]
-    base_next_month = round(sum(item["fcst_qty"] for item in recent_fcst) / len(recent_fcst))
-
-    scenario_projection = []
-    projected_base = base_next_month
-    month_labels = ["2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08"]
-    for idx, month in enumerate(month_labels[: SCENARIO_DEFAULTS["horizon_months"]]):
-        seasonality = [1.0, 1.04, 1.09, 1.02, 1.01, 0.98][idx]
-        scenario_projection.append(
+    best_month = max(SKU_HISTORY, key=lambda item: item["accuracy_pct"])
+    worst_month = min(SKU_HISTORY, key=lambda item: item["accuracy_pct"])
+    recent_window = SKU_HISTORY[-6:]
+    recent_orders = round(sum(item["order_qty"] for item in recent_window) / len(recent_window))
+    recent_fcst = round(sum(item["fcst_qty"] for item in recent_window) / len(recent_window))
+    base_projection = round(
+        (recent_orders * PROJECTION_DEFAULTS["blend_actual_weight"])
+        + (recent_fcst * PROJECTION_DEFAULTS["blend_forecast_weight"])
+    )
+    seasonality_curve = [0.94, 0.97, 1.02, 1.05, 1.08, 1.1, 1.07, 1.03, 0.99, 0.96, 0.95, 0.98]
+    projection_months = [
+        "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08",
+        "2026-09", "2026-10", "2026-11", "2026-12", "2027-01", "2027-02",
+    ]
+    annual_projection = []
+    for idx, month in enumerate(projection_months[: PROJECTION_DEFAULTS["horizon_months"]]):
+        seasonality = seasonality_curve[idx]
+        projected_units = round(base_projection * seasonality)
+        annual_projection.append(
             {
                 "month": month,
-                "baseline_qty": round(projected_base * seasonality),
+                "projected_units": projected_units,
+                "vs_recent_avg_pct": round(((projected_units - recent_orders) / recent_orders) * 100, 1) if recent_orders else 0.0,
             }
         )
+
+    projection_total = sum(item["projected_units"] for item in annual_projection)
+    annualized_run_rate = round(recent_orders * 12)
+    projection_gap_pct = round(((projection_total - annualized_run_rate) / annualized_run_rate) * 100, 1) if annualized_run_rate else 0.0
+    closing_gap_units = latest["fcst_qty"] - latest["order_qty"]
     return {
         "company": {
             "name": COMPANY_NAME,
             "country": "Mexico",
             "category": "Healthy snacks & functional foods",
-            "note": "Detail SKU dataset aplicado sobre un tablero de escenarios macro para Wild Foods Mexico.",
+            "note": "Analisis ejecutivo del comportamiento real del SKU frente al pronostico y su proyeccion anualizada.",
         },
         "generated_at": date.today().isoformat(),
         "summary": {
-            "units_6m": total_fcst,
-            "revenue_6m_mxn": total_orders,
-            "avg_service_level_pct": avg_accuracy,
-            "active_skus": 1,
-            "peak_month": latest["month"],
-            "peak_units": latest["fcst_qty"],
-            "capacity_utilization_peak_pct": avg_bias,
+            "forecast_units": total_fcst,
+            "actual_units": total_orders,
+            "gap_units": total_fcst - total_orders,
+            "gap_pct": avg_bias,
+            "accuracy_pct": avg_accuracy,
+            "fva_pct": avg_fva,
+            "best_month": best_month["month"],
+            "best_accuracy_pct": best_month["accuracy_pct"],
+            "worst_month": worst_month["month"],
+            "worst_accuracy_pct": worst_month["accuracy_pct"],
+            "latest_month": latest["month"],
+            "latest_forecast_units": latest["fcst_qty"],
+            "latest_actual_units": latest["order_qty"],
+            "latest_gap_units": closing_gap_units,
+            "projected_12m_units": projection_total,
+            "projected_vs_run_rate_pct": projection_gap_pct,
         },
         "monthly_forecast": [
             {
                 "month": item["month"],
-                "units": item["fcst_qty"],
-                "revenue_mxn": item["order_qty"],
-                "baseline_units": item["order_qty"],
-                "upside_units": max(item["fcst_qty"], item["order_qty"]),
+                "forecast_units": item["fcst_qty"],
+                "actual_units": item["order_qty"],
+                "bias_units": item["bias_qty"],
+                "accuracy_pct": item["accuracy_pct"],
             }
             for item in SKU_HISTORY
         ],
-        "sku_rows": [
-            {
-                "sku": SKU_PROFILE["part_name"],
-                "part_no": SKU_PROFILE["part_no"],
-                "segmentation": SKU_PROFILE["segmentation"],
-                "pattern": SKU_PROFILE["demand_pattern"],
-                "category": SKU_PROFILE["category"],
-                "line_name": SKU_PROFILE["line_name"],
-                "flavor": SKU_PROFILE["flavor"],
-                "format": SKU_PROFILE["format"],
-                "life_cycle": SKU_PROFILE["life_cycle"],
-                "adj_cv": SKU_PROFILE["adj_cv"],
-                "months": len(SKU_HISTORY),
-                "base_fcst": total_fcst,
-                "base_orders": total_orders,
-                "bias_qty": total_fcst - total_orders,
-                "error_qty": total_error,
-                "bias_pct": avg_bias,
-                "accuracy_pct": avg_accuracy,
-                "fva_units": round(sum(item["fva_units"] for item in SKU_HISTORY)),
-                "fx_sensitivity": SKU_PROFILE["base_fx_sensitivity"],
-                "gdp_sensitivity": SKU_PROFILE["base_gdp_sensitivity"],
-            }
-        ],
-        "sku_chart": SKU_HISTORY,
-        "regional_mix": [],
-        "capacity_plan": [],
-        "scenario_defaults": SCENARIO_DEFAULTS,
-        "scenario_projection": scenario_projection,
+        "projection_12m": annual_projection,
         "sku_profile": SKU_PROFILE,
+        "executive_analysis": [
+            f"En el historico disponible el pronostico acumulado supera la venta real por {total_fcst - total_orders:,} unidades, equivalente a un sesgo promedio de {avg_bias}%.".replace(",", "."),
+            f"El mejor ajuste del modelo se observo en {best_month['month']} con accuracy de {best_month['accuracy_pct']}%, mientras que {worst_month['month']} fue el punto mas debil con {worst_month['accuracy_pct']}%.".replace(",", "."),
+            f"Para el ultimo corte ({latest['month']}), el forecast quedo {closing_gap_units:,} unidades por encima de la venta real; la proyeccion a 12 meses queda en {projection_total:,} unidades.".replace(",", "."),
+        ],
         "alerts": [
-            "El SKU muestra alta volatilidad: el Adj CV es 0.715 y el patrón de demanda está marcado como Erratic.",
-            "El último corte disponible, febrero 2026, cerró con accuracy de 47.2% y sesgo positivo de 52.8%.",
-            "El modelo de escenario usa sensibilidad de tipo de cambio y PIB para proyectar los siguientes 6 meses del SKU.",
+            "El SKU mantiene una volatilidad alta y comportamiento erratico, con dispersion relevante entre forecast y venta real.",
+            "La precision historica se deteriora de forma visible en el cierre mas reciente, especialmente en enero y febrero de 2026.",
+            "La proyeccion de 12 meses se ancla en la venta reciente y suaviza el exceso de optimismo observado en el forecast historico.",
         ],
         "assumptions": [
             "Se usó Detail.xlsx compartido por el usuario; el archivo contiene una serie histórica mensual para el SKU MX0200046031040.",
-            "La proyección base futura parte del promedio de los últimos 3 meses de forecast observados.",
-            "Los drivers macro afectan la proyección con elasticidades simples: FX 0.45 y PIB 0.9 sobre la base del SKU.",
+            "La proyeccion a 12 meses usa una base mixta entre venta real reciente y forecast reciente, con una curva simple de estacionalidad.",
+            "El objetivo del modulo es mostrar lectura ejecutiva y no simulacion editable de supuestos.",
         ],
     }
 
