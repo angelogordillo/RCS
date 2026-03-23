@@ -230,6 +230,48 @@
       margin-top: 14px;
     }
 
+    .profile-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(180px, 0.8fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .profile-card .profile-badge {
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(15, 91, 216, 0.08), rgba(211, 181, 107, 0.12));
+      border: 1px solid rgba(15, 91, 216, 0.12);
+    }
+
+    .profile-card strong {
+      display: block;
+      font-size: 1.02rem;
+      color: var(--brand-deep);
+      margin-bottom: 8px;
+    }
+
+    .profile-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .profile-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid rgba(15, 91, 216, 0.2);
+      color: var(--brand);
+      background: rgba(15, 91, 216, 0.06);
+    }
+
     .detail-card ul {
       margin: 16px 0 0;
       padding-left: 18px;
@@ -381,7 +423,8 @@
       }
 
       .pillars,
-      .audience-grid {
+      .audience-grid,
+      .profile-card {
         grid-template-columns: 1fr;
       }
     }
@@ -479,6 +522,29 @@
             <li>Contacto comercial para opciones individuales o corporativas.</li>
             <li>Seguimiento directo por parte del equipo de RCS / OWL.</li>
           </ul>
+        </article>
+
+        <article class="detail-card">
+          <span class="section-kicker">Facilitador</span>
+          <h2>Reseña ejecutiva</h2>
+          <div class="profile-card" style="margin-top: 16px;">
+            <div>
+              <p>
+                <strong>Francisco Gutiérrez Alcayaga "Guty"</strong> aporta una combinación poco común entre estrategia, negocio, inteligencia artificial y desarrollo humano. Su perfil integra un <strong>Master en Inteligencia Artificial</strong>, un <strong>MBA</strong> y trayectoria como consultor, emprendedor, autor y speaker.
+              </p>
+              <p style="margin-top: 12px;">
+                Desde esa convergencia, trabaja la adopción de IA no como un tema aislado de tecnología, sino como una palanca de transformación con foco en ejecución, liderazgo y resultados.
+              </p>
+              <div class="profile-actions">
+                <a class="profile-link" href="/eventos/seminario/facilitador">Ver semblanza completa</a>
+                <a class="profile-link" href="https://www.linkedin.com/in/franciscogutierrezchile" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              </div>
+            </div>
+            <aside class="profile-badge">
+              <strong>Perfil en síntesis</strong>
+              <p>Master en IA, MBA, consultor y emprendedor con enfoque en mentalidad, integración tecnológica y liderazgo aplicado.</p>
+            </aside>
+          </div>
         </article>
       </div>
 
