@@ -189,6 +189,49 @@
       gap: 18px;
     }
 
+    .highlight-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 150px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .highlight-copy {
+      display: grid;
+      gap: 12px;
+    }
+
+    .highlight-photo {
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid rgba(15, 91, 216, 0.12);
+      background: linear-gradient(135deg, rgba(15, 91, 216, 0.08), rgba(211, 181, 107, 0.12));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    }
+
+    .highlight-photo img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1.12;
+      object-fit: cover;
+    }
+
+    .highlight-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .mini-tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 91, 216, 0.06);
+      border: 1px solid rgba(15, 91, 216, 0.12);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--brand-deep);
+    }
+
     .section-kicker {
       display: inline-block;
       padding: 6px 10px;
@@ -322,6 +365,10 @@
         grid-template-columns: 1fr;
       }
 
+      .highlight-top {
+        grid-template-columns: 1fr;
+      }
+
       .gallery img {
         height: 220px;
       }
@@ -350,12 +397,21 @@
       </article>
 
       <aside class="highlight-card" aria-label="Evento destacado">
-        <div>
-          <span class="section-kicker">Evento destacado</span>
-          <h2 style="margin-top: 14px;">Arquitectos de la Mentalidad 2026</h2>
-          <p style="margin-top: 12px;">
-            Una experiencia para líderes que necesitan dirigir la transformación en la era de la inteligencia artificial.
-          </p>
+        <div class="highlight-top">
+          <div class="highlight-copy">
+            <span class="section-kicker">Evento destacado</span>
+            <h2>Arquitectos de la Mentalidad 2026</h2>
+            <p>
+              Una experiencia para líderes que necesitan dirigir la transformación en la era de la inteligencia artificial.
+            </p>
+            <div class="highlight-meta" aria-label="Resumen del seminario">
+              <span class="mini-tag">Programa ejecutivo</span>
+              <span class="mini-tag">Waiting list activo</span>
+            </div>
+          </div>
+          <div class="highlight-photo" aria-label="Facilitador del seminario">
+            <img src="/assets/Francisco%20Gutierrez%20Alcayaga.png" alt="Francisco Gutiérrez Alcayaga" />
+          </div>
         </div>
         <div class="pillars" aria-label="Pilares del programa">
           <div class="pillar">M | Mindset</div>
