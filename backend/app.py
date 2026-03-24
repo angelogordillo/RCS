@@ -21,6 +21,7 @@ FRONTEND_ADMIN = BASE_DIR / "frontend" / "adm.html"
 FRONTEND_BOLSA = BASE_DIR / "frontend" / "bolsa.html"
 FRONTEND_PUBLICACIONES = BASE_DIR / "frontend" / "publicaciones.html"
 FRONTEND_PROYECCION = BASE_DIR / "frontend" / "proyeccion.html"
+FRONTEND_DIR = BASE_DIR / "frontend"
 LOGOS_DIR = BASE_DIR / "logos"
 DATA_DIR = BASE_DIR / "data"
 SEMINARIO_WAITLIST_FILE = DATA_DIR / "seminario_waitlist.ndjson"
@@ -34,6 +35,9 @@ APP_SECRET = os.getenv("RCS_APP_SECRET", "rcs-company-secret")
 
 if LOGOS_DIR.exists():
     app.mount("/logos", StaticFiles(directory=LOGOS_DIR), name="logos")
+
+if FRONTEND_DIR.exists():
+    app.mount("/assets", StaticFiles(directory=FRONTEND_DIR), name="assets")
 
 
 class Node(BaseModel):
