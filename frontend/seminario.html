@@ -238,17 +238,17 @@
     }
 
     .profile-card .profile-badge {
-      padding: 16px;
+      overflow: hidden;
       border-radius: 18px;
       background: linear-gradient(135deg, rgba(15, 91, 216, 0.08), rgba(211, 181, 107, 0.12));
       border: 1px solid rgba(15, 91, 216, 0.12);
     }
 
-    .profile-card strong {
+    .profile-card .profile-badge img {
       display: block;
-      font-size: 1.02rem;
-      color: var(--brand-deep);
-      margin-bottom: 8px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
     }
 
     .profile-actions {
@@ -544,9 +544,8 @@
                 <a class="profile-link" href="https://www.linkedin.com/in/franciscogutierrezchile" target="_blank" rel="noopener noreferrer">LinkedIn</a>
               </div>
             </div>
-            <aside class="profile-badge">
-              <strong>Perfil en síntesis</strong>
-              <p>Master en IA, MBA, consultor y emprendedor con enfoque en mentalidad, integración tecnológica y liderazgo aplicado.</p>
+            <aside class="profile-badge" aria-label="Fotografía del facilitador">
+              <img src="/assets/Francisco%20Gutierrez%20Alcayaga.png" alt="Francisco Gutiérrez Alcayaga" />
             </aside>
           </div>
         </article>
