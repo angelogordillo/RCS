@@ -125,92 +125,62 @@
       width: 100%;
     }
 
-    .eventos-home {
+    .home-shortcuts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 760px;
       margin: 34px auto 0;
-      max-width: 760px;
-      border: 1px solid #e8e8e8;
+    }
+
+    .shortcut-card {
+      border: 1px solid #dfe7f5;
       border-radius: 14px;
-      padding: 22px 18px;
+      padding: 18px;
       text-align: left;
-      background: #fafcff;
+      background: #ffffff;
     }
 
-    .eventos-home h2 {
-      margin: 0 0 8px;
-      font-size: clamp(1.2rem, 3vw, 1.6rem);
-      color: #13233f;
-    }
-
-    .eventos-home p {
-      margin: 0 0 12px;
-      color: #4f5e7a;
-      line-height: 1.5;
-    }
-
-    .eventos-link {
-      display: inline-block;
-      text-decoration: none;
-      font-weight: 700;
-      color: #ffffff;
-      background: #0f5bd8;
-      border: 1px solid #0f5bd8;
-      border-radius: 10px;
-      padding: 9px 14px;
-    }
-
-    .jobs-home {
-      margin: 24px auto 0;
-      max-width: 760px;
-      border: 1px solid #d9e6ff;
-      border-radius: 14px;
-      padding: 22px 18px;
-      text-align: left;
-      background: linear-gradient(160deg, #f4f8ff 0%, #ffffff 62%);
-    }
-
-    .jobs-home h2 {
-      margin: 0 0 8px;
-      font-size: clamp(1.2rem, 3vw, 1.6rem);
+    .shortcut-card h2 {
+      margin: 0 0 6px;
+      font-size: clamp(1.15rem, 3vw, 1.45rem);
       color: #1e264b;
     }
 
-    .jobs-powered {
-      margin: 0 0 12px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
+    .shortcut-card p {
+      margin: 0 0 14px;
+      color: #52617d;
+      line-height: 1.45;
+    }
+
+    .shortcut-note {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       color: #2d67c8;
     }
 
-    .job-card {
-      border: 1px solid #dbe7fb;
-      border-radius: 12px;
-      padding: 14px;
-      background: #ffffff;
-    }
-
-    .job-card h3 {
-      margin: 0 0 8px;
-      font-size: 1.02rem;
-      color: #13233f;
-    }
-
-    .job-card p {
-      margin: 0 0 12px;
-      color: #4f5e7a;
-      line-height: 1.45;
-    }
-
-    .job-link {
+    .shortcut-link {
       display: inline-block;
       text-decoration: none;
       font-weight: 700;
+      border-radius: 10px;
+      padding: 9px 14px;
+    }
+
+    .shortcut-link-primary {
+      color: #ffffff;
+      background: #0f5bd8;
+      border: 1px solid #0f5bd8;
+    }
+
+    .shortcut-link-secondary {
       color: #ffffff;
       background: #1e264b;
       border: 1px solid #1e264b;
-      border-radius: 10px;
-      padding: 9px 14px;
     }
 
     .contact-footer {
@@ -247,6 +217,10 @@
       .logos-partners {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .home-shortcuts {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -317,19 +291,18 @@
       </div>
     </section>
 
-    <section class="eventos-home" aria-label="Sección de eventos">
-      <h2>Eventos</h2>
-      <p>Consulta el resumen de actividades de networking y participación institucional de la Red de Cadena de Suministro Chile - México.</p>
-      <a class="eventos-link" href="/eventos">Ver eventos</a>
-    </section>
+    <section class="home-shortcuts" aria-label="Accesos rápidos">
+      <article class="shortcut-card" aria-label="Sección de eventos">
+        <h2>Eventos</h2>
+        <p>Resumen de actividades y networking de la red.</p>
+        <a class="shortcut-link shortcut-link-primary" href="/eventos">Ver eventos</a>
+      </article>
 
-    <section class="jobs-home" aria-label="Bolsa de trabajo de la red">
-      <h2>Bolsa de Trabajo</h2>
-      <p class="jobs-powered">Powered by Safhire</p>
-      <article class="job-card" aria-label="Primera vacante publicada en Safhire">
-        <h3>Production Planner</h3>
-        <p>Postula directamente en Safhire y completa tu proceso de aplicación en línea.</p>
-        <a class="job-link" href="https://app.safhire.ai/es/apply/MTI5LWpvYi1pZC1rZXktMjAyNA" target="_blank" rel="noopener noreferrer">Aplicar a la vacante</a>
+      <article class="shortcut-card" aria-label="Bolsa de trabajo de la red">
+        <h2>Bolsa de Trabajo</h2>
+        <span class="shortcut-note">Powered by Safhire</span>
+        <p>Vacante destacada: Production Planner.</p>
+        <a class="shortcut-link shortcut-link-secondary" href="https://app.safhire.ai/es/apply/MTI5LWpvYi1pZC1rZXktMjAyNA" target="_blank" rel="noopener noreferrer">Aplicar</a>
       </article>
     </section>
 
