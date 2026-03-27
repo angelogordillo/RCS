@@ -126,13 +126,6 @@
       padding: 28px;
     }
 
-    .producer-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 22px 0 0;
-    }
-
     .producer-card h2 {
       margin-bottom: 8px;
       font-size: clamp(1.6rem, 3vw, 2.1rem);
@@ -229,6 +222,54 @@
       line-height: 1.6;
     }
 
+    .preparation-card {
+      margin-top: 24px;
+      padding: 28px;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(219, 227, 239, 0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .preparation-card h2 {
+      margin-bottom: 10px;
+      font-size: clamp(1.55rem, 3vw, 2rem);
+      color: var(--brand-deep);
+    }
+
+    .preparation-card > p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 70ch;
+    }
+
+    .preparation-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .preparation-step {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+    }
+
+    .preparation-step strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 1rem;
+    }
+
+    .preparation-step p {
+      margin: 0;
+      color: #263248;
+      line-height: 1.6;
+    }
+
     .contact-footer {
       margin-top: 24px;
       padding: 16px;
@@ -259,6 +300,10 @@
       }
 
       .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .preparation-steps {
         grid-template-columns: 1fr;
       }
     }
@@ -315,14 +360,11 @@
           <p>Achocolatado, frutos rojos y avellana</p>
         </div>
       </div>
-      <div class="producer-actions">
-        <a class="btn primary" href="#beneficios-cafe">Beneficios y preparación</a>
-      </div>
     </section>
 
     <section class="comparison-card" id="beneficios-cafe" aria-label="Beneficios del cafe y proceso de preparacion">
       <h2>Beneficios del café y proceso de preparación</h2>
-      <p>Referencia comparativa para explicar el valor de un café tostado de origen frente a un café soluble estándar, tanto en experiencia de consumo como en forma de preparación.</p>
+      <p>En consumo moderado, el café suele valorarse por su aporte de energía, concentración y disfrute sensorial dentro de una rutina diaria.</p>
       <div class="comparison-grid">
         <article class="comparison-item">
           <h3>Café tostado de origen</h3>
@@ -341,6 +383,25 @@
             <li>La preparación es inmediata: agua caliente y disolución directa, útil para velocidad pero con menor ritual de consumo.</li>
             <li>El café tostado requiere más atención en preparación, pero entrega una experiencia más completa en aroma, textura y sabor.</li>
           </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="preparation-card" aria-label="Detalles de preparacion del cafe">
+      <h2>Detalles de preparación</h2>
+      <p>Guía breve para preparar una taza equilibrada y resaltar mejor el perfil achocolatado, de frutos rojos y avellana de este café.</p>
+      <div class="preparation-steps">
+        <article class="preparation-step">
+          <strong>1. Proporción</strong>
+          <p>Usa una referencia de 10 a 12 gramos de café por cada 180 mililitros de agua para una taza balanceada.</p>
+        </article>
+        <article class="preparation-step">
+          <strong>2. Agua y extracción</strong>
+          <p>Trabaja con agua caliente, idealmente entre 90 y 96 °C, evitando hervir directamente sobre el café para no sobreextraerlo.</p>
+        </article>
+        <article class="preparation-step">
+          <strong>3. Método sugerido</strong>
+          <p>Prensa francesa, filtro o V60 ayudan a destacar limpieza, dulzor y claridad aromática; ajusta molienda según el método elegido.</p>
         </article>
       </div>
     </section>
