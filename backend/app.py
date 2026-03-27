@@ -15,6 +15,7 @@ app = FastAPI(title="RCS API", version="0.1.0")
 BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_INDEX = BASE_DIR / "frontend" / "index.html"
 FRONTEND_EVENTOS = BASE_DIR / "frontend" / "eventos.html"
+FRONTEND_PRODUCTORES = BASE_DIR / "frontend" / "productores.html"
 FRONTEND_SEMINARIO = BASE_DIR / "frontend" / "seminario.html"
 FRONTEND_FACILITADOR = BASE_DIR / "frontend" / "facilitador.html"
 FRONTEND_ADMIN = BASE_DIR / "frontend" / "adm.html"
@@ -321,6 +322,21 @@ def eventos():
             "project": "Red de Cadena de Suministro Chile - México",
             "status": "error",
             "message": "No se encontró frontend/eventos.html",
+        },
+        status_code=404,
+    )
+
+
+@app.get("/productores", response_model=None)
+def productores():
+    if FRONTEND_PRODUCTORES.exists():
+        return FileResponse(FRONTEND_PRODUCTORES)
+
+    return JSONResponse(
+        {
+            "project": "Red de Cadena de Suministro Chile - México",
+            "status": "error",
+            "message": "No se encontró frontend/productores.html",
         },
         status_code=404,
     )

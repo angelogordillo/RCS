@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RCS | Productores Asociados</title>
+  <meta name="description" content="Productores asociados de la Red de Cadena de Suministro Chile - México." />
+  <style>
+    :root {
+      --ink: #10213d;
+      --muted: #5a6680;
+      --line: #dbe3ef;
+      --surface: #f4f7fb;
+      --brand: #0f5bd8;
+      --brand-deep: #092f6b;
+      --white: #ffffff;
+      --shadow: 0 18px 50px rgba(15, 42, 89, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(15, 91, 216, 0.16), transparent 24%),
+        linear-gradient(180deg, #f9fbff 0%, #eef3fa 100%);
+    }
+
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 42px 0 56px;
+    }
+
+    .hero,
+    .producer-card,
+    .contact-footer {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(219, 227, 239, 0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero {
+      padding: 32px;
+      margin-bottom: 24px;
+      background:
+        linear-gradient(135deg, rgba(9, 47, 107, 0.96), rgba(16, 33, 61, 0.98)),
+        #10213d;
+      color: var(--white);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      max-width: 12ch;
+    }
+
+    .subtitle {
+      margin: 16px 0 0;
+      max-width: 62ch;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.84);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn.primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--brand), #2d7cff);
+      box-shadow: 0 12px 24px rgba(15, 91, 216, 0.28);
+    }
+
+    .btn.secondary {
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.24);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .producer-card {
+      padding: 28px;
+    }
+
+    .producer-card h2 {
+      margin-bottom: 8px;
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      color: var(--brand-deep);
+    }
+
+    .producer-card p.lead {
+      margin: 0 0 24px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 64ch;
+    }
+
+    .producer-name {
+      margin-bottom: 18px;
+      font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+      color: var(--ink);
+    }
+
+    .producer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .producer-item {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+    }
+
+    .producer-label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--brand);
+    }
+
+    .producer-item p {
+      margin: 0;
+      color: #263248;
+      line-height: 1.5;
+    }
+
+    .contact-footer {
+      margin-top: 24px;
+      padding: 16px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-footer a {
+      color: var(--brand-deep);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      main {
+        width: min(1080px, calc(100% - 20px));
+        padding: 22px 0 36px;
+      }
+
+      .hero,
+      .producer-card {
+        padding: 22px;
+      }
+
+      .producer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" aria-label="Encabezado de productores asociados">
+      <span class="eyebrow">RCS</span>
+      <h1>Productores Asociados</h1>
+      <p class="subtitle">Espacio dedicado a los perfiles productivos vinculados a la red. Aquí concentramos la ficha técnica de cada caso para facilitar consulta comercial y presentación institucional.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="/">Volver al inicio</a>
+      </div>
+    </section>
+
+    <section class="producer-card" aria-label="Ficha técnica del productor Alonso López">
+      <h2>Ficha técnica</h2>
+      <p class="lead">Primer productor publicado en la red, con café de origen chiapaneco cultivado bajo sombra y perfil de taza orientado a notas dulces y frutales.</p>
+      <h3 class="producer-name">Productor: Alonso López</h3>
+
+      <div class="producer-grid">
+        <div class="producer-item">
+          <span class="producer-label">Origen</span>
+          <p>Tenejapa, Chiapas</p>
+        </div>
+        <div class="producer-item">
+          <span class="producer-label">Especie</span>
+          <p>Arábica</p>
+        </div>
+        <div class="producer-item">
+          <span class="producer-label">Variedad</span>
+          <p>Mezcla de granos: Typica, Bourbon, Garnica y Caturra</p>
+        </div>
+        <div class="producer-item">
+          <span class="producer-label">Proceso</span>
+          <p>Lavado y secado en camas africanas</p>
+        </div>
+        <div class="producer-item">
+          <span class="producer-label">Cultivado</span>
+          <p>Bajo sombra</p>
+        </div>
+        <div class="producer-item">
+          <span class="producer-label">Cosecha</span>
+          <p>2025-2026</p>
+        </div>
+        <div class="producer-item">
+          <span class="producer-label">Especialidad</span>
+          <p>Proceso lavado</p>
+        </div>
+        <div class="producer-item">
+          <span class="producer-label">Notas</span>
+          <p>Achocolatado, frutos rojos y avellana</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="contact-footer">Contáctanos: <a href="mailto:angelo@theowl.solutions">angelo@theowl.solutions</a></p>
+  </main>
+</body>
+</html>

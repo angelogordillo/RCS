@@ -177,70 +177,6 @@
       text-decoration: none;
     }
 
-    .producer-section {
-      margin: 38px auto 0;
-      max-width: 900px;
-      text-align: left;
-    }
-
-    .producer-section h2 {
-      margin: 0 0 10px;
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      color: #1e264b;
-      text-align: center;
-    }
-
-    .producer-section > p {
-      margin: 0 auto 22px;
-      max-width: 680px;
-      color: #52617d;
-      line-height: 1.55;
-      text-align: center;
-    }
-
-    .producer-card {
-      border: 1px solid #dfe7f5;
-      border-radius: 18px;
-      padding: 24px;
-      background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
-      box-shadow: 0 14px 36px rgba(30, 38, 75, 0.08);
-    }
-
-    .producer-card h3 {
-      margin: 0 0 18px;
-      font-size: clamp(1.3rem, 3vw, 1.75rem);
-      color: #1e264b;
-    }
-
-    .producer-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px 18px;
-    }
-
-    .producer-item {
-      padding: 14px 16px;
-      border: 1px solid #e4ebf7;
-      border-radius: 14px;
-      background: #ffffff;
-    }
-
-    .producer-label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: #2d67c8;
-    }
-
-    .producer-item p {
-      margin: 0;
-      color: #263248;
-      line-height: 1.5;
-    }
-
     @media (max-width: 760px) {
       .logos {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -256,10 +192,6 @@
       }
 
       .home-shortcuts {
-        grid-template-columns: 1fr;
-      }
-
-      .producer-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -337,47 +269,10 @@
         <p>Vacante destacada: Production Planner.</p>
         <a class="shortcut-link shortcut-link-secondary" href="https://app.safhire.ai/es/apply/MTI5LWpvYi1pZC1rZXktMjAyNA" target="_blank" rel="noopener noreferrer">Aplicar</a>
       </article>
-    </section>
-
-    <section class="producer-section" aria-label="Productores asociados">
-      <h2>Productores Asociados</h2>
-
-      <article class="producer-card" aria-label="Ficha técnica del productor Alonso López">
-        <h3>Productor: Alonso López</h3>
-        <div class="producer-grid">
-          <div class="producer-item">
-            <span class="producer-label">Origen</span>
-            <p>Tenejapa, Chiapas</p>
-          </div>
-          <div class="producer-item">
-            <span class="producer-label">Especie</span>
-            <p>Arábica</p>
-          </div>
-          <div class="producer-item">
-            <span class="producer-label">Variedad</span>
-            <p>Mezcla de granos: Typica, Bourbon, Garnica y Caturra</p>
-          </div>
-          <div class="producer-item">
-            <span class="producer-label">Proceso</span>
-            <p>Lavado y secado en camas africanas</p>
-          </div>
-          <div class="producer-item">
-            <span class="producer-label">Cultivado</span>
-            <p>Bajo sombra</p>
-          </div>
-          <div class="producer-item">
-            <span class="producer-label">Cosecha</span>
-            <p>2025-2026</p>
-          </div>
-          <div class="producer-item">
-            <span class="producer-label">Especialidad</span>
-            <p>Proceso lavado</p>
-          </div>
-          <div class="producer-item">
-            <span class="producer-label">Notas</span>
-            <p>Achocolatado, frutos rojos y avellana</p>
-          </div>
-        </div>
+      <article class="shortcut-card" aria-label="Productores asociados de la red">
+        <h2>Productores Asociados</h2>
+        <p>Conoce la ficha técnica y el perfil del productor disponible actualmente en la red.</p>
+        <a class="shortcut-link shortcut-link-primary" href="/productores">Ver productores</a>
       </article>
     </section>
 
