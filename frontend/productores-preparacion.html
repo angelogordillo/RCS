@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RCS | Preparación completa del café</title>
+  <meta name="description" content="Alternativas de equipos y sugerencias prácticas para preparar café tostado de origen." />
+  <style>
+    :root {
+      --ink: #10213d;
+      --muted: #5a6680;
+      --line: #dbe3ef;
+      --surface: #f4f7fb;
+      --brand: #0f5bd8;
+      --brand-deep: #092f6b;
+      --white: #ffffff;
+      --shadow: 0 18px 50px rgba(15, 42, 89, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(15, 91, 216, 0.16), transparent 24%),
+        linear-gradient(180deg, #f9fbff 0%, #eef3fa 100%);
+    }
+
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 42px 0 56px;
+    }
+
+    .hero,
+    .equipment-card,
+    .tips-card,
+    .contact-footer {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(219, 227, 239, 0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero {
+      padding: 32px;
+      margin-bottom: 24px;
+      background:
+        linear-gradient(135deg, rgba(9, 47, 107, 0.96), rgba(16, 33, 61, 0.98)),
+        #10213d;
+      color: var(--white);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 5vw, 3.4rem);
+      max-width: 12ch;
+    }
+
+    .hero p {
+      margin: 16px 0 0;
+      max-width: 62ch;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn.primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--brand), #2d7cff);
+      box-shadow: 0 12px 24px rgba(15, 91, 216, 0.28);
+    }
+
+    .btn.secondary {
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.24);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .equipment-card,
+    .tips-card {
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .equipment-card > p,
+    .tips-card > p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 74ch;
+    }
+
+    .equipment-grid,
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .equipment-item,
+    .tip-item {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+    }
+
+    .equipment-item h3,
+    .tip-item h3 {
+      margin-bottom: 10px;
+      color: var(--brand-deep);
+      font-size: 1.05rem;
+    }
+
+    .equipment-item p,
+    .tip-item p,
+    .equipment-item ul {
+      margin: 0;
+      color: #263248;
+      line-height: 1.65;
+    }
+
+    .equipment-item ul {
+      padding-left: 18px;
+      margin-top: 12px;
+    }
+
+    .contact-footer {
+      padding: 16px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-footer a {
+      color: var(--brand-deep);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      main {
+        width: min(1080px, calc(100% - 20px));
+        padding: 22px 0 36px;
+      }
+
+      .hero,
+      .equipment-card,
+      .tips-card {
+        padding: 22px;
+      }
+
+      .equipment-grid,
+      .tips-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" aria-label="Preparacion completa del cafe">
+      <span class="eyebrow">RCS</span>
+      <h1>Preparación completa</h1>
+      <p>Alternativas de equipos y sugerencias prácticas para preparar este café tostado de origen y resaltar su perfil achocolatado, de frutos rojos y avellana.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="/productores">Volver a productores</a>
+      </div>
+    </section>
+
+    <section class="equipment-card" aria-label="Equipos recomendados">
+      <h2>Equipos más adecuados para este tipo de café</h2>
+      <p>Al tratarse de un café lavado, con notas definidas y perfil limpio en taza, conviene usar equipos que permitan controlar bien la extracción y conservar claridad aromática.</p>
+      <div class="equipment-grid">
+        <article class="equipment-item">
+          <h3>V60 o dripper manual</h3>
+          <p>Muy recomendable para destacar limpieza, dulzor y separación de notas. Funciona bien cuando se busca una taza más delicada y expresiva.</p>
+          <ul>
+            <li>Molienda media.</li>
+            <li>Vertido controlado y pausado.</li>
+            <li>Ideal para resaltar frutos rojos y avellana.</li>
+          </ul>
+        </article>
+        <article class="equipment-item">
+          <h3>Prensa francesa</h3>
+          <p>Buena opción si se prefiere más cuerpo y textura. Mantiene parte de los aceites naturales del café y entrega una taza más redonda.</p>
+          <ul>
+            <li>Molienda gruesa.</li>
+            <li>Infusión de 4 minutos como punto de partida.</li>
+            <li>Recomendada para perfiles achocolatados.</li>
+          </ul>
+        </article>
+        <article class="equipment-item">
+          <h3>Cafetera de filtro</h3>
+          <p>Práctica para consumo diario y volúmenes mayores. Permite consistencia si se mantiene una proporción adecuada de café y agua.</p>
+          <ul>
+            <li>Molienda media.</li>
+            <li>Útil para oficinas o servicio continuo.</li>
+            <li>Favorece una taza limpia y estable.</li>
+          </ul>
+        </article>
+        <article class="equipment-item">
+          <h3>Moka italiana</h3>
+          <p>Aporta una extracción más intensa y concentrada. Puede funcionar bien si se busca una taza con mayor fuerza, cuidando no sobrecalentar.</p>
+          <ul>
+            <li>Molienda media-fina, sin llegar a espresso.</li>
+            <li>Retirar del fuego apenas termine la extracción.</li>
+            <li>Buena para una preparación más robusta.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="tips-card" aria-label="Sugerencias practicas">
+      <h2>Sugerencias prácticas</h2>
+      <p>Pequeños ajustes en molienda, agua y servicio pueden hacer una diferencia importante en la percepción final de la taza.</p>
+      <div class="tips-grid">
+        <article class="tip-item">
+          <h3>Muele justo antes de preparar</h3>
+          <p>Siempre que sea posible, muele el café al momento para conservar mejor aroma y frescura.</p>
+        </article>
+        <article class="tip-item">
+          <h3>Usa agua limpia</h3>
+          <p>El agua con sabor fuerte o exceso de minerales puede opacar el perfil de origen y volver la taza más plana.</p>
+        </article>
+        <article class="tip-item">
+          <h3>Ajusta por método</h3>
+          <p>Si la taza sale amarga, prueba una molienda más gruesa o menor tiempo; si sale débil, usa molienda un poco más fina o más café.</p>
+        </article>
+        <article class="tip-item">
+          <h3>Sirve sin hervir de más</h3>
+          <p>Temperaturas excesivas pueden castigar los matices dulces y frutales; conviene servir cuando la extracción termina.</p>
+        </article>
+      </div>
+    </section>
+
+    <p class="contact-footer">Contáctanos: <a href="mailto:angelo@theowl.solutions">angelo@theowl.solutions</a></p>
+  </main>
+</body>
+</html>
