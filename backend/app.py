@@ -16,6 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_INDEX = BASE_DIR / "frontend" / "index.html"
 FRONTEND_EVENTOS = BASE_DIR / "frontend" / "eventos.html"
 FRONTEND_PRODUCTORES = BASE_DIR / "frontend" / "productores.html"
+FRONTEND_PRODUCTORES_CLINICA = BASE_DIR / "frontend" / "productores-clinica.html"
 FRONTEND_SEMINARIO = BASE_DIR / "frontend" / "seminario.html"
 FRONTEND_FACILITADOR = BASE_DIR / "frontend" / "facilitador.html"
 FRONTEND_ADMIN = BASE_DIR / "frontend" / "adm.html"
@@ -337,6 +338,21 @@ def productores():
             "project": "Red de Cadena de Suministro Chile - México",
             "status": "error",
             "message": "No se encontró frontend/productores.html",
+        },
+        status_code=404,
+    )
+
+
+@app.get("/productores/informacion-clinica", response_model=None)
+def productores_clinica():
+    if FRONTEND_PRODUCTORES_CLINICA.exists():
+        return FileResponse(FRONTEND_PRODUCTORES_CLINICA)
+
+    return JSONResponse(
+        {
+            "project": "Red de Cadena de Suministro Chile - México",
+            "status": "error",
+            "message": "No se encontró frontend/productores-clinica.html",
         },
         status_code=404,
     )

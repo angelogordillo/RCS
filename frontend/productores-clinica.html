@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RCS | Información clínica del café</title>
+  <meta name="description" content="Resumen en español de evidencia clínica y epidemiológica sobre consumo de café." />
+  <style>
+    :root {
+      --ink: #10213d;
+      --muted: #5a6680;
+      --line: #dbe3ef;
+      --surface: #f4f7fb;
+      --brand: #0f5bd8;
+      --brand-deep: #092f6b;
+      --white: #ffffff;
+      --shadow: 0 18px 50px rgba(15, 42, 89, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(15, 91, 216, 0.16), transparent 24%),
+        linear-gradient(180deg, #f9fbff 0%, #eef3fa 100%);
+    }
+
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 42px 0 56px;
+    }
+
+    .hero,
+    .summary-card,
+    .notes-card,
+    .contact-footer {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(219, 227, 239, 0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero {
+      padding: 32px;
+      margin-bottom: 24px;
+      background:
+        linear-gradient(135deg, rgba(9, 47, 107, 0.96), rgba(16, 33, 61, 0.98)),
+        #10213d;
+      color: var(--white);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 5vw, 3.4rem);
+      max-width: 12ch;
+    }
+
+    .hero p {
+      margin: 16px 0 0;
+      max-width: 64ch;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn.primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--brand), #2d7cff);
+      box-shadow: 0 12px 24px rgba(15, 91, 216, 0.28);
+    }
+
+    .btn.secondary {
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.24);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .summary-card,
+    .notes-card {
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .summary-card > p,
+    .notes-card > p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 74ch;
+    }
+
+    .findings {
+      display: grid;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .finding {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+    }
+
+    .finding strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand-deep);
+      font-size: 1rem;
+    }
+
+    .finding p,
+    .notes-card li {
+      margin: 0;
+      color: #263248;
+      line-height: 1.65;
+    }
+
+    .notes-card ul {
+      margin: 18px 0 0;
+      padding-left: 18px;
+    }
+
+    .source-link {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--brand-deep);
+      background: rgba(15, 91, 216, 0.08);
+      border: 1px solid rgba(15, 91, 216, 0.18);
+    }
+
+    .contact-footer {
+      padding: 16px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-footer a {
+      color: var(--brand-deep);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      main {
+        width: min(1080px, calc(100% - 20px));
+        padding: 22px 0 36px;
+      }
+
+      .hero,
+      .summary-card,
+      .notes-card {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" aria-label="Informacion clinica del cafe">
+      <span class="eyebrow">RCS</span>
+      <h1>Información clínica del café</h1>
+      <p>Resumen en español del artículo <em>The Emerging Health Benefits of Coffee with an Emphasis on Type 2 Diabetes and Cardiovascular Disease</em>, publicado en <em>European Endocrinology</em> en 2013 y disponible en PubMed Central.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="/productores">Volver a productores</a>
+        <a class="btn secondary" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6003581/" target="_blank" rel="noopener noreferrer">Ver estudio original</a>
+      </div>
+    </section>
+
+    <section class="summary-card" aria-label="Resumen del estudio">
+      <h2>Resumen en español</h2>
+      <p>El artículo revisa evidencia epidemiológica y clínica sobre café y salud, con énfasis en diabetes tipo 2 y enfermedad cardiovascular. Los autores concluyen que el consumo moderado de café se asocia, en general, con bajo riesgo o nulo aumento de riesgo para enfermedades graves en la mayoría de los adultos, y que incluso puede relacionarse con algunos beneficios potenciales.</p>
+
+      <div class="findings">
+        <article class="finding">
+          <strong>1. Diabetes tipo 2</strong>
+          <p>La revisión describe una asociación consistente entre mayor consumo habitual de café y menor riesgo de desarrollar diabetes tipo 2 en múltiples cohortes observacionales. El texto menciona posibles mecanismos biológicos, como el papel de los ácidos clorogénicos, efectos sobre el metabolismo de la glucosa y sensibilidad a la insulina.</p>
+        </article>
+        <article class="finding">
+          <strong>2. Riesgo cardiovascular</strong>
+          <p>El artículo reporta que los datos epidemiológicos también apoyan una posible reducción de enfermedad cardiovascular en consumidores habituales de café, aunque el nivel de certeza no se presenta como suficiente para recomendarlo como intervención preventiva por sí sola.</p>
+        </article>
+        <article class="finding">
+          <strong>3. Otros posibles beneficios</strong>
+          <p>La revisión menciona asociaciones favorables adicionales en función hepática, algunas condiciones neurodegenerativas y ciertos tipos de cáncer. Estas observaciones provienen principalmente de estudios observacionales, por lo que deben interpretarse con prudencia.</p>
+        </article>
+        <article class="finding">
+          <strong>4. Precauciones</strong>
+          <p>Los autores señalan que el consumo excesivo puede tener efectos adversos en algunas personas, especialmente sobre el sueño. También remarcan que la respuesta al café varía entre individuos.</p>
+        </article>
+      </div>
+
+      <a class="source-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6003581/" target="_blank" rel="noopener noreferrer">Fuente original en PubMed Central</a>
+    </section>
+
+    <section class="notes-card" aria-label="Notas de interpretacion">
+      <h2>Cómo interpretar este estudio</h2>
+      <p>Esta página resume una revisión narrativa y epidemiológica, no una recomendación médica individual. La propia publicación aclara que gran parte de las asociaciones descritas se apoyan en estudios observacionales.</p>
+      <ul>
+        <li>El estudio sugiere asociaciones, no prueba causalidad definitiva.</li>
+        <li>El beneficio potencial depende del contexto general de dieta, sueño, salud metabólica y tolerancia individual.</li>
+        <li>Para personas con insomnio, ansiedad, arritmias o indicaciones médicas específicas, el consumo de café debe evaluarse individualmente.</li>
+      </ul>
+    </section>
+
+    <p class="contact-footer">Fuente consultada: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6003581/" target="_blank" rel="noopener noreferrer">PMC6003581</a></p>
+  </main>
+</body>
+</html>
