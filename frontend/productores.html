@@ -126,6 +126,13 @@
       padding: 28px;
     }
 
+    .producer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 22px 0 0;
+    }
+
     .producer-card h2 {
       margin-bottom: 8px;
       font-size: clamp(1.6rem, 3vw, 2.1rem);
@@ -174,6 +181,54 @@
       line-height: 1.5;
     }
 
+    .comparison-card {
+      margin-top: 24px;
+      padding: 28px;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(219, 227, 239, 0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .comparison-card h2 {
+      margin-bottom: 10px;
+      font-size: clamp(1.55rem, 3vw, 2rem);
+      color: var(--brand-deep);
+    }
+
+    .comparison-card > p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 70ch;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .comparison-item {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+    }
+
+    .comparison-item h3 {
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+      color: var(--ink);
+    }
+
+    .comparison-item ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #263248;
+      line-height: 1.6;
+    }
+
     .contact-footer {
       margin-top: 24px;
       padding: 16px;
@@ -200,6 +255,10 @@
       }
 
       .producer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -255,6 +314,34 @@
           <span class="producer-label">Notas</span>
           <p>Achocolatado, frutos rojos y avellana</p>
         </div>
+      </div>
+      <div class="producer-actions">
+        <a class="btn primary" href="#beneficios-cafe">Beneficios y preparación</a>
+      </div>
+    </section>
+
+    <section class="comparison-card" id="beneficios-cafe" aria-label="Beneficios del cafe y proceso de preparacion">
+      <h2>Beneficios del café y proceso de preparación</h2>
+      <p>Referencia comparativa para explicar el valor de un café tostado de origen frente a un café soluble estándar, tanto en experiencia de consumo como en forma de preparación.</p>
+      <div class="comparison-grid">
+        <article class="comparison-item">
+          <h3>Café tostado de origen</h3>
+          <ul>
+            <li>Conserva mejor complejidad aromática y notas sensoriales propias del origen y proceso.</li>
+            <li>Permite ajustar molienda, intensidad y método de extracción según preferencia.</li>
+            <li>La preparación suele requerir molienda o filtrado, pero ofrece una taza más fresca y expresiva.</li>
+            <li>El perfil lavado y secado en camas africanas resalta dulzor, limpieza y mayor definición en taza.</li>
+          </ul>
+        </article>
+        <article class="comparison-item">
+          <h3>Versus café soluble estándar</h3>
+          <ul>
+            <li>El soluble prioriza conveniencia y rapidez, con menor control sobre extracción y cuerpo final.</li>
+            <li>Generalmente presenta un perfil más uniforme, con menos capas aromáticas y menor diferenciación de origen.</li>
+            <li>La preparación es inmediata: agua caliente y disolución directa, útil para velocidad pero con menor ritual de consumo.</li>
+            <li>El café tostado requiere más atención en preparación, pero entrega una experiencia más completa en aroma, textura y sabor.</li>
+          </ul>
+        </article>
       </div>
     </section>
 
