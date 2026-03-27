@@ -635,7 +635,7 @@
             <span>Formato streaming</span>
           </div>
           <div class="streaming-actions">
-            <a class="streaming-register" href="#streaming-registro">Registrar mi lugar</a>
+            <a class="streaming-register" href="#streaming-registro">Reservar por correo</a>
             <a class="streaming-secondary" href="/assets/arquitectos-mentalidad-2026-folleto.pdf" target="_blank" rel="noopener noreferrer">Ver folleto</a>
           </div>
         </div>
@@ -714,41 +714,16 @@
         </article>
       </div>
 
-      <aside class="form-card" id="streaming-registro" aria-label="Formulario de registro y waiting list">
-        <span class="section-kicker">Registro</span>
+      <aside class="form-card" id="streaming-registro" aria-label="Contacto para reservar lugar">
+        <span class="section-kicker">Contacto</span>
         <h2 style="margin-top: 14px;">Reserva tu lugar para la sesión informativa</h2>
         <p style="margin-top: 12px;">
-          Déjanos tus datos para registrarte a la sesión vía streaming del jueves 23 de abril de 2026 a las 17:30 hrs de Ciudad de México y para mantenerte en la base prioritaria del seminario.
+          Para reservar tu lugar en la sesión vía streaming del jueves 23 de abril de 2026 a las 17:30 hrs de Ciudad de México, escríbenos directamente y te confirmamos disponibilidad.
         </p>
-        <form id="waitingListForm">
-          <div class="field">
-            <label for="nombre">Nombre completo</label>
-            <input id="nombre" name="nombre" type="text" autocomplete="name" required />
-          </div>
-          <div class="field">
-            <label for="email">Correo electrónico</label>
-            <input id="email" name="email" type="email" autocomplete="email" required />
-          </div>
-          <div class="field">
-            <label for="empresa">Empresa</label>
-            <input id="empresa" name="empresa" type="text" autocomplete="organization" required />
-          </div>
-          <div class="field">
-            <label for="cargo">Cargo</label>
-            <input id="cargo" name="cargo" type="text" autocomplete="organization-title" required />
-          </div>
-          <div class="field">
-            <label for="pais">País</label>
-            <input id="pais" name="pais" type="text" autocomplete="country-name" required />
-          </div>
-          <div class="field">
-            <label for="interes">Interés o contexto</label>
-            <textarea id="interes" name="interes" placeholder="Cuéntanos si buscas cupos individuales, corporativos o información adicional."></textarea>
-          </div>
-          <button id="submitButton" type="submit">Registrar mi lugar</button>
-        </form>
-        <p class="helper" style="margin-top: 12px;">Tus datos se usan únicamente para contactarte sobre este evento.</p>
-        <div class="status" id="formStatus" role="status" aria-live="polite"></div>
+        <p style="margin-top: 12px;">
+          Correo de contacto: <a href="mailto:angelo@theowl.solutions">angelo@theowl.solutions</a>
+        </p>
+        <p class="helper" style="margin-top: 12px;">Indica tu nombre, empresa y el número de lugares que deseas reservar.</p>
       </aside>
     </section>
 
@@ -757,53 +732,5 @@
     </section>
   </main>
 
-  <script>
-    const form = document.getElementById("waitingListForm");
-    const statusBox = document.getElementById("formStatus");
-    const submitButton = document.getElementById("submitButton");
-
-    const setStatus = (type, message) => {
-      statusBox.className = `status visible ${type}`;
-      statusBox.textContent = message;
-    };
-
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      submitButton.disabled = true;
-      setStatus("success", "Enviando tu registro...");
-
-      const payload = {
-        nombre: form.nombre.value.trim(),
-        email: form.email.value.trim(),
-        empresa: form.empresa.value.trim(),
-        cargo: form.cargo.value.trim(),
-        pais: form.pais.value.trim(),
-        interes: form.interes.value.trim(),
-      };
-
-      try {
-        const response = await fetch("/api/eventos/seminario/waiting-list", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
-
-        const result = await response.json().catch(() => ({}));
-
-        if (!response.ok) {
-          throw new Error(result.message || result.detail || "No fue posible registrar tus datos.");
-        }
-
-        form.reset();
-        setStatus("success", result.message || "Tu registro fue agregado correctamente al waiting list.");
-      } catch (error) {
-        setStatus("error", error.message || "Ocurrió un error al enviar el formulario.");
-      } finally {
-        submitButton.disabled = false;
-      }
-    });
-  </script>
 </body>
 </html>
