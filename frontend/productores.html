@@ -340,6 +340,14 @@
       font-weight: 800;
       letter-spacing: 0.06em;
       text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .media-kicker:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(15, 91, 216, 0.14);
+      background: linear-gradient(135deg, rgba(15, 91, 216, 0.18), rgba(9, 47, 107, 0.1));
     }
 
     .media-note {
@@ -639,7 +647,7 @@
       <h2>Galería del origen</h2>
       <p>Imágenes y videos del proceso en campo: selección de cereza, cosecha manual, entorno de cultivo y resultado final en café tostado.</p>
       <div class="media-toolbar">
-        <span class="media-kicker">Origen verificable</span>
+        <a class="media-kicker" href="https://sidof.segob.gob.mx/notas/5769330" target="_blank" rel="noopener noreferrer">Denominación de Origen</a>
         <span class="media-note">Desliza la tira y toca cualquier foto para verla en grande.</span>
       </div>
       <div class="media-strip">
