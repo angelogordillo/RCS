@@ -270,6 +270,74 @@
       line-height: 1.6;
     }
 
+    .media-card {
+      margin-top: 24px;
+      padding: 28px;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(219, 227, 239, 0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .media-card h2 {
+      margin-bottom: 10px;
+      font-size: clamp(1.55rem, 3vw, 2rem);
+      color: var(--brand-deep);
+    }
+
+    .media-card > p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 72ch;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .media-item {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+      box-shadow: 0 10px 24px rgba(15, 42, 89, 0.08);
+    }
+
+    .media-item img,
+    .media-item video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      background: #dfe8f5;
+    }
+
+    .media-item video {
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .media-caption {
+      padding: 14px 16px 16px;
+    }
+
+    .media-caption strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 0.98rem;
+    }
+
+    .media-caption p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.93rem;
+    }
+
     .contact-footer {
       margin-top: 24px;
       padding: 16px;
@@ -300,6 +368,10 @@
       }
 
       .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .media-grid {
         grid-template-columns: 1fr;
       }
 
@@ -359,6 +431,120 @@
           <span class="producer-label">Notas</span>
           <p>Achocolatado, frutos rojos y avellana</p>
         </div>
+      </div>
+    </section>
+
+    <section class="media-card" aria-label="Galeria visual del proceso de cultivo, cosecha y tostado">
+      <h2>Galería del origen</h2>
+      <p>Imágenes y videos del proceso en campo: selección de cereza, cosecha manual, entorno de cultivo y resultado final en café tostado.</p>
+      <div class="media-grid">
+        <article class="media-item">
+          <img src="./productores-cafe-cerezas-balde.jpeg" alt="Cerezas de café recién recolectadas en balde azul" loading="lazy" />
+          <div class="media-caption">
+            <strong>Cereza recolectada</strong>
+            <p>Selección de fruta madura al cierre de la jornada de cosecha.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <img src="./productores-cafe-tostado-macro.jpeg" alt="Detalle de granos de café tostado" loading="lazy" />
+          <div class="media-caption">
+            <strong>Perfil tostado</strong>
+            <p>Vista cercana del grano tostado con notas achocolatadas y de avellana.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <img src="./productores-canasta-cereza-sombra.jpeg" alt="Canasta de mimbre con cerezas de café" loading="lazy" />
+          <div class="media-caption">
+            <strong>Canasta de cosecha</strong>
+            <p>Fruta recolectada bajo sombra antes de pasar a selección y proceso.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <img src="./productores-canasta-grano-maduro.jpeg" alt="Canasta con cerezas amarillas y rojas de café" loading="lazy" />
+          <div class="media-caption">
+            <strong>Maduración visible</strong>
+            <p>Contraste natural entre cerezas en distintos puntos de maduración.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <img src="./productores-cosecha-mujer.jpeg" alt="Productora cortando cerezas de café en campo" loading="lazy" />
+          <div class="media-caption">
+            <strong>Cosecha manual</strong>
+            <p>Recolección selectiva en finca, cuidando la calidad desde el origen.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <img src="./productores-rama-cafe-rojo.jpeg" alt="Rama de cafeto con cerezas rojas y verdes" loading="lazy" />
+          <div class="media-caption">
+            <strong>Fruta en planta</strong>
+            <p>Cafeto con cereza madura, evidencia del manejo de cultivo bajo sombra.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <img src="./productores-rama-cafe-amarillo.jpeg" alt="Rama de cafeto con cerezas amarillas" loading="lazy" />
+          <div class="media-caption">
+            <strong>Variedad y color</strong>
+            <p>Ramas con distintos tonos de fruta durante el proceso de maduración.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <img src="./productores-cafe-tostado-mano.jpeg" alt="Manos sosteniendo granos de café tostado" loading="lazy" />
+          <div class="media-caption">
+            <strong>Resultado final</strong>
+            <p>Grano tostado listo para molienda y preparación de taza.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <img src="./productores-canasta-cereza-cerca.jpeg" alt="Canasta llena de cerezas de café vistas de cerca" loading="lazy" />
+          <div class="media-caption">
+            <strong>Selección en canasta</strong>
+            <p>Revisión visual del estado de la fruta recolectada.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <img src="./productores-canasta-cereza-abierta.jpeg" alt="Canasta abierta con cerezas de café rojas" loading="lazy" />
+          <div class="media-caption">
+            <strong>Cosecha del día</strong>
+            <p>Volumen de cereza madura reunida para continuar el proceso.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <img src="./productores-familia-cosecha.jpeg" alt="Niñas participando en la cosecha de café" loading="lazy" />
+          <div class="media-caption">
+            <strong>Trabajo familiar</strong>
+            <p>Imagen del contexto humano y comunitario alrededor de la cosecha.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <video controls preload="metadata" playsinline>
+            <source src="./productores-video-cosecha-1.mp4" type="video/mp4" />
+            Tu navegador no soporta video HTML5.
+          </video>
+          <div class="media-caption">
+            <strong>Video de finca 1</strong>
+            <p>Registro en movimiento del entorno de producción y cosecha.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <video controls preload="metadata" playsinline>
+            <source src="./productores-video-cosecha-2.mp4" type="video/mp4" />
+            Tu navegador no soporta video HTML5.
+          </video>
+          <div class="media-caption">
+            <strong>Video de finca 2</strong>
+            <p>Material adicional del proceso en campo y manejo de la fruta.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <video controls preload="metadata" playsinline>
+            <source src="./productores-video-cosecha-3.mp4" type="video/mp4" />
+            Tu navegador no soporta video HTML5.
+          </video>
+          <div class="media-caption">
+            <strong>Video de finca 3</strong>
+            <p>Vista complementaria del origen para reforzar trazabilidad y autenticidad.</p>
+          </div>
+        </article>
       </div>
     </section>
 
