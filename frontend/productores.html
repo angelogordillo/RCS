@@ -409,34 +409,6 @@
       object-fit: cover;
     }
 
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 24px;
-    }
-
-    .video-item {
-      overflow: hidden;
-      border-radius: 22px;
-      border: 1px solid rgba(15, 91, 216, 0.12);
-      background: linear-gradient(180deg, #edf4ff 0%, #ffffff 100%);
-      box-shadow: 0 12px 26px rgba(15, 42, 89, 0.08);
-    }
-
-    .video-frame {
-      padding: 14px;
-      background:
-        radial-gradient(circle at top right, rgba(15, 91, 216, 0.14), transparent 34%),
-        linear-gradient(180deg, rgba(9, 47, 107, 0.04), rgba(9, 47, 107, 0));
-    }
-
-    .video-item video {
-      width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 12px 24px rgba(15, 42, 89, 0.14);
-    }
-
     .lightbox {
       position: fixed;
       inset: 0;
@@ -558,8 +530,7 @@
         grid-template-columns: 1fr;
       }
 
-      .media-strip,
-      .video-grid {
+      .media-strip {
         grid-template-columns: 1fr;
         grid-auto-flow: row;
         grid-auto-columns: unset;
@@ -725,32 +696,6 @@
           <div class="media-caption">
             <strong>Trabajo familiar</strong>
             <p>Imagen del contexto humano y comunitario alrededor de la cosecha.</p>
-          </div>
-        </article>
-      </div>
-      <div class="video-grid">
-        <article class="video-item">
-          <div class="video-frame">
-            <video controls preload="metadata" playsinline>
-              <source src="/assets/productores-video-cosecha-2.mp4" type="video/mp4" />
-              Tu navegador no soporta video HTML5.
-            </video>
-          </div>
-          <div class="media-caption">
-            <strong>Video de finca 2</strong>
-            <p>Material adicional del proceso en campo y manejo de la fruta.</p>
-          </div>
-        </article>
-        <article class="video-item">
-          <div class="video-frame">
-            <video controls preload="metadata" playsinline>
-              <source src="/assets/productores-video-cosecha-3.mp4" type="video/mp4" />
-              Tu navegador no soporta video HTML5.
-            </video>
-          </div>
-          <div class="media-caption">
-            <strong>Video de finca 3</strong>
-            <p>Vista complementaria del origen para reforzar trazabilidad y autenticidad.</p>
           </div>
         </article>
       </div>
