@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RCS | Programa ejecutivo de IA conversacional para empresas</title>
-  <meta name="description" content="Programa online ejecutivo para empresas: 10 módulos de una hora sobre mentalidad, liderazgo e IA conversacional, con modelo SLL entrenado con los archivos del programa para consulta interactiva desde la primera sesión." />
+  <meta name="description" content="Programa online ejecutivo para empresas: 10 sesiones de una hora sobre mentalidad, liderazgo e inteligencia artificial conversacional aplicada al negocio." />
   <style>
     :root {
       --ink: #111827;
@@ -68,9 +68,7 @@
     .hero-panel,
     .signal-card,
     .section-card,
-    .contact-card,
-    .module-card,
-    .sll-card {
+    .contact-card {
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 30px;
       box-shadow: var(--shadow);
@@ -241,8 +239,6 @@
 
     .signal-card p,
     .section-card p,
-    .module-card p,
-    .sll-card p,
     .contact-card p,
     li {
       color: var(--steel);
@@ -310,127 +306,6 @@
       font-size: 1rem;
     }
 
-    .program-header {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.44fr);
-      gap: 20px;
-      align-items: end;
-    }
-
-    .program-summary {
-      padding: 18px;
-      border-radius: 22px;
-      background: var(--navy);
-      color: var(--white);
-      font-family: "Helvetica Neue", Arial, sans-serif;
-    }
-
-    .program-summary strong {
-      display: block;
-      color: var(--sand);
-      font-size: 1.2rem;
-    }
-
-    .program-summary span {
-      display: block;
-      margin-top: 5px;
-      color: rgba(255, 255, 255, 0.76);
-      line-height: 1.45;
-    }
-
-    .modules-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 24px;
-    }
-
-    .module-card {
-      padding: 18px;
-      background: var(--white);
-      border-color: var(--line);
-      box-shadow: var(--soft-shadow);
-    }
-
-    .module-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 38px;
-      margin-bottom: 14px;
-      border-radius: 50%;
-      color: var(--white);
-      background: var(--blue-dark);
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      font-weight: 900;
-    }
-
-    .module-card h3 {
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      color: var(--navy);
-    }
-
-    .module-card p {
-      margin-top: 8px;
-      font-size: 0.96rem;
-    }
-
-    .sll-section {
-      display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .sll-card {
-      padding: 30px;
-      background:
-        radial-gradient(circle at 12% 12%, rgba(215, 185, 121, 0.28), transparent 28%),
-        linear-gradient(135deg, #0a1931, #103a79);
-      color: var(--white);
-    }
-
-    .sll-card .section-eyebrow {
-      background: rgba(255, 255, 255, 0.12);
-      color: rgba(255, 255, 255, 0.86);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-    }
-
-    .sll-card p,
-    .sll-card li {
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    .sll-card ul {
-      margin: 20px 0 0;
-      padding-left: 18px;
-    }
-
-    .assistant-mock {
-      padding: 20px;
-      border-radius: 26px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.13);
-      font-family: "Helvetica Neue", Arial, sans-serif;
-    }
-
-    .chat-line {
-      padding: 14px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.1);
-      line-height: 1.55;
-    }
-
-    .chat-line + .chat-line {
-      margin-top: 10px;
-      background: rgba(215, 185, 121, 0.15);
-    }
-
-    .chat-line strong {
-      color: var(--sand);
-    }
-
     .audience-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -475,12 +350,12 @@
       font-family: "Helvetica Neue", Arial, sans-serif;
     }
 
-    .contact-box a {
+    .contact-box a,
+    .contact-box span {
       display: block;
       margin-top: 8px;
       color: var(--sand);
       font-weight: 900;
-      text-decoration: none;
     }
 
     .facilitator {
@@ -517,8 +392,6 @@
       }
 
       .hero,
-      .program-header,
-      .sll-section,
       .contact-card {
         grid-template-columns: 1fr;
       }
@@ -538,8 +411,7 @@
       .hero-panel,
       .signal-card,
       .section-card,
-      .contact-card,
-      .sll-card {
+      .contact-card {
         padding: 22px;
         border-radius: 24px;
       }
@@ -549,7 +421,6 @@
       }
 
       .hero-metrics,
-      .modules-grid,
       .value-grid,
       .audience-grid,
       .facilitator {
@@ -572,26 +443,26 @@
           <span class="eyebrow">Programa online para empresas</span>
           <h1>IA conversacional para liderazgo ejecutivo</h1>
           <p class="hero-lede">
-            Un recorrido de 10 sesiones para que equipos directivos y liderazgos funcionales entiendan, prueben y traduzcan la inteligencia artificial en decisiones, productividad y nuevas capacidades organizacionales.
+            Un recorrido ejecutivo para que equipos directivos y liderazgos funcionales entiendan, prueben y traduzcan la inteligencia artificial en decisiones, productividad y nuevas capacidades organizacionales.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#contacto">Solicitar propuesta empresarial</a>
-            <a class="button secondary" href="#programa">Ver los 10 módulos</a>
+            <a class="button secondary" href="#perfil">Perfil recomendado</a>
           </div>
         </div>
 
         <div class="hero-metrics" aria-label="Características principales">
           <div class="metric">
             <strong>10</strong>
-            <span>módulos online</span>
+            <span>sesiones online</span>
           </div>
           <div class="metric">
             <strong>60</strong>
             <span>minutos por sesión</span>
           </div>
           <div class="metric">
-            <strong>SLL</strong>
-            <span>consulta interactiva desde el día uno</span>
+            <strong>IA</strong>
+            <span>casos prácticos de agentes conversacionales</span>
           </div>
         </div>
       </article>
@@ -603,7 +474,7 @@
           El programa está diseñado para empresas que necesitan formar criterio directivo, bajar la IA a casos reales y acelerar la familiaridad de sus equipos con agentes conversacionales.
         </p>
         <p class="executive-note">
-          La experiencia incluye un modelo SLL cargado con todos los archivos del programa para que los participantes consulten materiales, hagan preguntas y observen un caso práctico de IA aplicada desde la primera sesión.
+          La experiencia combina conversación estratégica, ejemplos aplicados y ejercicios guiados para que la IA deje de ser una tendencia abstracta y se convierta en una capacidad concreta de liderazgo.
         </p>
         <ul class="quick-list">
           <li><strong>Modalidad:</strong> online, síncrona, ejecutiva y aplicable.</li>
@@ -627,7 +498,7 @@
         </div>
         <div class="value-item">
           <strong>Aprendizaje aplicado</strong>
-          <p>Cada módulo conecta conceptos con ejercicios, preguntas ejecutivas y ejemplos cercanos al mundo empresarial.</p>
+          <p>Cada sesión conecta conceptos con ejercicios, preguntas ejecutivas y ejemplos cercanos al mundo empresarial.</p>
         </div>
         <div class="value-item">
           <strong>Adopción cultural</strong>
@@ -636,107 +507,7 @@
       </div>
     </section>
 
-    <section class="section-card" id="programa" aria-label="Programa online de 10 módulos">
-      <div class="program-header">
-        <div>
-          <span class="section-eyebrow">Programa online</span>
-          <h2>10 módulos de una hora para construir capacidad ejecutiva en IA</h2>
-          <p style="margin-top: 14px;">
-            Una secuencia breve, intensa y práctica para que los participantes avancen desde mentalidad y fundamentos hasta casos de uso, agentes conversacionales y una hoja de ruta de adopción.
-          </p>
-        </div>
-        <aside class="program-summary">
-          <strong>Duración total: 10 horas</strong>
-          <span>Sesiones de 60 minutos, con materiales consultables en el SLL durante todo el programa.</span>
-        </aside>
-      </div>
-
-      <div class="modules-grid">
-        <article class="module-card">
-          <span class="module-number">1</span>
-          <h3>Mapa ejecutivo de la IA actual</h3>
-          <p>Qué cambió, qué importa para la empresa y cómo separar ruido, oportunidad y riesgo.</p>
-        </article>
-        <article class="module-card">
-          <span class="module-number">2</span>
-          <h3>Mentalidad directiva para adopción</h3>
-          <p>Cómo liderar curiosidad, criterio y velocidad sin perder gobernanza ni foco estratégico.</p>
-        </article>
-        <article class="module-card">
-          <span class="module-number">3</span>
-          <h3>Productividad aumentada</h3>
-          <p>Uso ejecutivo de asistentes para análisis, comunicación, síntesis, reuniones y seguimiento.</p>
-        </article>
-        <article class="module-card">
-          <span class="module-number">4</span>
-          <h3>Prompts, contexto y calidad de respuesta</h3>
-          <p>Cómo pedir mejor, entregar contexto y evaluar respuestas con criterio de negocio.</p>
-        </article>
-        <article class="module-card">
-          <span class="module-number">5</span>
-          <h3>Agentes conversacionales</h3>
-          <p>Qué son, cómo se diseñan y dónde pueden crear valor en atención, ventas, operaciones y soporte interno.</p>
-        </article>
-        <article class="module-card">
-          <span class="module-number">6</span>
-          <h3>SLL y conocimiento corporativo</h3>
-          <p>Uso de modelos especializados con documentos propios para consulta segura, trazable y contextual.</p>
-        </article>
-        <article class="module-card">
-          <span class="module-number">7</span>
-          <h3>Casos de uso y priorización</h3>
-          <p>Cómo identificar procesos candidatos y priorizarlos por impacto, factibilidad y aprendizaje organizacional.</p>
-        </article>
-        <article class="module-card">
-          <span class="module-number">8</span>
-          <h3>Riesgos, ética y gobernanza</h3>
-          <p>Privacidad, sesgos, seguridad de información, supervisión humana y reglas mínimas de adopción responsable.</p>
-        </article>
-        <article class="module-card">
-          <span class="module-number">9</span>
-          <h3>Diseño de pilotos ejecutables</h3>
-          <p>De la idea al piloto: alcance, métricas, responsables, criterios de éxito y aprendizaje esperado.</p>
-        </article>
-        <article class="module-card">
-          <span class="module-number">10</span>
-          <h3>Hoja de ruta de adopción</h3>
-          <p>Cierre con mapa de oportunidades, próximos pasos y recomendaciones para escalar capacidades internas.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="sll-section" aria-label="Modelo SLL del programa">
-      <article class="sll-card">
-        <span class="section-eyebrow">Laboratorio vivo de IA</span>
-        <h2>Un SLL como caso práctico desde la primera sesión</h2>
-        <p style="margin-top: 14px;">
-          Además del contenido, los participantes acceden a una experiencia concreta: un modelo SLL configurado con los archivos del programa para responder preguntas, recuperar conceptos, conectar módulos y mostrar cómo opera un agente conversacional aplicado a conocimiento especializado.
-        </p>
-        <ul>
-          <li>Consulta interactiva de materiales, lecturas, marcos y preguntas frecuentes.</li>
-          <li>Demostración práctica de recuperación de conocimiento sobre documentos propios.</li>
-          <li>Familiarización progresiva con prompts, límites, validación y uso responsable.</li>
-          <li>Base para imaginar asistentes internos de capacitación, soporte o gestión de conocimiento.</li>
-        </ul>
-      </article>
-
-      <aside class="sll-card assistant-mock" aria-label="Ejemplo de consulta al SLL">
-        <div class="chat-line">
-          <strong>Participante:</strong> ¿Qué oportunidades de IA conversacional podríamos explorar en operaciones?
-        </div>
-        <div class="chat-line">
-          <strong>SLL del programa:</strong> Según los módulos 5, 6 y 7, conviene revisar consultas frecuentes, trazabilidad de pedidos, soporte a proveedores y síntesis de incidencias. El primer filtro recomendado es impacto, frecuencia, disponibilidad de información y riesgo.
-        </div>
-        <div class="chat-line">
-          <strong>Participante:</strong> ¿Cómo lo convertimos en piloto?
-        </div>
-        <div class="chat-line">
-          <strong>SLL del programa:</strong> Define un alcance de 4 a 6 semanas, documentos autorizados, responsables, métrica de reducción de tiempo y revisión humana obligatoria antes de escalar.
-        </div>
-      </aside>
-    </section>
-
-    <section class="section-card" aria-label="Perfil recomendado">
+    <section class="section-card" id="perfil" aria-label="Perfil recomendado">
       <span class="section-eyebrow">Participantes</span>
       <h2>Diseñado para equipos que deciden, coordinan o habilitan transformación</h2>
       <div class="audience-grid">
@@ -781,13 +552,12 @@
           Podemos adaptar la convocatoria, ejemplos y énfasis del programa según industria, madurez digital y objetivos del equipo participante.
         </p>
         <div class="contact-actions">
-          <a class="button primary" href="mailto:angelo@theowl.solutions?subject=Programa%20ejecutivo%20IA%20conversacional%20para%20empresas">Solicitar reunión</a>
           <a class="button secondary" href="/assets/arquitectos-mentalidad-2026-folleto.pdf" target="_blank" rel="noopener noreferrer">Ver folleto base</a>
         </div>
       </div>
       <aside class="contact-box">
         <strong>Contacto directo</strong>
-        <a href="mailto:angelo@theowl.solutions">angelo@theowl.solutions</a>
+        <span>angelo@theowl.solutions</span>
         <p style="margin-top: 14px;">Indica empresa, número estimado de participantes y objetivo principal de adopción de IA.</p>
       </aside>
     </section>
