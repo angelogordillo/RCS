@@ -25,12 +25,12 @@
     }
 
     main {
-      width: min(1120px, 100%);
+      width: min(900px, 100%);
       text-align: center;
     }
 
     h1 {
-      margin: 0 0 32px;
+      margin: 0 0 36px;
       font-size: clamp(2rem, 6vw, 3.2rem);
       font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
       font-weight: 800;
@@ -40,43 +40,10 @@
 
     .logos {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 26px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
       align-items: center;
-      margin-bottom: 34px;
-    }
-
-    .logos-bottom {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-      max-width: 260px;
-      margin: 0 auto;
-    }
-
-    .logos-bottom .logo-item a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .logos-partners {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 24px;
-      margin: 24px auto 0;
-    }
-
-    .logos-partners .logo-item {
-      flex: 1 1 0;
-      min-width: 0;
-      min-height: 102px;
-      padding: 10px;
-    }
-
-    .logos-partners .logo-item img {
-      max-width: 220px;
-      max-height: 82px;
+      margin-bottom: 36px;
     }
 
     .logo-item {
@@ -91,40 +58,43 @@
 
     .logo-item img {
       width: 100%;
-      max-width: 300px;
-      max-height: 110px;
+      max-width: 260px;
+      max-height: 100px;
       object-fit: contain;
     }
 
     .logo-item a {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
     }
 
     .home-shortcuts {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 480px);
       gap: 18px;
-      max-width: 1120px;
-      margin: 34px auto 0;
+      max-width: 900px;
+      margin: 0 auto;
+      justify-content: center;
     }
 
     .shortcut-card {
       border: 1px solid #dfe7f5;
       border-radius: 14px;
-      padding: 18px;
+      padding: 22px;
       text-align: left;
       background: #ffffff;
     }
 
     .shortcut-card h2 {
-      margin: 0 0 6px;
+      margin: 0 0 8px;
       font-size: clamp(1.15rem, 3vw, 1.45rem);
       color: #1e264b;
     }
 
     .shortcut-card p {
-      margin: 0 0 14px;
+      margin: 0 0 16px;
       color: #52617d;
       line-height: 1.45;
     }
@@ -144,7 +114,7 @@
       text-decoration: none;
       font-weight: 700;
       border-radius: 10px;
-      padding: 9px 14px;
+      padding: 9px 16px;
     }
 
     .shortcut-link-primary {
@@ -177,17 +147,8 @@
       text-decoration: none;
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 600px) {
       .logos {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .logos-bottom {
-        grid-template-columns: 1fr;
-      }
-
-      .logos-partners {
-        display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -200,12 +161,8 @@
 <body>
   <main>
     <h1>Red de Cadena de Suministro Chile - México</h1>
-    <section class="logos" aria-label="Logos del proyecto">
-      <div class="logo-item">
-        <a href="https://demafront.cl/" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio de DemaFront">
-          <img src="/logos/demafront.png" alt="DemaFront" />
-        </a>
-      </div>
+
+    <section class="logos" aria-label="Empresas miembro de la red">
       <div class="logo-item">
         <a href="https://monttgroup.com/en/home/" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio de Montt Group">
           <img src="/logos/montt-casa-logo.jpeg" alt="Montt Group" />
@@ -217,18 +174,10 @@
         </a>
       </div>
       <div class="logo-item">
-        <a href="https://thewellnest.ai/auth/login" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio de The Wellnest">
-          <img src="/logos/thewellnest-logo.png" alt="The Wellnest" />
-        </a>
-      </div>
-      <div class="logo-item">
         <a href="https://unklatam.com/" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio de UNK LATAM">
           <img src="/logos/unklatam-logo.jpeg" alt="UNK LATAM" />
         </a>
       </div>
-    </section>
-
-    <section class="logos-partners" aria-label="Logos aliados adicionales">
       <div class="logo-item">
         <a href="https://orbitarstudio.com/index.html" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio de Orbitar Estudio">
           <img src="/logos/orbitar-estudio.jpeg" alt="Orbitar Estudio" />
@@ -241,17 +190,7 @@
       </div>
       <div class="logo-item">
         <a href="https://camaramexicanachilena.com.mx/" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio de la Cámara Mexicano Chilena">
-          <img src="/logos/logo-camara.jpg" alt="Cámara" />
-        </a>
-      </div>
-      <div class="logo-item">
-        <a href="https://integralegal.com.mx/home/" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio de Integralegal">
-          <img src="/logos/integralegal.jpeg" alt="Integralegal" />
-        </a>
-      </div>
-      <div class="logo-item">
-        <a href="https://safhire.ai/es" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio de Safhire">
-          <img src="/logos/safhire.ai-logo.png" alt="Safhire" />
+          <img src="/logos/logo-camara.jpg" alt="Cámara Mexicano Chilena" />
         </a>
       </div>
     </section>
@@ -261,18 +200,6 @@
         <h2>Eventos</h2>
         <p>Resumen de actividades y networking de la red.</p>
         <a class="shortcut-link shortcut-link-primary" href="/eventos">Ver eventos</a>
-      </article>
-
-      <article class="shortcut-card" aria-label="Bolsa de trabajo de la red">
-        <h2>Bolsa de Trabajo</h2>
-        <span class="shortcut-note">Powered by Safhire</span>
-        <p>Vacante destacada: Production Planner.</p>
-        <a class="shortcut-link shortcut-link-secondary" href="https://app.safhire.ai/es/apply/MTI5LWpvYi1pZC1rZXktMjAyNA" target="_blank" rel="noopener noreferrer">Aplicar</a>
-      </article>
-      <article class="shortcut-card" aria-label="Productores asociados de la red">
-        <h2>Productores Asociados</h2>
-        <p>Conoce la ficha técnica y el perfil del productor disponible actualmente en la red.</p>
-        <a class="shortcut-link shortcut-link-primary" href="/productores">Ver productores</a>
       </article>
     </section>
 
