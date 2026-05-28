@@ -72,11 +72,32 @@
 
     .home-shortcuts {
       display: grid;
-      grid-template-columns: minmax(0, 480px);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
       max-width: 900px;
       margin: 0 auto;
-      justify-content: center;
+    }
+
+    .shortcut-card.highlight {
+      border-color: #0f5bd8;
+      background: #f0f5ff;
+    }
+
+    .event-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .event-tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #e0e8fa;
+      color: #1e264b;
+      font-size: 0.8rem;
+      font-weight: 600;
     }
 
     .shortcut-card {
@@ -190,6 +211,17 @@
         <h2>Eventos</h2>
         <p>Resumen de actividades y networking de la red.</p>
         <a class="shortcut-link shortcut-link-primary" href="/eventos">Ver eventos</a>
+      </article>
+      <article class="shortcut-card highlight" aria-label="Próximo evento: Desayuno Networking">
+        <span class="shortcut-note">Próximo evento</span>
+        <h2>Desayuno Networking</h2>
+        <div class="event-meta">
+          <span class="event-tag">📅 Jue 11 junio · 08:00 hrs</span>
+          <span class="event-tag">🏨 Grand Fiesta Americana Chapultepec</span>
+          <span class="event-tag">Cupos limitados</span>
+        </div>
+        <p>Con la Cámara Mexicano Chilena de Comercio y Grupo Posadas. Confirmar asistencia por correo.</p>
+        <a class="shortcut-link shortcut-link-primary" href="mailto:angelo@theowl.solutions">Confirmar asistencia</a>
       </article>
     </section>
 
